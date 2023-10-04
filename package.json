@@ -1,0 +1,25 @@
+{
+  "name": "minutahospital",
+  "version": "1.0.0",
+  "description": "Un Proyecto para hospital san Jose De Melipilla",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon mi-archivo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuanOlivares97/MinutaHospital.git"
+  },
+  "author": "Equipo DUOC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuanOlivares97/MinutaHospital/issues"
+  },
+  "homepage": "https://github.com/JuanOlivares97/MinutaHospital#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
