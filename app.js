@@ -11,11 +11,10 @@ app.use(cors(corsOptions));
 const connection = require("./database/database.js");
 const LoginRoutes = require('./routes/LoginRoutes.js')
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: 'secreto', resave: false, saveUninitialized: false }));
+app.use(express.static('public'))
 app.set("view engine", "ejs");
-
 
 app.get('/', (req, res) => {
   res.redirect('/auth')
