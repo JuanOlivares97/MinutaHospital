@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Para evitar barras de desplazamiento */
+}
+
+html {
+    background: #EEA561;
+}
+
+.container {
+    flex-shrink: 0;
+    fill: #2779B2;
+}
+
+#svg-background {
+    position: absolute;
+    /* o position: fixed; */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+
+#sesion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 733.5px;
+    height: 500px;
+    flex-shrink: 0;
+    fill: linear-gradient(180deg, #AB6CEA 46.88%, rgba(186, 108, 234, 0.44) 50.9%);
+}
+
+#inicio {
+
+
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.50), 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+form {
+    text-align: right;
+}
