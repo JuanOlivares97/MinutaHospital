@@ -4,13 +4,7 @@ const db = require("../database/database.js");
 const Route = express.Router();
 
 Route.get('/', (req, res) => {
-    res.send(`
-      <form method="post" action="/auth/login">
-        <input type="text" name="username" placeholder="Nombre de usuario" required><br>
-        <input type="password" name="password" placeholder="Contraseña" required><br>
-        <button type="submit">Iniciar Sesión</button>
-      </form>
-    `);
+    res.render('loginview')
 });
 
 Route.post('/login', (req, res) => {
