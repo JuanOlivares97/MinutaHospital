@@ -16,6 +16,13 @@ app.use(session({ secret: 'secreto', resave: false, saveUninitialized: false }))
 app.use(express.static('public'))
 app.set("view engine", "ejs");
 
+<<<<<<< Updated upstream
+=======
+app.get('/login', (req, res) => {
+  res.render('/loginview')
+});
+
+>>>>>>> Stashed changes
 app.get('/', (req, res) => {
   res.redirect('/auth')
 });
