@@ -1,5 +1,5 @@
 const express = require('express');
-const HospitalizadoController = require("../controllers/HospitalziadoController.js");
+const HospitalizadoController = require("../controllers/HospitalzadoController.js");
 
 const Route = express.Router();
 
@@ -16,11 +16,11 @@ Route.get('/agregar-hospitalizado', HospitalizadoController.mostrarFormularioAgr
 Route.post('/agregar-hospitalizado', HospitalizadoController.agregarHospitalizado);
 
 // Ruta para mostrar el formulario de editar un hospitalizado
-Route.get('/editar-hospitalizado/:id', HospitalizadoController.mostrarFormularioEditar);
+Route.get('/editar-hospitalizado/:rut', HospitalizadoController.mostrarFormularioEditar);
 
 // Ruta para procesar el formulario de editar un hospitalizado
-Route.post('/editar-hospitalizado/:id', HospitalizadoController.actualizarHospitalizado);
+Route.post('/editar-hospitalizado/:rut', HospitalizadoController.actualizarHospitalizado);
 
-Route.get('/eliminar-hospitalizado/:id', HospitalizadoController.eliminarHospitalizado);
+Route.post('/eliminar-hospitalizado/:rut', HospitalizadoController.eliminarHospitalizado);
 
 module.exports = Route;

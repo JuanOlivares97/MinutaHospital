@@ -4,7 +4,7 @@ const db = require("../database/database.js");
 const Route = express.Router();
 
 Route.get('/', (req, res) => {
-    res.render('loginview')
+    res.render('loginview',{ titulo: 'Login Hospital' })
 });
 
 Route.post('/login', (req, res) => {

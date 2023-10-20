@@ -14,16 +14,16 @@ const HospitalizadoController = {
           resolve(results);
         });
       });
-
-      res.render("HospitalizadosView", { hospitalizados: results }); // Renderiza la vista 'hospitalizados' con los resultados
+      res.json(results);
+      //res.render("HospitalizadosView", { hospitalizados: results }); // Renderiza la vista 'hospitalizados' con los resultados
     } catch (error) {
       return res.status(500).json({ error: "Error al listar hospitalizados" });
     }
   },
-  agregarHospitalizado: async (req, res) => {
-    res.render('FormAgregarHospitalizado');
-  },
   mostrarFormularioAgregar: async (req, res) => {
+    //res.render('FormAgregarHospitalizado');
+  },
+  agregarHospitalizado: async (req, res) => {
     // Recoge los datos del formulario (puedes usar req.body)
     const { 
         CodigoCama, //int
@@ -39,12 +39,10 @@ const HospitalizadoController = {
           CodigoCamaAlta,
           IdTipoServicio,
           IdTipoUnidad,
-          IdTipoVia,
-          IdPautaSubjetiva,
-          IdPautaObjetiva, } = req.body; // Asegúrate de que coincidan con los campos del formulario
+          IdTipoVia } = req.body; // Asegúrate de que coincidan con los campos del formulario
 
     // Realiza una consulta SQL para agregar un hospitalizado
-    const query = "INSERT INTO `Hospitalizado` (`CodigoCama`, `RutHospitalizado`, `DvHospitalizado`, `NombreHospitalizado`, `FechaNacimiento`, `FechaIngreso`, `ObservacionesNutricionista`, `FechaAlta`, `IdIndicacionesAlta`, `ServicioAlta`, `CodigoCamaAlta`, `IdTipoServicio`, `IdTipoUnidad`, `IdTipoVia`, `IdPautaSubjetiva`, `IdPautaObjetiva`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+    const query = "INSERT INTO `Hospitalizado` (`CodigoCama`, `RutHospitalizado`, `DvHospitalizado`, `NombreHospitalizado`, `FechaNacimiento`, `FechaIngreso`, `ObservacionesNutricionista`, `FechaAlta`, `IdIndicacionesAlta`, `ServicioAlta`, `CodigoCamaAlta`, `IdTipoServicio`, `IdTipoUnidad`, `IdTipoVia`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     db.query(query, [
         CodigoCama, //int
           RutHospitalizado, //int
@@ -59,29 +57,26 @@ const HospitalizadoController = {
           CodigoCamaAlta,
           IdTipoServicio,
           IdTipoUnidad,
-          IdTipoVia,
-          IdPautaSubjetiva,
-          IdPautaObjetiva], (error, results, fields) => {
+          IdTipoVia], (error, results, fields) => {
       if (error) {
-        return res.status(500).json({ error: 'Error al agregar hospitalizado' });
+        return res.status(500).json({ error: error });
       }
-
-      return res.redirect('/NutricionistaJefe/listar-hospitalizado'); // Redirige a la lista de hospitalizados
+      return res.status(200).json({ Bacan: 'hospitalizado agregado ' });
+      //return res.redirect('/NutricionistaJefe/listar-hospitalizado'); // Redirige a la lista de hospitalizados
     });
   },
   actualizarHospitalizado: async (req, res) => {
-    const hospitalizadoId = req.params.id;
-    
+    const RutHospitalizado = req.params.rut;
     // Realiza una consulta SQL para obtener los datos del hospitalizado a editar
-    const query = "SELECT * FROM Hospitalizado WHERE id = ?";
+    const query = "SELECT * FROM Hospitalizado WHERE TRIM(CONCAT(`RutHospitalizado`,'-',`DvHospitalizado`)) = ?";
     
-    db.query(query, [hospitalizadoId], (error, results, fields) => {
+    db.query(query, [RutHospitalizado], (error, results, fields) => {
       if (error) {
         return res.status(500).json({ error: 'Error al obtener el hospitalizado' });
       }
-
+      return res.status(200).json({ Bacan: 'hospitalizado actualizado' });
       // Renderiza el formulario de edición con los datos del hospitalizado
-      res.render('formularioEditarHospitalizado', { hospitalizado: results[0] }); // Asegúrate de crear la vista correspondiente
+      //res.render('formularioEditarHospitalizado', { hospitalizado: results[0] }); // Asegúrate de crear la vista correspondiente
     });
   },
   mostrarFormularioEditar: async (req,res)=>{
@@ -104,17 +99,17 @@ const HospitalizadoController = {
   },
   eliminarHospitalizado: async (req, res) => {
     // Obtén el ID del hospitalizado a eliminar
-    const hospitalizadoId = req.params.id;
+    const RutHospitalizado = req.params.rut;
 
     // Realiza una consulta SQL para eliminar el hospitalizado
-    const query = "DELETE FROM Hospitalizado WHERE IdHospitalizado = ?";
+    const query = "DELETE FROM `Hospitalizado` WHERE TRIM(CONCAT(`RutHospitalizado`,'-',`DvHospitalizado`)) = ?";
     
-    db.query(query, [hospitalizadoId], (error, results, fields) => {
+    db.query(query, [RutHospitalizado], (error, results, fields) => {
       if (error) {
-        return res.status(500).json({ error: 'Error al eliminar el hospitalizado' });
+        return res.status(500).json({ error: error });
       }
-
-      return res.redirect('/NutricionistaJefe/listar-hospitalizado'); // Redirige a la lista de hospitalizados
+      return res.status(200).json({ Bacan: 'hospitalizado Eliminado' });
+      //return res.redirect('/NutricionistaJefe/listar-hospitalizado'); // Redirige a la lista de hospitalizados
     });
   },
 };
