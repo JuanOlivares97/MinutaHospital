@@ -4,11 +4,12 @@ const HospitalizadoController = require("../controllers/HospitalzadoController.j
 const Route = express.Router();
 
 Route.get('/', (req, res) => {
-    res.send('HOLA');
+    res.render('hospitalizadoview');
 });
 
-Route.get('/listar-hospitalizado', HospitalizadoController.ListarHospitalizados)
-
+Route.get('/listar-hospitalizado', HospitalizadoController.ListarHospitalizados);
+    res.send('HOLA');
+});
 // Ruta para mostrar el formulario de agregar un hospitalizado
 Route.get('/agregar-hospitalizado', HospitalizadoController.mostrarFormularioAgregar);
 
