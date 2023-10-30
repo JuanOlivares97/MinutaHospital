@@ -1,24 +1,21 @@
 const express = require('express');
-const session = require('express-session');
-const bcrypt = require('bcrypt');
 const db = require("../database/database.js");
 
 const Route = express.Router();
 
 Route.get('/', (req, res) => {
-    res.render('loginview')
+    res.render('loginview',{ titulo: 'Login Hospital' })
 });
 
 Route.post('/login', (req, res) => {
     const { username, password } = req.body;
-    db.query('SELECT * FROM Funcionario WHERE CONCAT(`RutFuncionario`,'-',`DvFuncionario`) = ?', [username], (err, results) => {
+    console.log(username)
+    db.query("SELECT * FROM Funcionario WHERE TRIM(CONCAT(`RutFuncionario`,'-',`DvFuncionario`)) = ? ", [username], (err, results) => {
       if (err) throw err;
       if (results.length === 1) {
         const user = results[0];
         console.log(user.contrasena)
-        bcrypt.compare(password, user.contrasena, (err, isMatch) => {
-          if (err) throw err;
-  
+        const isMatch = user.contrasena = password;
           if (isMatch) {
             // Autenticación exitosa, redirige en función del tipo de usuario
             if (user.IdTipoFuncionario === 1) {
@@ -37,7 +34,7 @@ Route.post('/login', (req, res) => {
           } else {
             res.send('Credenciales incorrectas');
           }
-        });
+        
       } else {
         res.send('Usuario no encontrado');
       }
