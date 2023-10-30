@@ -10,14 +10,22 @@
 
 <body>
     <div class="container">
-        <img  id="svg-background" src="/img/iniciosesion.svg" alt="fondo del iniciosesion">
+        <img id="svg-background" src="/img/iniciosesion.svg" alt="fondo del iniciosesion">
         <div id="inicio">
             <div id="sesion">
-                <img  id="svg-background2" src="/img/decoracionInicioSesion.svg" alt="fondo del iniciosesion">
+                <div id="img">
+                    <img id="svg-background2" src="/img/decoracionInicioSesion.svg" alt="fondo del iniciosesion">
+                    <img id="img-background" src="/img/decoracionlogin2.png" alt="">
+                </div>
+                
                 <form id="formulario" method="post" action="/auth/login">
-                    <input type="text" name="username" placeholder="11111111-1" required><br>
-                    <input type="password" name="password" placeholder="Contraseña" required><br>
-                    <button type="submit">Iniciar Sesión</button>
+                    <div class="decoracion">Inicio de sesion</div>
+                    <label for="useruser">Usuario</label>
+                    <input id="user" type="text" name="username" placeholder="11111111-1" required>
+                    <label for="passpass">Contraseña</label>
+                    <input id="pass" type="password" name="password" placeholder="Contraseña" required>
+                    <button id="button" type="submit">Iniciar Sesión</button>
+                    <a id="recuperarpass" for="mensaje">Recuperar contraseña</a>
                 </form>
             </div>
         </div>
