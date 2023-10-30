@@ -28,22 +28,23 @@ html {
     left: 0;
     height: 80vh;
     border-radius: 20px;
-    width: 50%;
 }
 
 #inicio {
-    width: 80%;
+    width: 70%;
     height: 80%;
     border-radius: 20px;
     background: #FFF;
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.50), 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }
+
 #sesion{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 80vh;
 }
+
 #formulario{
     width: 50%;
     
