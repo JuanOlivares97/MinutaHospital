@@ -8,8 +8,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-const connection = require("./database/database.js");
 const LoginRoutes = require('./routes/LoginRoutes.js')
+const NutricionistaJefeRoutes = require("./routes/NutricionistaJefeRoutes.js")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: 'secreto', resave: false, saveUninitialized: false }));
@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', LoginRoutes);
+app.use('/NutricionistaJefe', NutricionistaJefeRoutes);
 
 app.use("/resources", express.static("public"));
 app.use("/resources", express.static(__dirname + "/public"));

@@ -132,5 +132,65 @@ label {
     font-weight: 400;
     line-height: normal;
     border-bottom: 2px solid #38377B;
+}
 
+/*REPONSIVO*/
+@media (max-width: 1380px) {
+    #formulario {
+        width: 355px;
+        height: 465PX;
+    }
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion,
+    #recuperarpass {
+        font-size: 22px;
+    }
+    #button {
+        width: 235px;
+        height: 50px;
+    }
+    #img-background{
+        height: 370px;
+    }
+}
+
+
+@media (max-width: 1069px) {
+    #formulario {
+        width: 285px;
+        height: 365PX;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion,
+    #recuperarpass {
+        font-size: 20px;
+    }
+
+    #button {
+        width: 200px;
+        height: 47px;
+    }
+    #img-background{
+        height: 350px;
+    }
+}
+@media (max-width: 1330px) {
+    #img{
+        display: none;
+    }
+    #formulario {
+        width: 500px;
+        height: 700PX;
+    }
+    #sesion{
+        display: flex;
+        align-items: center;
+    }
 }
