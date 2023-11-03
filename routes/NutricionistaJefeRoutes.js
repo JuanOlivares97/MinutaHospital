@@ -8,8 +8,6 @@ Route.get('/', (req, res) => {
 });
 
 Route.get('/listar-hospitalizado', HospitalizadoController.ListarHospitalizados);
-    res.send('HOLA');
-});
 // Ruta para mostrar el formulario de agregar un hospitalizado
 Route.get('/agregar-hospitalizado', HospitalizadoController.mostrarFormularioAgregar);
 
