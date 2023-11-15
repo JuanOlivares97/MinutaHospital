@@ -50,8 +50,7 @@
                             <th>NombreHospitalizado</th>
                             <th>FechaNacimiento</th>
                             <th>FechaIngreso</th>
-                            <th>ObservacionesNutricionista
-                            <th>
+                            <th>ObservacionesNutricionista<th>
                             <th>FechaAlta </th>
                             <th>IdIndicacionesAlta </th>
                             <th>ServicioAlta </th>
@@ -62,14 +61,31 @@
                         </tr>
                     </thead>
                     <tbody>
-        
+                        <% for (let i = 0; i < hospitalizados.length; i++) { %>
+                            <tr>
+                                <td><%= hospitalizados[i].CodigoCama %></td>
+                                <td><%= hospitalizados[i].RutHospitalizado %></td>
+                                <td><%= hospitalizados[i].DvHospitalizado %></td>
+                                <td><%= hospitalizados[i].NombreHospitalizado %></td>
+                                <td><%= hospitalizados[i].FechaNacimiento %></td>
+                                <td><%= hospitalizados[i].FechaIngreso %></td>
+                                <td><%= hospitalizados[i].ObservacionesNutricionista %></td>
+                                <td><%= hospitalizados[i].FechaAlta %></td>
+                                <td><%= hospitalizados[i].IdIndicacionesAlta %></td>
+                                <td><%= hospitalizados[i].ServicioAlta %></td>
+                                <td><%= hospitalizados[i].CodigoCamaAlta %></td>
+                                <td><%= hospitalizados[i].IdTipoServicio %></td>
+                                <td><%= hospitalizados[i].IdTipoUnidad %></td>
+                                <td><%= hospitalizados[i].IdTipoVia %></td>
+                            </tr>
+                        <% }; %>
                     </tbody>
                 </table>
               </div>
         </div>
         <!--Container Main end-->
-        <!--Scripts-->
-        <script src="/js/navbar.js"></script>
+        <!--Scripts<script src="/js/listarhospitalizado.js"></script>-->
+        
     </body>
 
 </html>
