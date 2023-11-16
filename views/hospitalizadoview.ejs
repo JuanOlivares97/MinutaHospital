@@ -36,10 +36,19 @@
                 </div>
             </nav>
         </div>
-        <div id="titulo">Mantenedor de funcionarios</div>
+        <div id="titulo">Mantenedor de Hospitalizados</div>
         <!--Navbar end-->
         <!--Container Main start-->
+
         <div class="container">
+            <div id="headertable">
+                <a id="agregar" href="#">Agregar hospitalizado <img src="/img/agregar.png" alt=""></a>
+                <form action="/buscar" method="get">
+                    <label for="busqueda">Buscar:</label>
+                    <input type="search" id="busqueda" name="q" placeholder="Ingrese su búsqueda...">
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -50,7 +59,8 @@
                             <th>NombreHospitalizado</th>
                             <th>FechaNacimiento</th>
                             <th>FechaIngreso</th>
-                            <th>ObservacionesNutricionista<th>
+                            <th>ObservacionesNutricionista
+                            <th>
                             <th>FechaAlta </th>
                             <th>IdIndicacionesAlta </th>
                             <th>ServicioAlta </th>
@@ -61,31 +71,59 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% for (let i = 0; i < hospitalizados.length; i++) { %>
+                        <% for (let i=0; i < hospitalizados.length; i++) { %>
                             <tr>
-                                <td><%= hospitalizados[i].CodigoCama %></td>
-                                <td><%= hospitalizados[i].RutHospitalizado %></td>
-                                <td><%= hospitalizados[i].DvHospitalizado %></td>
-                                <td><%= hospitalizados[i].NombreHospitalizado %></td>
-                                <td><%= hospitalizados[i].FechaNacimiento %></td>
-                                <td><%= hospitalizados[i].FechaIngreso %></td>
-                                <td><%= hospitalizados[i].ObservacionesNutricionista %></td>
-                                <td><%= hospitalizados[i].FechaAlta %></td>
-                                <td><%= hospitalizados[i].IdIndicacionesAlta %></td>
-                                <td><%= hospitalizados[i].ServicioAlta %></td>
-                                <td><%= hospitalizados[i].CodigoCamaAlta %></td>
-                                <td><%= hospitalizados[i].IdTipoServicio %></td>
-                                <td><%= hospitalizados[i].IdTipoUnidad %></td>
-                                <td><%= hospitalizados[i].IdTipoVia %></td>
+                                <td>
+                                    <%= hospitalizados[i].CodigoCama %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].RutHospitalizado %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].DvHospitalizado %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].NombreHospitalizado %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].FechaNacimiento %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].FechaIngreso %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].ObservacionesNutricionista %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].FechaAlta %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].IdIndicacionesAlta %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].ServicioAlta %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].CodigoCamaAlta %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].IdTipoServicio %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].IdTipoUnidad %>
+                                </td>
+                                <td>
+                                    <%= hospitalizados[i].IdTipoVia %>
+                                </td>
                             </tr>
-                        <% }; %>
+                            <% }; %>
                     </tbody>
                 </table>
-              </div>
+            </div>
         </div>
         <!--Container Main end-->
-        <!--Scripts<script src="/js/listarhospitalizado.js"></script>-->
-        
+        <!--Scripts-->
+        <script src="/js/navbar.js"></script>
     </body>
 
 </html>
