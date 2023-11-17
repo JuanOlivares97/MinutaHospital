@@ -10,6 +10,7 @@ app.use(cors(corsOptions));
 
 const LoginRoutes = require('./routes/LoginRoutes.js')
 const NutricionistaJefeRoutes = require("./routes/NutricionistaJefeRoutes.js")
+const apiRoutes = require('./routes/apiRoutes.js')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: 'secreto', resave: false, saveUninitialized: false }));
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', LoginRoutes);
 app.use('/NutricionistaJefe', NutricionistaJefeRoutes);
+app.use('/api', apiRoutes) 
 
 app.use("/resources", express.static("public"));
 app.use("/resources", express.static(__dirname + "/public"));
