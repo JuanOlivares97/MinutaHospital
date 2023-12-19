@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
 const corsOptions = {
-  origin: 'https://lowedev.cl'
+  origin: 'https://supercharly.cl'
 };
 app.use(cors(corsOptions));
 
