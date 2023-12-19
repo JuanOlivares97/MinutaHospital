@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-    <title>Document</title>
+    <script  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Hospital San Jose Melipilla</title>
 </head>
-
-<body>
-    <!--Navbar start-->
-
-    <body id="body-pd">
+<body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
             <h3>SISTEMA DE CONTROL DE ALIMENTACIÓN</h3>
@@ -40,9 +40,77 @@
         <!--Navbar end-->
         <!--Container Main start-->
 
-        <div class="container">
+        <div id="container">
             <div id="headertable">
-                <a id="agregar" href="#">Agregar hospitalizado <img src="/img/agregar.png" alt=""></a>
+                <a id="agregar" href="#" data-toggle="modal" data-target="#modalHospitalizado">
+                    Agregar hospitalizado <img src="/img/agregar.png" alt="">
+                </a>
+            
+                <!-- Modal -->
+                <div class="modal fade" id="modalHospitalizado" tabindex="-1" role="dialog" aria-labelledby="modalHospitalizadoLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalHospitalizadoLabel">Agregar hospitalizado</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Aquí coloca tu formulario -->
+                                <form action="/NutricionistaJefe/agregar-hospitalizado" method="post">
+                                    <label for="CodigoCama">Código de Cama:</label>
+                                    <input type="number" id="CodigoCama" name="CodigoCama" required>
+                                
+                                    <label for="RutHospitalizado">Rut Hospitalizado:</label>
+                                    <input type="number" id="RutHospitalizado" name="RutHospitalizado" required>
+                                
+                                    <label for="DvHospitalizado">Dv Hospitalizado:</label>
+                                    <input type="number" id="DvHospitalizado" name="DvHospitalizado" required>
+                                
+                                    <label for="NombreHospitalizado">Nombre Hospitalizado:</label>
+                                    <input type="text" id="NombreHospitalizado" name="NombreHospitalizado" required>
+                                
+                                    <label for="FechaNacimiento">Fecha de Nacimiento:</label>
+                                    <input type="date" id="FechaNacimiento" name="FechaNacimiento" required>
+                                
+                                    <label for="FechaIngreso">Fecha de Ingreso:</label>
+                                    <input type="date" id="FechaIngreso" name="FechaIngreso" required>
+                                
+                                    <label for="ObservacionesNutricionista">Observaciones Nutricionista:</label>
+                                    <textarea id="ObservacionesNutricionista" name="ObservacionesNutricionista"></textarea>
+                                
+                                    <label for="FechaAlta">Fecha de Alta:</label>
+                                    <input type="date" id="FechaAlta" name="FechaAlta">
+                                
+                                    <label for="IndicacionesAlta">Indicaciones Alta:</label>
+                                    <input type="text" id="IndicacionesAlta" name="IndicacionesAlta">
+                                
+                                    <label for="ServicioAlta">Servicio de Alta:</label>
+                                    <input type="text" id="ServicioAlta" name="ServicioAlta">
+                                
+                                    <label for="CodigoCamaAlta">Código de Cama de Alta:</label>
+                                    <input type="text" id="CodigoCamaAlta" name="CodigoCamaAlta">
+                                
+                                    <label for="IdTipoServicio">ID Tipo de Servicio:</label>
+                                    <input type="text" id="IdTipoServicio" name="IdTipoServicio">
+                                
+                                    <label for="IdTipoUnidad">ID Tipo de Unidad:</label>
+                                    <input type="text" id="IdTipoUnidad" name="IdTipoUnidad">
+                                
+                                    <label for="IdTipoVia">ID Tipo de Vía:</label>
+                                    <input type="text" id="IdTipoVia" name="IdTipoVia">
+                                
+                                    <button type="submit">Enviar</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  
                 <form action="/buscar" method="get">
                     <label for="busqueda">Buscar:</label>
                     <input type="search" id="busqueda" name="q" placeholder="Ingrese su búsqueda...">
@@ -53,21 +121,19 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>CODIGO CAMA</th>
-                            <th>RUT</th>
-                            <th>DV</th>
-                            <th>NombreHospitalizado</th>
-                            <th>FechaNacimiento</th>
-                            <th>FechaIngreso</th>
-                            <th>ObservacionesNutricionista
-                            <th>
-                            <th>FechaAlta </th>
-                            <th>IdIndicacionesAlta </th>
-                            <th>ServicioAlta </th>
-                            <th>CodigoCamaAlta</th>
-                            <th>IdTipoServicio</th>
-                            <th>IdTipoUnidad</th>
-                            <th>IdTipoVia</th>
+                            <th>Cama</th>
+                            <th>Rut</th>
+                            <th>Nombre Completo</th>
+                            <th>Fecha Nacimiento</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Observaciones</th>
+                            <th>Fecha Alta </th>
+                            <th>Indicaciones Alta </th>
+                            <th>Servicio Alta </th>
+                            <th>Cama Alta</th>
+                            <th>Tipo Servicio</th>
+                            <th>Tipo Unidad</th>
+                            <th>Tipo Via</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,10 +143,7 @@
                                     <%= hospitalizados[i].CodigoCama %>
                                 </td>
                                 <td>
-                                    <%= hospitalizados[i].RutHospitalizado %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].DvHospitalizado %>
+                                    <%= hospitalizados[i].Rut %>
                                 </td>
                                 <td>
                                     <%= hospitalizados[i].NombreHospitalizado %>
@@ -107,13 +170,13 @@
                                     <%= hospitalizados[i].CodigoCamaAlta %>
                                 </td>
                                 <td>
-                                    <%= hospitalizados[i].IdTipoServicio %>
+                                    <%= hospitalizados[i].TipoServicio %>
                                 </td>
                                 <td>
-                                    <%= hospitalizados[i].IdTipoUnidad %>
+                                    <%= hospitalizados[i].TipoUnidad %>
                                 </td>
                                 <td>
-                                    <%= hospitalizados[i].IdTipoVia %>
+                                    <%= hospitalizados[i].TipoVia %>
                                 </td>
                             </tr>
                             <% }; %>
@@ -123,7 +186,8 @@
         </div>
         <!--Container Main end-->
         <!--Scripts-->
-        <script src="/js/navbar.js"></script>
-    </body>
+        
+        <script src="/resources/js/navbar.js"></script>
+</body>
 
 </html>

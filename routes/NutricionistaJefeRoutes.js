@@ -1,15 +1,15 @@
 const express = require('express');
 const HospitalizadoController = require("../controllers/HospitalzadoController.js");
-
+const FuncionarioController = require("../controllers/FuncionarioController.js");
 const Route = express.Router();
 
 Route.get('/', (req, res) => {
     res.redirect('/NutricionistaJefe/listar-hospitalizado');
 });
+Route.get('/mostrar-funcionario', FuncionarioController.mostrarFuncionarios);
 
 Route.get('/listar-hospitalizado', HospitalizadoController.listarHospitalizados);
-// Ruta para mostrar el formulario de agregar un hospitalizado
-Route.get('/agregar-hospitalizado', HospitalizadoController.mostrarFormularioAgregar);
+Route.get('/listar-funcionario', FuncionarioController.listarFuncionarios);
 
 // Ruta para procesar el formulario de agregar un hospitalizado
 Route.post('/agregar-hospitalizado', HospitalizadoController.agregarHospitalizado);

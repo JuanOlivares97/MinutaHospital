@@ -153,12 +153,14 @@ a {
   background-color: var(--white-color)
 }
 
-.container {
-  margin-top: 150px;
+th{
+  text-align: center !important;
+}
 
+#container {
+  margin-top: 150px;
   width: 100%;
-  top: 0;
-  left: 0;
+
 }
 
 #titulo {
