@@ -1,10 +1,8 @@
 const db = require("../database/database.js");
 const apiController = require('../controllers/apiController.js')
-const Swal = require('sweetalert2');
 const HospitalizadoController = {
   listarHospitalizados: (req, res) => {
     const query = 'SELECT `CodigoCama`, CONCAT(`RutHospitalizado`, "-", `DvHospitalizado`) as "Rut", `NombreHospitalizado`, DATE_FORMAT(`FechaNacimiento`, "%d-%m-%Y") as "FechaNacimiento", DATE_FORMAT(`FechaIngreso`, "%d-%m-%Y") as "FechaIngreso", `ObservacionesNutricionista`, DATE_FORMAT(`FechaAlta`, "%d-%m-%Y") as "FechaAlta", `IndicacionesAlta`, CASE WHEN `ServicioAlta` != 0 THEN "Sin Alta" ELSE CAST(`ServicioAlta` AS CHAR) END as "ServicioAlta", `CodigoCamaAlta`, TS.`DescTipoServicio` as "TipoServicio", TU.`DescTipoUnidad` as "TipoUnidad", TV.`DescTipoVia` as "TipoVia" FROM `Hospitalizado` H INNER JOIN `TipoServicio` TS ON (H.`IdTipoServicio` = TS.`IdTipoServicio`) INNER JOIN `TipoVia` TV ON H.`IdTipoVia` = TV.`IdTipoVia` INNER JOIN `TipoUnidad` TU ON H.`IdTipoUnidad` = TU.`IdTipoUnidad`';
-
     db.query(query, function (error, hospitalizados) {
       if (error) {
         res.render('error', { message: 'Error al cargar los hospitalizados' });
