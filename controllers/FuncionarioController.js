@@ -1,15 +1,37 @@
 const db = require("../database/database.js");
-const apiController = require("../controllers/apiController.js");
 const FuncionariosController = {
-  mostrarFuncionarios: (req, res) => {
-    res.render('funcionarioView')
-},
+  mostrarPaginaFuncionarios: (req, res) => {
+    res.render("hospitalizadoview");
+  },
   listarFuncionarios: (req, res) => {
-    db.query("SELECT * FROM Funcionario", function (error, funcionarios) {
+    const query = `
+        SELECT 
+            CONCAT(RutFuncionario, "-", DvFuncionario) as Rut,
+            NombreFuncionario, 
+            DATE_FORMAT(FechaInicioContrato, "%d-%m-%Y") as FechaContrato,
+            DATE_FORMAT(FechaTerminoContrato, "%d-%m-%Y") as FechaTermino,
+            correo as "CorreoElectronico"
+            TS.DescTipoServicio as TipoServicio,
+            TU.DescTipoUnidad as TipoUnidad,
+            TR.DescTipoRegimen as TipoRegimen,
+            TC.TipoContrato as TipoContrato,
+            TF.TipoPerfil as TipoFuncionario,
+            TE.DescTipoEstamento AS TipoEstamento
+        FROM Funcionario F
+        INNER JOIN TipoEstamento TE ON (F.IdTipoEstamento = TE.IdTipoEstamento)
+        INNER JOIN TipoFuncionario TF ON (F.IdTipoFuncionario = TF.IdTipoFuncionario)
+        INNER JOIN TipoContrato TC ON (F.IdTipoContrato = TC.IdTipoContrato)
+        INNER JOIN TipoServicio TS ON (F.IdTipoServicio = TS.IdTipoServicio)
+        INNER JOIN TipoRegimen TR ON (F.IdTipoRegimen = TR.IdTipoRegimen)
+        INNER JOIN TipoUnidad TU ON (F.IdTipoUnidad = TU.IdTipoUnidad)
+        WHERE F.Habilitado = 'S';`;
+
+    db.query(query, (error, funcionarios) => {
         if (error) {
-            return res.status(500).json({ error: error });
+            res.status(500).json({ error: 'Error al cargar los funcionarios' });
+        } else {
+            res.status(200).json(funcionarios);
         }
-        res.json(funcionarios);
     });
 },
   agregarFuncionarios: async (req, res) => {

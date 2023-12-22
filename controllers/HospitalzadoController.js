@@ -1,63 +1,83 @@
 const db = require("../database/database.js");
-const apiController = require('../controllers/apiController.js')
+
 const HospitalizadoController = {
   mostrarPaginaHospitalizados: (req, res) => {
-        res.render("hospitalizadoview");
-},
+    res.render("hospitalizadoview");
+  },
   listarHospitalizados: (req, res) => {
-    const query = 'SELECT `CodigoCama`, CONCAT(`RutHospitalizado`, "-", `DvHospitalizado`) as "Rut", `NombreHospitalizado`, DATE_FORMAT(`FechaNacimiento`, "%d-%m-%Y") as "FechaNacimiento", DATE_FORMAT(`FechaIngreso`, "%d-%m-%Y") as "FechaIngreso", `ObservacionesNutricionista`, DATE_FORMAT(`FechaAlta`, "%d-%m-%Y") as "FechaAlta", `IndicacionesAlta`, CASE WHEN `ServicioAlta` != 0 THEN "Sin Alta" ELSE CAST(`ServicioAlta` AS CHAR) END as "ServicioAlta", `CodigoCamaAlta`, TS.`DescTipoServicio` as "TipoServicio", TU.`DescTipoUnidad` as "TipoUnidad", TV.`DescTipoVia` as "TipoVia" FROM `Hospitalizado` H INNER JOIN `TipoServicio` TS ON (H.`IdTipoServicio` = TS.`IdTipoServicio`) INNER JOIN `TipoVia` TV ON H.`IdTipoVia` = TV.`IdTipoVia` INNER JOIN `TipoUnidad` TU ON H.`IdTipoUnidad` = TU.`IdTipoUnidad`';
-    db.query(query, function (error, hospitalizados) {
-      if (error) {
-        res.render('error', { message: 'Error al cargar los hospitalizados' });
-      } else {
-        res.status(200).json(hospitalizados);
-      }
+    const tipoServicio = req.body.tipoServicio; // Asumiendo que el tipoServicio se envía en el cuerpo de la solicitud POST
+
+    if (!tipoServicio) {
+        return res.status(400).json({ error: 'Se requiere el parámetro tipoServicio en el cuerpo de la solicitud POST.' });
+    }
+
+    const query = `
+        SELECT CodigoCama,
+        CONCAT(RutHospitalizado, "-", DvHospitalizado) AS Rut,
+        NombreHospitalizado,
+        TIMESTAMPDIFF(YEAR, FechaNacimiento, CURDATE()) AS Edad,
+        DATE_FORMAT(FechaIngreso, "%d-%m-%Y") AS FechaIngreso,
+        ObservacionesNutricionista,
+        DATE_FORMAT(FechaAlta, "%d-%m-%Y") AS FechaAlta,
+        TR.DescTipoRegimen AS TipoRegimen,
+        Ayuno
+        FROM Hospitalizado H
+        INNER JOIN TipoRegimen TR ON (H.IdTipoRegimen = TR.IdTipoRegimen)
+        WHERE IdTipoServicio = ?;
+    `;
+
+    db.query(query, [tipoServicio], (error, hospitalizados) => {
+        if (error) {
+            res.status(500).json({ error: 'Error al cargar los hospitalizados' });
+        } else {
+            res.status(200).json(hospitalizados);
+        }
     });
 },
-agregarHospitalizado: async (req, res) => {
-  const {
-    CodigoCama, //int
-    RutHospitalizado, //int
-    DvHospitalizado, //int
-    NombreHospitalizado, //string
-    FechaNacimiento, //date
-    FechaIngreso, //date
-    ObservacionesNutricionista, //textbox
-    FechaAlta, //date
-    IndicacionesAlta, //textbox
-    ServicioAlta,
-    CodigoCamaAlta,
-    IdTipoServicio,
-    IdTipoUnidad,
-    IdTipoVia
-  } = req.body;
+  agregarHospitalizado: async (req, res) => {
+    const {
+      CodigoCama, //int
+      RutHospitalizado, //int
+      DvHospitalizado, //int
+      NombreHospitalizado, //string
+      FechaNacimiento, //date
+      FechaIngreso, //date
+      ObservacionesNutricionista, //textbox
+      FechaAlta, //date
+      IndicacionesAlta, //textbox
+      ServicioAlta,
+      CodigoCamaAlta,
+      IdTipoServicio,
+      IdTipoUnidad,
+      IdTipoVia
+    } = req.body;
 
-  // Realiza una consulta SQL para agregar un hospitalizado
-  const query = "INSERT INTO `Hospitalizado` (`CodigoCama`, `RutHospitalizado`, `DvHospitalizado`, `NombreHospitalizado`, `FechaNacimiento`, `FechaIngreso`, `ObservacionesNutricionista`, `FechaAlta`, `IndicacionesAlta`, `ServicioAlta`, `CodigoCamaAlta`, `IdTipoServicio`, `IdTipoUnidad`, `IdTipoVia`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+    // Realiza una consulta SQL para agregar un hospitalizado
+    const query = "INSERT INTO `Hospitalizado` (`CodigoCama`, `RutHospitalizado`, `DvHospitalizado`, `NombreHospitalizado`, `FechaNacimiento`, `FechaIngreso`, `ObservacionesNutricionista`, `FechaAlta`, `IndicacionesAlta`, `ServicioAlta`, `CodigoCamaAlta`, `IdTipoServicio`, `IdTipoUnidad`, `IdTipoVia`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 
-  db.query(query, [
-    CodigoCama, //int
-    RutHospitalizado, //int
-    DvHospitalizado, //int
-    NombreHospitalizado, //string
-    FechaNacimiento, //date
-    FechaIngreso, //date
-    ObservacionesNutricionista, //textbox
-    FechaAlta, //date
-    IndicacionesAlta, //textbox
-    ServicioAlta,
-    CodigoCamaAlta,
-    IdTipoServicio,
-    IdTipoUnidad,
-    IdTipoVia
-  ], (error, results, fields) => {
-    if (error) {
-      return res.status(500).json({ error: error });
-    }
-    
-    return res.redirect('/NutricionistaJefe/listar-hospitalizado');
-  });
-},
+    db.query(query, [
+      CodigoCama, //int
+      RutHospitalizado, //int
+      DvHospitalizado, //int
+      NombreHospitalizado, //string
+      FechaNacimiento, //date
+      FechaIngreso, //date
+      ObservacionesNutricionista, //textbox
+      FechaAlta, //date
+      IndicacionesAlta, //textbox
+      ServicioAlta,
+      CodigoCamaAlta,
+      IdTipoServicio,
+      IdTipoUnidad,
+      IdTipoVia
+    ], (error, results, fields) => {
+      if (error) {
+        return res.status(500).json({ error: error });
+      }
+
+      return res.redirect('/NutricionistaJefe/listar-hospitalizado');
+    });
+  },
   actualizarHospitalizado: async (req, res) => {
     const RutHospitalizado = req.params.rut;
     // Realiza una consulta SQL para obtener los datos del hospitalizado a editar

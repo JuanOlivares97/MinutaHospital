@@ -4,10 +4,11 @@ const FuncionarioController = require("../controllers/FuncionarioController.js")
 const Route = express.Router();
 
 Route.get('/', HospitalizadoController.mostrarPaginaHospitalizados)
+Route.get('/funcionarios', FuncionarioController.mostrarPaginaFuncionarios);
 
-Route.get('/mostrar-funcionario', FuncionarioController.mostrarFuncionarios);
+// API Para listar Registros
+Route.post('/listar-hospitalizado', HospitalizadoController.listarHospitalizados);
 
-Route.get('/listar-hospitalizado', HospitalizadoController.listarHospitalizados);
 Route.get('/listar-funcionario', FuncionarioController.listarFuncionarios);
 
 // Ruta para procesar el formulario de agregar un hospitalizado
@@ -21,23 +22,5 @@ Route.post('/editar-hospitalizado/:rut', HospitalizadoController.actualizarHospi
 
 Route.post('/eliminar-hospitalizado/:rut', HospitalizadoController.eliminarHospitalizado);
 
-Route.get('/buscar', async (req, res) => {
-    try {
-      // Conectarse a la base de datos
-      const connection = await mysql.createConnection(dbConfig);
-  
-      // Realizar la consulta (cambiar 'nombre_de_tabla' y 'columna_busqueda' según tu caso)
-      const [rows] = await connection.execute('SELECT * FROM nombre_de_tabla WHERE columna_busqueda = ?', [req.query.valor]);
-  
-      // Cerrar la conexión a la base de datos
-      connection.end();
-  
-      // Enviar los resultados como respuesta
-      res.json(rows);
-    } catch (error) {
-      console.error('Error al realizar la búsqueda:', error);
-      res.status(500).send('Error interno del servidor');
-    }
-  });
 
 module.exports = Route;
