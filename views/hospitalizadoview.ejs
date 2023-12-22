@@ -19,30 +19,31 @@
     />
     <title>Hospital San Jose Melipilla</title>
 </head>
+
 <body id="body-pd">
-        <header class="header" id="header">
-            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <h3>SISTEMA DE CONTROL DE ALIMENTACIÓN</h3>
-            <div class="log-out"> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
-                        class="nav_name">SignOut</span> </a></div>
-        </header>
-        <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
-                <div class="nav_list"> <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i>
-                        <span class="nav_name">Dashboard</span> </a> <a href="#" class="nav_link"> <i
-                            class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a> <a href="#"
-                        class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span
-                            class="nav_name">Messages</span> </a> <a href="#" class="nav_link"> <i
-                            class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> <a href="#"
-                        class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
-                            class="nav_name">Stats</span> </a>
-                </div>
-            </nav>
-        </div>
-        <div id="titulo">Mantenedor de Hospitalizados</div>
-        <!--Navbar end-->
-        <!--Container Main start-->
+    <header class="header" id="header">
+        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        <h3>SISTEMA DE CONTROL DE ALIMENTACIÓN</h3>
+        <div class="log-out"> <a href="/logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
+                    class="nav_name">Cerrar Sesion</span> </a></div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div class="nav_list"> <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i>
+                    <span class="nav_name">Dashboard</span> </a> <a href="#" class="nav_link"> <i
+                        class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a> <a href="#"
+                    class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span
+                        class="nav_name">Messages</span> </a> <a href="#" class="nav_link"> <i
+                        class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> <a href="#"
+                    class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a>
+                <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                        class="nav_name">Stats</span> </a>
+            </div>
+        </nav>
+    </div>
+    <div id="titulo">Mantenedor de Hospitalizados</div>
+    <!--Navbar end-->
+    <!--Container Main start-->
 
         <div id="container">
             <div id="headertable">
@@ -114,10 +115,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        <!--TABLA GRID JS-->
-        <div id="listaHospitalizados"></div>    
-        </div>
+                <!--TABLA GRID JS-->
+                <div id="listaHospitalizados"></div>    
         <!--Container Main end-->
         <!--Scripts-->
         <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
