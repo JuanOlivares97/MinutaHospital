@@ -109,6 +109,14 @@ a {
   padding: .5rem 0 .5rem 1.5rem
 }
 
+.log-out>a{
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
 .nav_logo {
   margin-bottom: 2rem
 }

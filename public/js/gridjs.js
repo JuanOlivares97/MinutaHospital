@@ -1,18 +1,27 @@
 new gridjs.Grid({
     columns: [
-        "CodigoCama",
+        "Cama",
         "Rut",
-        "NombreHospitalizado",
-        "FechaNacimiento",
-        "FechaIngreso",
-        "ObservacionesNutricionista",
-        "FechaAlta",
-        "IndicacionesAlta",
-        "ServicioAlta",
-        "CodigoCamaAlta",
-        "TipoServicio",
-        "TipoUnidad",
-        "TipoVia",
+        "Nombre Completo",
+        "Edad",
+        "Ingreso",
+        "Observaciones Nutricionista",
+        "Fecha Alta",
+        "Regimen",
+        {
+            name: "Opciones",
+            formatter: (cell, row) => gridjs.html(`
+            <form action="" method="POST">
+                    <input type="hidden" name="" value="${row.cells[1].data}" required> 
+                    <button style="width:100px; margin:5px;"> Editar </button>
+                  </form>
+            <form action="" method="POST">
+                    <input type="hidden" name="" value="${row.cells[1].data}" required> 
+                    <button style="width:100px; margin:5px;">Eliminar</button>
+            </form>
+                  `)
+        },
+        "Ayuno"
     ],
     sort: true,
     fixedHeader: true,
@@ -28,22 +37,20 @@ new gridjs.Grid({
         }
       },
     server: {
+        method: 'POST',
         url: "http://localhost:3000/NutricionistaJefe/listar-hospitalizado",
         then: (data) =>
             data.map((hospitalizado) => [
                 hospitalizado.CodigoCama,
                 hospitalizado.Rut,
                 hospitalizado.NombreHospitalizado,
-                hospitalizado.FechaNacimiento,
+                hospitalizado.Edad,
                 hospitalizado.FechaIngreso,
                 hospitalizado.ObservacionesNutricionista,
                 hospitalizado.FechaAlta,
-                hospitalizado.IndicacionesAlta,
-                hospitalizado.ServicioAlta,
-                hospitalizado.CodigoCamaAlta,
-                hospitalizado.TipoServicio,
-                hospitalizado.TipoUnidad,
-                hospitalizado.TipoVia,
+                hospitalizado.TipoRegimen,
+                null,
+                hospitalizado.Ayuno.data,
             ]),
         handle: (res) => {
             if (res.status === 404) return { data: [] };
@@ -53,4 +60,3 @@ new gridjs.Grid({
         },
     },
 }).render(document.getElementById("listaHospitalizados"));
-

@@ -40,86 +40,92 @@
         </nav>
     </div>
     <!--Navbar end-->
-    <div Class="titulo">Alimentación Hospitalizados</div>
+    <div class="titulo">Alimentación Hospitalizados</div>
     <!--Container Main start-->
-    <div id="container">
-        <div id="headertable">
-            <a id="agregar" href="#" data-toggle="modal" data-target="#modalHospitalizado">
-                Agregar hospitalizado <img src="/img/agregar.png" alt="">
-            </a>
-
-            <!-- Modal -->
-            <div class="modal fade" id="modalHospitalizado" tabindex="-1" role="dialog"
-                aria-labelledby="modalHospitalizadoLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalHospitalizadoLabel">Agregar hospitalizado</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Aquí coloca tu formulario -->
-                            <form action="/NutricionistaJefe/agregar-hospitalizado" method="post">
-                                <label for="CodigoCama">Código de Cama:</label>
-                                <input type="number" id="CodigoCama" name="CodigoCama" required>
-
-                                <label for="RutHospitalizado">Rut Hospitalizado:</label>
-                                <input type="number" id="RutHospitalizado" name="RutHospitalizado" required>
-
-                                <label for="DvHospitalizado">Dv Hospitalizado:</label>
-                                <input type="number" id="DvHospitalizado" name="DvHospitalizado" required>
-
-                                <label for="NombreHospitalizado">Nombre Hospitalizado:</label>
-                                <input type="text" id="NombreHospitalizado" name="NombreHospitalizado" required>
-
-                                <label for="FechaNacimiento">Fecha de Nacimiento:</label>
-                                <input type="date" id="FechaNacimiento" name="FechaNacimiento" required>
-
-                                <label for="FechaIngreso">Fecha de Ingreso:</label>
-                                <input type="date" id="FechaIngreso" name="FechaIngreso" required>
-
-                                <label for="ObservacionesNutricionista">Observaciones Nutricionista:</label>
-                                <textarea id="ObservacionesNutricionista" name="ObservacionesNutricionista"></textarea>
-
-                                <label for="FechaAlta">Fecha de Alta:</label>
-                                <input type="date" id="FechaAlta" name="FechaAlta">
-
-                                <label for="IndicacionesAlta">Indicaciones Alta:</label>
-                                <input type="text" id="IndicacionesAlta" name="IndicacionesAlta">
-
-                                <label for="ServicioAlta">Servicio de Alta:</label>
-                                <input type="text" id="ServicioAlta" name="ServicioAlta">
-
-                                <label for="CodigoCamaAlta">Código de Cama de Alta:</label>
-                                <input type="text" id="CodigoCamaAlta" name="CodigoCamaAlta">
-
-                                <label for="IdTipoServicio">ID Tipo de Servicio:</label>
-                                <input type="text" id="IdTipoServicio" name="IdTipoServicio">
-
-                                <label for="IdTipoUnidad">ID Tipo de Unidad:</label>
-                                <input type="text" id="IdTipoUnidad" name="IdTipoUnidad">
-
-                                <label for="IdTipoVia">ID Tipo de Vía:</label>
-                                <input type="text" id="IdTipoVia" name="IdTipoVia">
-
-                                <button type="submit">Enviar</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <div id="container">
+            <div id="headertable">
+                <a id="agregar" href="#" data-toggle="modal" data-target="#modalHospitalizado">
+                    Agregar hospitalizado <img src="/img/agregar.png" alt="">
+                </a>
+                <form action="http://localhost:3000/NutricionistaJefe/listar-hospitalizado" method="post">
+                    <select id="tipoServicioSelect">
+                        <option value="" disabled selected>Selecciona un tipo de servicio</option>
+                    </select>
+                </form>
+                <!-- Modal Agregar -->
+                <div class="modal fade" id="modalHospitalizado" tabindex="-1" role="dialog" aria-labelledby="modalHospitalizadoLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalHospitalizadoLabel">Agregar hospitalizado</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Aquí coloca tu formulario -->
+                                <form action="/NutricionistaJefe/agregar-hospitalizado" method="post">
+                                    <label for="CodigoCama">Código de Cama:</label>
+                                    <input type="number" id="CodigoCama" name="CodigoCama" required>
+                                
+                                    <label for="RutHospitalizado">Rut Hospitalizado:</label>
+                                    <input type="number" id="RutHospitalizado" name="RutHospitalizado" required>
+                                
+                                    <label for="DvHospitalizado">Dv Hospitalizado:</label>
+                                    <input type="number" id="DvHospitalizado" name="DvHospitalizado" required>
+                                
+                                    <label for="NombreHospitalizado">Nombre Hospitalizado:</label>
+                                    <input type="text" id="NombreHospitalizado" name="NombreHospitalizado" required>
+                                
+                                    <label for="FechaNacimiento">Fecha de Nacimiento:</label>
+                                    <input type="date" id="FechaNacimiento" name="FechaNacimiento" required>
+                                
+                                    <label for="FechaIngreso">Fecha de Ingreso:</label>
+                                    <input type="date" id="FechaIngreso" name="FechaIngreso" required>
+                                
+                                    <label for="ObservacionesNutricionista">Observaciones Nutricionista:</label>
+                                    <textarea id="ObservacionesNutricionista" name="ObservacionesNutricionista"></textarea>
+                                
+                                    <label for="FechaAlta">Fecha de Alta:</label>
+                                    <input type="date" id="FechaAlta" name="FechaAlta">
+                                
+                                    <label for="IndicacionesAlta">Indicaciones Alta:</label>
+                                    <input type="text" id="IndicacionesAlta" name="IndicacionesAlta">
+                                
+                                    <label for="ServicioAlta">Servicio de Alta:</label>
+                                    <input type="text" id="ServicioAlta" name="ServicioAlta">
+                                
+                                    <label for="CodigoCamaAlta">Código de Cama de Alta:</label>
+                                    <input type="text" id="CodigoCamaAlta" name="CodigoCamaAlta">
+                                
+                                    <label for="IdTipoServicio">ID Tipo de Servicio:</label>
+                                    <input type="text" id="IdTipoServicio" name="IdTipoServicio">
+                                
+                                    <label for="IdTipoUnidad">ID Tipo de Unidad:</label>
+                                    <input type="text" id="IdTipoUnidad" name="IdTipoUnidad">
+                                
+                                    <label for="IdTipoVia">ID Tipo de Vía:</label>
+                                    <input type="text" id="IdTipoVia" name="IdTipoVia">
+                                
+                                    <button type="submit">Enviar</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--TABLA GRID JS-->
-            <div id="listaHospitalizados"></div>
-            <!--Container Main end-->
-            <!--Scripts-->
-            <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-            <script src="/resources/js/gridjs.js"></script>
-            <script src="/resources/js/navbar.js"></script>
+                <!-- Modal Editar -->
+                
+                <!--TABLA GRID JS-->
+                <div id="listaHospitalizados"></div>    
+        <!--Container Main end-->
+        <!--Scripts-->
+        <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+        <script src="/resources/js/gridjs.js"></script>
+        <script src="/resources/js/navbar.js"></script>
+        <script src="/resources/js/consumoApi.js"></script>
 </body>
 
 </html>

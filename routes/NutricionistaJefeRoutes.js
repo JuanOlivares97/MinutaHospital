@@ -4,10 +4,11 @@ const FuncionarioController = require("../controllers/FuncionarioController.js")
 const Route = express.Router();
 
 Route.get('/', HospitalizadoController.mostrarPaginaHospitalizados)
+Route.get('/funcionarios', FuncionarioController.mostrarPaginaFuncionarios);
 
-Route.get('/mostrar-funcionario', FuncionarioController.mostrarFuncionarios);
+// API Para listar Registros
+Route.post('/listar-hospitalizado', HospitalizadoController.listarHospitalizados);
 
-Route.get('/listar-hospitalizado', HospitalizadoController.listarHospitalizados);
 Route.get('/listar-funcionario', FuncionarioController.listarFuncionarios);
 
 // Ruta para procesar el formulario de agregar un hospitalizado
