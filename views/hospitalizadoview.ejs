@@ -13,6 +13,10 @@
     <script  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script  src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+      href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
     <title>Hospital San Jose Melipilla</title>
 </head>
 <body id="body-pd">
@@ -110,83 +114,14 @@
                         </div>
                     </div>
                 </div>
-                  
-                <form action="/buscar" method="get">
-                    <label for="busqueda">Buscar:</label>
-                    <input type="search" id="busqueda" name="q" placeholder="Ingrese su búsqueda...">
-                    <input type="submit" value="Buscar">
-                </form>
             </div>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Cama</th>
-                            <th>Rut</th>
-                            <th>Nombre Completo</th>
-                            <th>Fecha Nacimiento</th>
-                            <th>Fecha Ingreso</th>
-                            <th>Observaciones</th>
-                            <th>Fecha Alta </th>
-                            <th>Indicaciones Alta </th>
-                            <th>Servicio Alta </th>
-                            <th>Cama Alta</th>
-                            <th>Tipo Servicio</th>
-                            <th>Tipo Unidad</th>
-                            <th>Tipo Via</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for (let i=0; i < hospitalizados.length; i++) { %>
-                            <tr>
-                                <td>
-                                    <%= hospitalizados[i].CodigoCama %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].Rut %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].NombreHospitalizado %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].FechaNacimiento %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].FechaIngreso %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].ObservacionesNutricionista %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].FechaAlta %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].IdIndicacionesAlta %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].ServicioAlta %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].CodigoCamaAlta %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].TipoServicio %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].TipoUnidad %>
-                                </td>
-                                <td>
-                                    <%= hospitalizados[i].TipoVia %>
-                                </td>
-                            </tr>
-                            <% }; %>
-                    </tbody>
-                </table>
-            </div>
+        <!--TABLA GRID JS-->
+        <div id="listaHospitalizados"></div>    
         </div>
         <!--Container Main end-->
         <!--Scripts-->
-        
+        <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+        <script src="/resources/js/gridjs.js"></script>
         <script src="/resources/js/navbar.js"></script>
 </body>
 

@@ -3,9 +3,8 @@ const HospitalizadoController = require("../controllers/HospitalzadoController.j
 const FuncionarioController = require("../controllers/FuncionarioController.js");
 const Route = express.Router();
 
-Route.get('/', (req, res) => {
-    res.redirect('/NutricionistaJefe/listar-hospitalizado');
-});
+Route.get('/', HospitalizadoController.mostrarPaginaHospitalizados)
+
 Route.get('/mostrar-funcionario', FuncionarioController.mostrarFuncionarios);
 
 Route.get('/listar-hospitalizado', HospitalizadoController.listarHospitalizados);

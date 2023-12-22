@@ -2,7 +2,7 @@ const db = require("../database/database.js");
 
 const apiController = {
   listarTipoVia: async (req, res) => {
-    const query = "SELECT DescTipoVia FROM `TipoVia`";
+    const query = "SELECT * FROM `TipoVia`";
     db.query(query, function (error, TipoVia) {
       if (error) {
         console.error("Error en la consulta a la base de datos:", error);
@@ -14,7 +14,7 @@ const apiController = {
     });
   },
   listarTipoContrato: async (req, res) => {
-    const query = "SELECT TipoContrato FROM TipoContrato";
+    const query = "SELECT * FROM TipoContrato";
     db.query(query, function (error, TipoContrato) {
       if (error) {
         console.error("Error en la consulta a la base de datos:", error);
@@ -26,7 +26,7 @@ const apiController = {
     });
   },
   listarTipoEstamento: async (req, res) => {
-    const query = "SELECT DescTipoEstamento FROM TipoEstamento";
+    const query = "SELECT * FROM TipoEstamento";
     db.query(query, function (error, TipoEstamento) {
       if (error) {
         console.error("Error en la consulta a la base de datos:", error);
@@ -38,7 +38,7 @@ const apiController = {
     });
   },
   listarTipoRegimen: async (req, res) => {
-    const query = "SELECT DescTipoRegimen FROM TipoRegimen WHERE Habilitado = 'S'";
+    const query = "SELECT * FROM TipoRegimen WHERE Habilitado = 'S'";
     db.query(query, function (error, TipoRegimen) {
       if (error) {
         console.error("Error en la consulta a la base de datos:", error);
@@ -50,7 +50,7 @@ const apiController = {
     });
   },
   listarTipoServicio: async (req, res) => {
-    const query = "SELECT DescTipoServicio FROM TipoServicio WHERE Habilitado = 'S'";
+    const query = "SELECT * FROM TipoServicio WHERE Habilitado = 'S'";
     db.query(query, function (error, TipoServicio) {
       if (error) {
         console.error("Error en la consulta a la base de datos:", error);
@@ -63,7 +63,7 @@ const apiController = {
     });
   },
   listarTipoUnidad: async (req, res) => {
-    const query = "SELECT DescTipoUnidad FROM TipoUnidad WHERE Habilitado = 'S'";
+    const query = "SELECT * FROM TipoUnidad WHERE Habilitado = 'S'";
     db.query(query, function (error, TipoUnidad) {
       if (error) {
         console.error("Error en la consulta a la base de datos:", error);
