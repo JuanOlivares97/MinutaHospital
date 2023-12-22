@@ -24,7 +24,17 @@ app.get('/', (req, res) => {
 app.use('/auth', LoginRoutes);
 app.use('/NutricionistaJefe', NutricionistaJefeRoutes);
 app.use('/api', apiRoutes) 
-
+app.get('/logout', (req, res) => {
+  // Destruye la sesión
+  req.session.destroy(err => {
+    if (err) {
+      console.log(err);
+      res.send('Error al cerrar sesión');
+    } else {
+      res.redirect('/auth');  // Redirige a la página de inicio de sesión
+    }
+  });
+});
 app.use("/resources", express.static("public"));
 app.use("/resources", express.static(__dirname + "/public"));
 
