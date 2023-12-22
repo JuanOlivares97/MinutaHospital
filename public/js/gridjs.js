@@ -30,14 +30,12 @@ new gridjs.Grid({
             "font-size": "15px",
         },
     },
-    search: {
-        selector: (cell, rowIndex, cellIndex) => cellIndex === 1 ? cell.Rut : cell
-    },
+    search: true,
     language: {
         'search': {
-            'placeholder': '🔍 11111111-1'
+          'placeholder': '🔍 11111111-1'
         }
-    },
+      },
     server: {
         method: 'POST',
         url: "http://localhost:3000/NutricionistaJefe/listar-hospitalizado",
