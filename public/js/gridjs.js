@@ -14,12 +14,19 @@ new gridjs.Grid({
         "TipoUnidad",
         "TipoVia",
     ],
+    sort: true,
+    fixedHeader: true,
     style: {
         table: {
             "font-size": "15px",
         },
     },
     search: true,
+    language: {
+        'search': {
+          'placeholder': '🔍 11111111-1'
+        }
+      },
     server: {
         url: "http://localhost:3000/NutricionistaJefe/listar-hospitalizado",
         then: (data) =>
@@ -46,3 +53,4 @@ new gridjs.Grid({
         },
     },
 }).render(document.getElementById("listaHospitalizados"));
+
