@@ -41,17 +41,21 @@
             </div>
         </nav>
     </div>
-    <div id="titulo">Mantenedor de Hospitalizados</div>
+    <div id="titulo">Alimentación de Hospitalizados</div>
     <!--Navbar end-->
     <!--Container Main start-->
-
+        
         <div id="container">
             <div id="headertable">
                 <a id="agregar" href="#" data-toggle="modal" data-target="#modalHospitalizado">
                     Agregar hospitalizado <img src="/img/agregar.png" alt="">
                 </a>
-            
-                <!-- Modal -->
+                <form action="http://localhost:3000/NutricionistaJefe/listar-hospitalizado" method="post">
+                    <select id="tipoServicioSelect">
+                        <option value="" disabled selected>Selecciona un tipo de servicio</option>
+                    </select>
+                </form>
+                <!-- Modal Agregar -->
                 <div class="modal fade" id="modalHospitalizado" tabindex="-1" role="dialog" aria-labelledby="modalHospitalizadoLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -115,6 +119,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal Editar -->
+                
                 <!--TABLA GRID JS-->
                 <div id="listaHospitalizados"></div>    
         <!--Container Main end-->
@@ -122,6 +128,7 @@
         <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
         <script src="/resources/js/gridjs.js"></script>
         <script src="/resources/js/navbar.js"></script>
+        <script src="/resources/js/consumoApi.js"></script>
 </body>
 
 </html>
