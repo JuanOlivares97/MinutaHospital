@@ -1,5 +1,5 @@
 const express = require('express');
-const HospitalizadoController = require("../controllers/HospitalzadoController.js");
+const HospitalizadoController = require("../controllers/HospitalizadoController.js");
 const FuncionarioController = require("../controllers/FuncionarioController.js");
 const Route = express.Router();
 
@@ -7,7 +7,7 @@ Route.get('/', HospitalizadoController.mostrarPaginaHospitalizados)
 Route.get('/funcionarios', FuncionarioController.mostrarPaginaFuncionarios);
 
 // API Para listar Registros
-Route.post('/listar-hospitalizado', HospitalizadoController.listarHospitalizados);
+Route.get('/listar-hospitalizado', HospitalizadoController.listarHospitalizados);
 
 Route.get('/listar-funcionario', FuncionarioController.listarFuncionarios);
 
