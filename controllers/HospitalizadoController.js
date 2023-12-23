@@ -5,10 +5,11 @@ const HospitalizadoController = {
     res.render("hospitalizadoview");
   },
   listarHospitalizados: (req, res) => {
-    const tipoServicio = req.body.tipoServicio; // Asumiendo que el tipoServicio se envía en el cuerpo de la solicitud POST
+    let tipoServicio = req.query.tipoServicio;
 
+    // Si no se proporciona el parámetro tipoServicio, asigna un valor predeterminado o deja que sea null
     if (!tipoServicio) {
-        return res.status(400).json({ error: 'Se requiere el parámetro tipoServicio en el cuerpo de la solicitud POST.' });
+        tipoServicio = 0;  // O asigna el valor que desees por defecto
     }
 
     const query = `
