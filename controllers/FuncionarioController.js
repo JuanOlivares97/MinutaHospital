@@ -1,7 +1,7 @@
 const db = require("../database/database.js");
 const FuncionariosController = {
   mostrarPaginaFuncionarios: (req, res) => {
-    res.render("hospitalizadoview");
+    res.render("funcionarioView");
   },
   listarFuncionarios: (req, res) => {
     const query = `

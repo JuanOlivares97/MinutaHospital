@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/recuperarcontrasenia.css">
+    <title></title>
+</head>
+
+<body>
+    <div class="container">
+        <img id="svg-background" src="/img/recuperarcontrasenia.svg" alt="fondo del iniciosesion">
+        <div id="inicio">
+            <div id="sesion">
+                <div id="form">
+                    <form id="formulario" method="post" action="/auth/login">
+                        <div class="decoracion">Recuperar Contraseña</div>
+                        <label for="useruser"> Ingresar Correo</label>
+                        <input id="user" type="text" name="username" placeholder="Ejemplo@gmail.com" required>
+                        <label for="passpass">Repetir Correo</label>
+                        <input id="pass" type="password" name="password" placeholder="Ejemplo@gmail.com" required>
+                        <button id="button" type="submit">Enviar</button>
+                        <button id="buttonC" type="cancel">Cancelar</button>
+                    </form>
+                    <div id="img">
+                        <img id="svg-background2" src="/img/decoracionRC.svg" alt="fondo del iniciosesion">
+                        <img id="img-background" src="/img/Hospital.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

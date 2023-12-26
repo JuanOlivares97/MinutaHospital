@@ -26,7 +26,7 @@
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
-            <div class="nav_list"> <a href="#" class="nav_link "> <i class='bx bx-grid-alt nav_icon'></i>
+            <div class="nav_list"> <a href="/NutricionistaJefe/funcionarios" class="nav_link "> <i class='bx bx-grid-alt nav_icon'></i>
                     <span class="nav_name">Mantenedor de Funcionario</span></a> <a href="/NutricionistaJefe"
                     class="nav_link active"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Alimentacion
                         Hospitalizado</span> </a> <a href="#" class="nav_link"> <i
@@ -58,9 +58,6 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="modalHospitalizadoLabel">Agregar hospitalizado</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
                             </div>
                             <div class="modal-body">
                                 <!-- Aquí coloca tu formulario -->
@@ -99,7 +96,9 @@
                                     <input type="text" id="CodigoCamaAlta" name="CodigoCamaAlta">
                                 
                                     <label for="IdTipoServicio">ID Tipo de Servicio:</label>
-                                    <input type="text" id="IdTipoServicio" name="IdTipoServicio">
+                                    <select id="tipoServicioS">
+                                        <option value="" disabled selected name="IdTipoServicioS" >Selecciona un tipo de servicio</option>
+                                    </select>
                                 
                                     <label for="IdTipoUnidad">ID Tipo de Unidad:</label>
                                     <input type="text" id="IdTipoUnidad" name="IdTipoUnidad">
@@ -111,7 +110,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
                     </div>

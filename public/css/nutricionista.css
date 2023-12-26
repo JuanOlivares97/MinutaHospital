@@ -109,7 +109,7 @@ a {
   padding: .5rem 0 .5rem 1.5rem
 }
 
-.log-out>a{
+.log-out>a {
   text-decoration: none;
   display: flex;
   justify-content: center;
@@ -232,13 +232,25 @@ table {
   label {
     font-weight: bold;
     display: block;
-    /* Hace que las etiquetas ocupen todo el ancho disponible */
   }
 
   input {
-    padding: 8px;
+    padding: 5px;
     width: 100%;
     box-sizing: border-box;
+  }
+
+  button {
+    border: 0cm;
+    border-radius: 20px;
+    background: #76D48B;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
+  }
+
+  modal-footer>button{
+    border-radius: 20px;
+    background: #F53131;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
   }
 }
 

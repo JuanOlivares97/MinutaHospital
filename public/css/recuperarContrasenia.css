@@ -1,0 +1,388 @@
+:root {
+    --header-height: 3rem;
+    --nav-width: 68px;
+    --first-color: #EEA561;
+    --first-color-light: #AFA5D9;
+    --white-color: #F7F6FB;
+    --icons-color: #000000;
+    --firt-border-color: #7BBCEA;
+    --body-font: 'Nunito', sans-serif;
+    --normal-font-size: 1rem;
+    --z-fixed: 100
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+html {
+    background: #2779B2;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#img {
+    width: 50%;
+}
+
+#svg-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#svg-background2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 80vh;
+    border-radius: 20px;
+}
+
+#img-background {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1
+}
+
+#inicio {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 80vh;
+    width: 70%;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.50), 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+#sesion {
+    display: flex;
+    width: 100%;
+    height: 80vh;
+}
+
+#form,
+#img {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#formulario {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 50px;
+    border: 2px solid var(--icons-color);
+    background: var(--white-color);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
+    width: 445px;
+    height: 605px;
+}
+
+#user,
+#pass {
+    color: rgba(0, 0, 0, 0.45);
+    font-family: Lato;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 255px;
+    height: 39px;
+    margin-bottom: -10px;
+
+    border: none;
+    border-bottom: 2px solid var(--icons-color);
+    outline: none;
+}
+label {
+    color: var(--icons-color);
+    font-family: Lato;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 180px;
+    height: 35px;
+    margin-bottom: -10px;
+}
+#button,
+#buttonC {
+    color: var(--icons-color);
+    font-family: Lalezar;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 266px;
+    height: 57px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 2px solid var(--firt-border-color);
+    background: var(--firt-border-color);
+}
+
+#buttonC {
+    border-radius: 20px;
+    border: 2px solid #7BBCEA;
+    background: #EA7B7B;
+}
+
+
+#recuperarpass {
+    color: var(--firt-border-color);
+    font-family: Lalezar;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.decoracion {
+    color: var(--icons-color);
+    font-family: Lato;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-bottom: 2px solid #38377B;
+    ;
+}
+
+/*REPONSIVO*/
+@media (max-width: 1380px) {
+    #formulario {
+        width: 380px;
+        height: 520PX;
+    }
+
+    #form {
+        padding-left: 100px;
+        display: flex;
+        padding-right: 130px;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion,
+    #recuperarpass {
+        font-size: 22px;
+    }
+
+    #button {
+        width: 235px;
+        height: 50px;
+    }
+
+    #img-background {
+        height: 450px;
+    }
+
+    #svg-background2 {
+        display: none;
+    }
+}
+
+
+@media (max-width: 1196px) {
+    #formulario {
+        width: 350px;
+        height: 500PX;
+    }
+
+    #form {
+        padding-left: 0px;
+        display: flex;
+        padding-right: 150px;
+    }
+
+    #svg-background2 {
+        display: none;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion,
+    #recuperarpass {
+        font-size: 22px;
+    }
+
+    #button {
+        width: 200px;
+        height: 47px;
+    }
+
+    #img-background {
+        height: 350px;
+        opacity: 0.95;
+    }
+}
+
+@media (max-width: 1049px) {
+    #formulario {
+        width: 350px;
+        height: 530PX;
+    }
+
+    #form {
+        padding-left: 0px;
+        display: flex;
+        padding-right: 150px;
+    }
+
+    #svg-background2 {
+        display: none;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion {
+        font-size: 24px;
+    }
+
+    #recuperarpass {
+        font-size: 20px;
+    }
+
+    #button {
+        width: 230px;
+        height: 47px;
+    }
+
+    #img-background {
+        z-index: -0.5;
+        height: 290px;
+        opacity: 0.95;
+    }
+}
+
+@media (max-width: 1109px) {
+    #formulario {
+        width: 300px;
+        height: 450PX;
+    }
+
+    #form {
+        padding-left: 400px;
+        display: flex;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion,
+    #recuperarpass {
+        font-size: 21px;
+    }
+
+    #button {
+        width: 235px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 996px) {
+    #formulario {
+        width: 400px;
+        height: 550PX;
+    }
+
+    #form {
+        padding-left: 0px;
+        display: flex;
+        padding-right: 150px;
+    }
+
+    #svg-background2 {
+        display: none;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion {
+        font-size: 24px;
+    }
+
+    #recuperarpass {
+        font-size: 20px;
+    }
+
+    #button {
+        width: 230px;
+        height: 47px;
+    }
+
+    #img-background {
+        display: none;
+    }
+}
+
+@media (max-width: 375px) {
+    #formulario {
+        width: 275px;
+        height: 550PX;
+        box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.50);
+    }
+
+    #inicio {
+        background: none;
+        box-shadow: none;
+    }
+
+    #form {
+        padding-left: 0px;
+        display: flex;
+    }
+
+    #svg-background2 {
+        display: none;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion {
+        font-size: 16px;
+    }
+
+    #recuperarpass {
+        font-size: 13px;
+    }
+
+    #button {
+        width: 230px;
+        height: 47px;
+    }
+
+    #img-background {
+        display: none;
+    }
+
+    #svg-background {
+        display: none;
+    }
+}
