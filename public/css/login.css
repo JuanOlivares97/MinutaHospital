@@ -9,8 +9,8 @@
     --body-font: 'Nunito', sans-serif;
     --normal-font-size: 1rem;
     --z-fixed: 100
-  }
-  
+}
+
 
 body {
     margin: 0;
@@ -55,7 +55,6 @@ html {
     left: 0;
     z-index: 1
 }
-
 
 #inicio {
     width: 70%;
@@ -118,7 +117,7 @@ html {
 }
 
 label {
-    color:var(--icons-color);
+    color: var(--icons-color);
     font-family: Lato;
     font-size: 27px;
     font-style: normal;
@@ -178,7 +177,8 @@ label {
     #img-background {
         height: 450px;
     }
-    #svg-background2{
+
+    #svg-background2 {
         display: none;
     }
 }
@@ -189,14 +189,17 @@ label {
         width: 350px;
         height: 500PX;
     }
+
     #form {
         padding-left: 0px;
         display: flex;
         padding-right: 150px;
     }
-    #svg-background2{
+
+    #svg-background2 {
         display: none;
     }
+
     #user,
     #pass,
     label,
@@ -216,24 +219,28 @@ label {
         opacity: 0.95;
     }
 }
+
 @media (max-width: 1049px) {
     #formulario {
         width: 350px;
         height: 530PX;
     }
+
     #form {
         padding-left: 0px;
         display: flex;
         padding-right: 150px;
     }
-    #svg-background2{
+
+    #svg-background2 {
         display: none;
     }
+
     #user,
     #pass,
     label,
     #button,
-    .decoracion{
+    .decoracion {
         font-size: 24px;
     }
 
@@ -252,6 +259,7 @@ label {
         opacity: 0.95;
     }
 }
+
 @media (max-width: 1109px) {
     #formulario {
         width: 300px;
@@ -277,24 +285,28 @@ label {
         height: 50px;
     }
 }
+
 @media (max-width: 996px) {
     #formulario {
         width: 400px;
         height: 550PX;
     }
+
     #form {
         padding-left: 0px;
         display: flex;
         padding-right: 150px;
     }
-    #svg-background2{
+
+    #svg-background2 {
         display: none;
     }
+
     #user,
     #pass,
     label,
     #button,
-    .decoracion{
+    .decoracion {
         font-size: 24px;
     }
 
@@ -318,22 +330,26 @@ label {
         height: 550PX;
         box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.50);
     }
-    #inicio{
+
+    #inicio {
         background: none;
         box-shadow: none;
     }
+
     #form {
         padding-left: 0px;
         display: flex;
     }
-    #svg-background2{
+
+    #svg-background2 {
         display: none;
     }
+
     #user,
     #pass,
     label,
     #button,
-    .decoracion{
+    .decoracion {
         font-size: 16px;
     }
 
@@ -349,6 +365,7 @@ label {
     #img-background {
         display: none;
     }
+
     #svg-background {
         display: none;
     }
