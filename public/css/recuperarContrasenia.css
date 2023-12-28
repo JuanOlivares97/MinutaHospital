@@ -72,6 +72,10 @@ html {
     width: 100%;
     height: 80vh;
 }
+a{
+    text-decoration: none;
+    color: var(--icons-color);
+}
 
 #form,
 #img {
