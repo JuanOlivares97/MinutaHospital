@@ -21,6 +21,11 @@ app.get('/', (req, res) => {
   res.redirect('/auth')
 });
 
+app.get('/recuperar', (req, res) => {
+  res.render('recuperarContrasenia')
+});
+
+
 app.use('/auth', LoginRoutes);
 app.use('/NutricionistaJefe', NutricionistaJefeRoutes);
 app.use('/api', apiRoutes) 
