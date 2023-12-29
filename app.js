@@ -1,19 +1,29 @@
 const express = require('express');
 const session = require('express-session');
+const cors = require('cors');
+
 const app = express();
 const port = process.env.PORT || 3000;
-const cors = require('cors');
+
 const corsOptions = {
   origin: 'https://supercharly.cl'
 };
 app.use(cors(corsOptions));
 
+
 const LoginRoutes = require('./routes/LoginRoutes.js')
 const NutricionistaJefeRoutes = require("./routes/NutricionistaJefeRoutes.js")
 const apiRoutes = require('./routes/apiRoutes.js')
 
-app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: 'secreto', resave: false, saveUninitialized: false }));
+app.use(express.urlencoded({
+  extended: true
+}));
+
+app.use(session({
+  secret: 'secreto',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(express.static('public'))
 app.set("view engine", "ejs");
 
@@ -21,14 +31,10 @@ app.get('/', (req, res) => {
   res.redirect('/auth')
 });
 
-app.get('/recuperar', (req, res) => {
-  res.render('recuperarContrasenia')
-});
-
-
 app.use('/auth', LoginRoutes);
 app.use('/NutricionistaJefe', NutricionistaJefeRoutes);
-app.use('/api', apiRoutes) 
+app.use('/api', apiRoutes)
+
 app.get('/logout', (req, res) => {
   // Destruye la sesión
   req.session.destroy(err => {
@@ -40,6 +46,7 @@ app.get('/logout', (req, res) => {
     }
   });
 });
+
 app.use("/resources", express.static("public"));
 app.use("/resources", express.static(__dirname + "/public"));
 

@@ -1,7 +1,7 @@
 const db = require("../database/database.js");
 
 const apiController = {
-  listarTipoVia: async (req, res) => {
+  listarTipoVia: (req, res) => {
     const query = "SELECT * FROM `TipoVia`";
     db.query(query, function (error, TipoVia) {
       if (error) {
@@ -13,7 +13,7 @@ const apiController = {
       res.status(200).json(TipoVia);
     });
   },
-  listarTipoContrato: async (req, res) => {
+  listarTipoContrato: (req, res) => {
     const query = "SELECT * FROM TipoContrato";
     db.query(query, function (error, TipoContrato) {
       if (error) {
@@ -25,7 +25,7 @@ const apiController = {
       res.status(200).json(TipoContrato);
     });
   },
-  listarTipoEstamento: async (req, res) => {
+  listarTipoEstamento: (req, res) => {
     const query = "SELECT * FROM TipoEstamento";
     db.query(query, function (error, TipoEstamento) {
       if (error) {
@@ -37,7 +37,7 @@ const apiController = {
       res.status(200).json(TipoEstamento);
     });
   },
-  listarTipoRegimen: async (req, res) => {
+  listarTipoRegimen: (req, res) => {
     const query = "SELECT * FROM TipoRegimen WHERE Habilitado = 'S'";
     db.query(query, function (error, TipoRegimen) {
       if (error) {
@@ -49,7 +49,7 @@ const apiController = {
       res.status(200).json(TipoRegimen);
     });
   },
-  listarTipoServicio: async (req, res) => {
+  listarTipoServicio: (req, res) => {
     const query = "SELECT * FROM TipoServicio WHERE Habilitado = 'S'";
     db.query(query, function (error, TipoServicio) {
       if (error) {
@@ -61,7 +61,7 @@ const apiController = {
       res.status(200).json(TipoServicio);
     });
   },
-  listarTipoUnidad: async (req, res) => {
+  listarTipoUnidad: (req, res) => {
     const query = "SELECT * FROM TipoUnidad WHERE Habilitado = 'S'";
     db.query(query, function (error, TipoUnidad) {
       if (error) {
