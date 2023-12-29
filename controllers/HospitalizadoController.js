@@ -3,23 +3,23 @@ const db = require("../database/database.js");
 const HospitalizadoController = {
   mostrarPaginaHospitalizados: (req, res) => {
     if (req.session && req.session.user) {
-        // Accede a los datos almacenados en la sesión
-        const { username, IdTipoFuncionario } = req.session.user;
+      // Accede a los datos almacenados en la sesión
+      const { username, IdTipoFuncionario } = req.session.user;
 
-        res.render("hospitalizadoview", {
-            username: username,
-            IdTipoFuncionario: IdTipoFuncionario
-        });
+      res.render("hospitalizadoview", {
+        username: username,
+        IdTipoFuncionario: IdTipoFuncionario
+      });
     } else {
-        res.redirect("/"); 
+      res.redirect("/");
     }
-},
+  },
   listarHospitalizados: (req, res) => {
     let tipoServicio = req.query.tipoServicio;
 
     // Si no se proporciona el parámetro tipoServicio, asigna un valor predeterminado o deja que sea null
     if (!tipoServicio) {
-        tipoServicio = 0;  // O asigna el valor que desees por defecto
+      tipoServicio = 0;  // O asigna el valor que desees por defecto
     }
 
     const query = `
@@ -38,13 +38,13 @@ const HospitalizadoController = {
     `;
 
     db.query(query, [tipoServicio], (error, hospitalizados) => {
-        if (error) {
-            res.status(500).json({ error: 'Error al cargar los hospitalizados' });
-        } else {
-            res.status(200).json(hospitalizados);
-        }
+      if (error) {
+        res.status(500).json({ error: 'Error al cargar los hospitalizados' });
+      } else {
+        res.status(200).json(hospitalizados);
+      }
     });
-},
+  },
   agregarHospitalizado: async (req, res) => {
     const {
       CodigoCama, //int
@@ -135,6 +135,9 @@ const HospitalizadoController = {
       return res.status(200).json({ Bacan: 'hospitalizado Eliminado' });
       //return res.redirect('/NutricionistaJefe/listar-hospitalizado'); // Redirige a la lista de hospitalizados
     });
+  },
+  mostrarGrafico: (req, res) => {
+    res.render("dashboard");
   },
 };
 
