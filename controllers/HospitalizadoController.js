@@ -2,8 +2,18 @@ const db = require("../database/database.js");
 
 const HospitalizadoController = {
   mostrarPaginaHospitalizados: (req, res) => {
-    res.render("hospitalizadoview");
-  },
+    if (req.session && req.session.user) {
+        // Accede a los datos almacenados en la sesión
+        const { username, IdTipoFuncionario } = req.session.user;
+
+        res.render("hospitalizadoview", {
+            username: username,
+            IdTipoFuncionario: IdTipoFuncionario
+        });
+    } else {
+        res.redirect("/"); 
+    }
+},
   listarHospitalizados: (req, res) => {
     let tipoServicio = req.query.tipoServicio;
 
