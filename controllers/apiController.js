@@ -58,7 +58,6 @@ const apiController = {
           .status(500)
           .json({ error: "Error en la consulta a la base de datos" });
       }
-      console.log(TipoServicio);
       res.status(200).json(TipoServicio);
     });
   },
@@ -71,7 +70,7 @@ const apiController = {
           .status(500)
           .json({ error: "Error en la consulta a la base de datos" });
       }
-      console.log(TipoUnidad);
+
       res.status(200).json(TipoUnidad);
     });
   },
