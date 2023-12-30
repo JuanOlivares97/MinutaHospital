@@ -1,5 +1,6 @@
 const express = require('express');
-const LoginController = require('../controllers/loginController.js')
+const LoginController = require('../controllers/loginController.js');
+const ColacionController = require('../controllers/ColacionController.js');
 
 const router = express.Router();
 
@@ -15,7 +16,8 @@ router.post('/confirmChangePassword', LoginController.cambiarContrasena)
 router.get('/formEmail', LoginController.mostrarFormAddEmail); //mostrar formulario agregar email
 router.post('/addEmail',LoginController.AddEmail) // guardar email
 
-
+router.get('/colacion', ColacionController.mostrarFormColacion)
+router.post('/agregar-colacion', ColacionController.agregarColacion)
 
 
 module.exports = router;

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="/resources/js/consumoApi.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    <% if (deshabilitado) { %>
+        <h1>Ya solicitaste una colacion maldito insecto</h1>
+        <button><a href="<%= RutaTipoFuncionario %>">Ir</a></button>
+    <% } else { %>
+        <form id="tipoRegimenForm" method="post" action="/auth/agregar-colacion">
+            <input type="hidden" name="regimen" id="regimenInput" value="">
+            <div id="tiposRegimenList"></div>
+        </form>
+    <% } %>
+</body>
+</html>

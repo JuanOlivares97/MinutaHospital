@@ -38,7 +38,7 @@ const apiController = {
     });
   },
   listarTipoRegimen: (req, res) => {
-    const query = "SELECT * FROM TipoRegimen WHERE Habilitado = 'S'";
+    const query = "SELECT `IdTipoRegimen`, `DescTipoRegimen` FROM TipoRegimen WHERE Habilitado = 'S'";
     db.query(query, function (error, TipoRegimen) {
       if (error) {
         console.error("Error en la consulta a la base de datos:", error);
