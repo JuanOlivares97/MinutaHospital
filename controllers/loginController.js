@@ -32,26 +32,26 @@ const LoginController = {
                         const redirectPath = getRedirectPath(user.IdTipoFuncionario);
                         res.redirect(redirectPath);
                     } else {
-                        res.render('errorView',{mensaje:"Credenciales Incorrectas"})
+                        res.render('errorView', {mensaje: "Credenciales Incorrectas" })
                     }
                 } else {
-                    res.render('errorView',{mensaje:"Usuario no Encontrado"})
+                    res.render('errorView',{ mensaje: "Usuario no Encontrado" })
                 }
             }
         );
     },
     formRecuperarContrasena: (req, res) => {
-        res.render("recuperarContrasenia");
+        res.render("recuperarContraseniaView");
     },
     RecuperarContrasena: (req, res) => {
         const { correo } = req.body;
         const user = getUserByEmail(correo, (err, user) => {
             if (err) {
-                res.render('errorView',{ error: 'Error al buscar el usuario: '+ err.message });
+                return res.render('errorView',{ error: 'Error al buscar el usuario: '+ err.message });
             }
 
             if (!user) {
-                res.render('errorView', { message: "Usuario no encontrado" });
+                return res.render('errorView', { message: "Usuario no encontrado" });
             }
 
             enviarCorreoRestablecimiento(correo);
@@ -62,7 +62,7 @@ const LoginController = {
         });
     },
     formCambiarContrasena: (req, res) => {
-        res.render("cambiarContrasena");
+        res.render("cambiarContrasenaView");
     },
     cambiarContrasena: (req, res) => {
         const { user, newPassword } = req.body;
@@ -80,7 +80,7 @@ const LoginController = {
         });
     },
     mostrarFormAddEmail: (req, res) => {
-        res.render("addEmail");
+        res.render("AgregarEmail");
     },
     AddEmail: (req, res) => {
         const { username, correo } = req.body;
@@ -90,14 +90,13 @@ const LoginController = {
             [correo, username],
             (err, results) => {
                 if (err) {
-                    return res.status(500).render("error", { mensaje: "Error al actualizar el correo electrónico", error: err });
+                    return res.render('errorView', { mensaje: "Error al actualizar el correo electrónico", error: err });
                 }
                 if (results.affectedRows > 0) {
                     return res.redirect("/auth");
                 } else {
                     const mensaje =
-                        "No se ha agregado el correo electrónico, contáctate con el servicio técnico.";
-                    const error = err;
+                        "No se ha agregado el correo electrónico, contáctate con el servicio técnico.  "+ err;
                     return res.render('errorView', { mensaje: mensaje, error: error });
                 }
             }
@@ -163,25 +162,17 @@ function enviarCorreoRestablecimiento(email) {
 function updateUserPasswordByEmail(user, newPassword, callback) {
     // Consulta SQL para actualizar la contraseña
     const sql = "UPDATE Funcionario SET contrasena = ? WHERE TRIM(CONCAT(`RutFuncionario`,'-',`DvFuncionario`)) = ?";
-
-    console.log('Consulta SQL:', sql);
-    console.log('Usuario:', user);
-    console.log('Nueva Contraseña:', newPassword);
-
     // Ejecuta la consulta
     db.query(sql, [newPassword, user], (err, result) => {
         console.log('Resultado de la consulta:', result);
         if (err) {
-            console.error('Error al actualizar la contraseña:', err.message);
             return callback(err, null);
         }
 
         // Comprueba si se actualizó al menos una fila
         if (result.affectedRows > 0) {
-            console.log('Contraseña actualizada con éxito.');
             callback(null, true);
         } else {
-            console.log('Usuario no encontrado.');
             callback(null, false);
         }
     });

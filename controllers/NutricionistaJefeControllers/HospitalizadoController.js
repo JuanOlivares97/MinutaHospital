@@ -1,14 +1,15 @@
-const db = require("../database/database.js");
+const db = require("../../database/database.js");
 
 const HospitalizadoController = {
   mostrarPaginaHospitalizados: (req, res) => {
     if (req.session && req.session.user) {
       // Accede a los datos almacenados en la sesión
-      const { username, IdTipoFuncionario } = req.session.user;
+      const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
 
-      res.render("hospitalizadoview", {
+      res.render("NutricionistaJefeViews/hospitalizadoview", {
         username: username,
-        IdTipoFuncionario: IdTipoFuncionario
+        IdTipoFuncionario: IdTipoFuncionario,
+        NombreCompleto: NombreCompleto
       });
     } else {
       res.redirect("/");
@@ -101,24 +102,6 @@ const HospitalizadoController = {
       return res.status(200).json({ Bacan: 'hospitalizado actualizado' });
       // Renderiza el formulario de edición con los datos del hospitalizado
       //res.render('formularioEditarHospitalizado', { hospitalizado: results[0] }); // Asegúrate de crear la vista correspondiente
-    });
-  },
-  mostrarFormularioEditar: async (req, res) => {
-    // Recoge los datos del formulario (puedes usar req.body)
-    const { nombre, edad, diagnostico } = req.body; // Asegúrate de que coincidan con los campos del formulario
-
-    // Obtén el ID del hospitalizado a actualizar
-    const hospitalizadoId = req.params.id;
-
-    // Realiza una consulta SQL para actualizar el hospitalizado
-    const query = "";
-
-    db.query(query, [nombre, edad, diagnostico, hospitalizadoId], (error, results, fields) => {
-      if (error) {
-        return res.status(500).json({ error: 'Error al actualizar el hospitalizado' });
-      }
-
-      return res.redirect('/NutricionistaJefe/listar-hospitalizado'); // Redirige a la lista de hospitalizados
     });
   },
   eliminarHospitalizado: async (req, res) => {

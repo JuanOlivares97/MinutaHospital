@@ -1,16 +1,16 @@
-const db = require("../database/database.js");
+const db = require("../../database/database.js");
 const FuncionariosController = {
   mostrarPaginaFuncionarios: (req, res) => {
-    res.render("funcionarioView");
+    res.render("NutricionistaJefeViews/funcionarioView");
   },
   listarFuncionarios: (req, res) => {
     const query = `
         SELECT 
             CONCAT(RutFuncionario, "-", DvFuncionario) as Rut,
-            NombreFuncionario, 
+            (NombreFuncionario) , 
             DATE_FORMAT(FechaInicioContrato, "%d-%m-%Y") as FechaContrato,
             DATE_FORMAT(FechaTerminoContrato, "%d-%m-%Y") as FechaTermino,
-            correo as "CorreoElectronico"
+            correo as "CorreoElectronico",
             TS.DescTipoServicio as TipoServicio,
             TU.DescTipoUnidad as TipoUnidad,
             TR.DescTipoRegimen as TipoRegimen,
@@ -27,13 +27,13 @@ const FuncionariosController = {
         WHERE F.Habilitado = 'S';`;
 
     db.query(query, (error, funcionarios) => {
-        if (error) {
-            res.status(500).json({ error: 'Error al cargar los funcionarios' });
-        } else {
-            res.status(200).json(funcionarios);
-        }
+      if (error) {
+        res.status(500).json({ error: 'Error al cargar los funcionarios' });
+      } else {
+        res.status(200).json(funcionarios);
+      }
     });
-},
+  },
   agregarFuncionarios: async (req, res) => {
     // Recoge los datos del formulario (puedes usar req.body)
     const {
@@ -51,7 +51,7 @@ const FuncionariosController = {
       IdTipoServicio,
       IdTipoUnidad,
       IdTipoRegimen,
-    } = req.body; // Asegúrate de que coincidan con los campos del formulario
+    } = req.body;
 
     // Realiza una consulta SQL para agregar un hospitalizado
     const query =

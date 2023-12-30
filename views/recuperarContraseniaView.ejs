@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-CL">
 
 <head>
     <meta charset="UTF-8">
@@ -14,16 +14,15 @@
         <div id="inicio">
             <div id="sesion">
                 <div id="form">
-                    <form id="formulario" method="post" action="/auth/addEmail">
-                        <div class="decoracion">Agrega tu Correo</div>
-                        <label for="useruser"> Ingresar Rut</label>
-                        <input id="user" type="text" name="username" placeholder="11111111-1" required>
+
+                    <form id="formulario" method="post" action="/auth/solicitud-restablecimiento">
+                        <div class="decoracion">Recuperar Contraseña</div>
                         <label for="useruser"> Ingresar Correo</label>
                         <input id="user" type="text" name="correo" placeholder="Ejemplo@gmail.com" required>
-
                         <button id="button" type="submit">Enviar</button>
                         <button id="buttonC" type="cancel"><a href="/">Cancelar</a></button>
                     </form>
+                    
                     <div id="img">
                         <img id="svg-background2" src="/img/decoracionRC.svg" alt="fondo del iniciosesion">
                         <img id="img-background" src="/img/Hospital.png" alt="">
