@@ -4,11 +4,12 @@ const HospitalizadoController = {
   mostrarPaginaHospitalizados: (req, res) => {
     if (req.session && req.session.user) {
         // Accede a los datos almacenados en la sesión
-        const { username, IdTipoFuncionario } = req.session.user;
+        const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
 
         res.render("hospitalizadoview", {
             username: username,
-            IdTipoFuncionario: IdTipoFuncionario
+            IdTipoFuncionario: IdTipoFuncionario,
+            NombreCompleto: NombreCompleto
         });
     } else {
         res.redirect("/"); 
