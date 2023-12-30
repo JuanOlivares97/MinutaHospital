@@ -104,24 +104,6 @@ const LoginController = {
     },
 };
 
-function getRedirectPath(idTipoFuncionario) {
-    switch (idTipoFuncionario) {
-        case 1:
-            return "/Nutricionista";
-        case 2:
-            return "/NutricionistaJefe";
-        case 3:
-            return "/Tecnico";
-        case 4:
-            return "/Clinico";
-        case 5:
-            return "/Recursos";
-        case 6:
-            return "/Recaudacion";
-        default:
-            return "/";
-    }
-}
 
 function getUserByEmail(correo, callback) {
     const query = "SELECT * FROM Funcionario WHERE correo = ? LIMIT 1";

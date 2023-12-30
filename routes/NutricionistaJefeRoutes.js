@@ -19,4 +19,6 @@ Route.post('/editar-hospitalizado/:rut', HospitalizadoController.actualizarHospi
 
 Route.post('/eliminar-hospitalizado/:rut', HospitalizadoController.eliminarHospitalizado);
 
+Route.get('/dashboard', HospitalizadoController.mostrarGrafico);
+
 module.exports = Route;
