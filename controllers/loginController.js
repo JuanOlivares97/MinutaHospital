@@ -10,7 +10,7 @@ const LoginController = {
     ValidacionLogin: (req, res) => {
         const { username, password } = req.body;
         db.query(
-            "SELECT `NombreFuncionario`,`correo`,`contrasena`, IdTipoFuncionario FROM Funcionario WHERE TRIM(CONCAT(`RutFuncionario`,'-',`DvFuncionario`)) = ? ",
+            "SELECT TRIM(CONCAT(`RutFuncionario`,'-',`DvFuncionario`)) as 'Rut' ,`NombreFuncionario`,`correo`,`contrasena`, IdTipoFuncionario FROM Funcionario WHERE TRIM(CONCAT(`RutFuncionario`,'-',`DvFuncionario`)) = ? ",
             [username],
             (err, results) => {
                 if (err) throw err;
@@ -24,13 +24,13 @@ const LoginController = {
                     const isMatch = user.contrasena === password;
                     if (isMatch) {
                         req.session.user = {
+                            rut: user.Rut,
                             username: user.correo,
                             NombreCompleto: user.NombreFuncionario,
                             IdTipoFuncionario: user.IdTipoFuncionario
                         };
     
-                        const redirectPath = getRedirectPath(user.IdTipoFuncionario);
-                        res.redirect(redirectPath);
+                        res.redirect('/auth/colacion');
                     } else {
                         res.render('errorView', {mensaje: "Credenciales Incorrectas" })
                     }
