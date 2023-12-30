@@ -16,15 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
             {
                 name: "Opciones",
                 formatter: (cell, row) => gridjs.html(`
-                <form action="" method="POST">
-                        <input type="hidden" name="" value="${row.cells[1].data}" required> 
-                        <button style="width:100px; margin:5px;"> Editar </button>
-                    </form>
-                <form action="" method="POST">
-                        <input type="hidden" name="" value="${row.cells[1].data}" required> 
-                        <button style="width:100px; margin:5px;">Eliminar</button>
-                </form>
-                      `)
+
+                <button><a class="editarServicio" id="agregar" href="#" data-toggle="modal" data-target="#modalEditarServicioHospitalizado" data-rut="${row.cells[1].data}">Cambiar Servicio</a></button>
+                <button><a class="editarAlta" id="agregar" href="#" data-toggle="modal" data-target="#modalEditarAltaHospitalizado" data-rut="${row.cells[1].data}">Dar Alta</a></button>
+                <button><a class="" id="agregar" href="#" data-toggle="modal" data-target="#" data-rut="${row.cells[1].data}">Logs</a></button>`)
             },
             "Ayuno"
         ],
@@ -45,25 +40,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 'next': '➡️',
                 'showing': '😃 Mostrando',
                 'results': () => 'Pacientes'
-              }
+            }
         },
-        pagination:{
-            limit:10,
-            summary:true
+        pagination: {
+            limit: 10,
+            summary: true
         },
         server: {
             url: `http://localhost:3000/NutricionistaJefe/listar-hospitalizado?tipoServicio=0`,
             then: (data) => data.map((hospitalizado) => [
-                    hospitalizado.CodigoCama,
-                    hospitalizado.Rut,
-                    hospitalizado.NombreHospitalizado,
-                    hospitalizado.Edad,
-                    hospitalizado.FechaIngreso,
-                    hospitalizado.ObservacionesNutricionista,
-                    hospitalizado.FechaAlta,
-                    hospitalizado.TipoRegimen,
-                    null,
-                    hospitalizado.Ayuno.data,
+                hospitalizado.CodigoCama,
+                hospitalizado.Rut,
+                hospitalizado.NombreHospitalizado,
+                hospitalizado.Edad,
+                hospitalizado.FechaIngreso,
+                hospitalizado.ObservacionesNutricionista,
+                hospitalizado.FechaAlta,
+                hospitalizado.TipoRegimen,
+                null,
+                hospitalizado.Ayuno.data,
             ]),
             handle: (res) => {
                 if (res.status === 404) return { data: [] };
@@ -81,19 +76,19 @@ document.addEventListener('DOMContentLoaded', function () {
         grid.updateConfig({
             server: {
                 url: `http://localhost:3000/NutricionistaJefe/listar-hospitalizado?tipoServicio=${selectedValue}`,
-                then: (data) => 
-                data.map((hospitalizado) => [
-                    hospitalizado.CodigoCama,
-                    hospitalizado.Rut,
-                    hospitalizado.NombreHospitalizado,
-                    hospitalizado.Edad,
-                    hospitalizado.FechaIngreso,
-                    hospitalizado.ObservacionesNutricionista,
-                    hospitalizado.FechaAlta,
-                    hospitalizado.TipoRegimen,
-                    null,
-                    hospitalizado.Ayuno.data,
-            ])
+                then: (data) =>
+                    data.map((hospitalizado) => [
+                        hospitalizado.CodigoCama,
+                        hospitalizado.Rut,
+                        hospitalizado.NombreHospitalizado,
+                        hospitalizado.Edad,
+                        hospitalizado.FechaIngreso,
+                        hospitalizado.ObservacionesNutricionista,
+                        hospitalizado.FechaAlta,
+                        hospitalizado.TipoRegimen,
+                        null,
+                        hospitalizado.Ayuno.data,
+                    ])
             },
         });
 
