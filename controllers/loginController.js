@@ -41,7 +41,7 @@ const LoginController = {
         );
     },
     formRecuperarContrasena: (req, res) => {
-        res.render("recuperarContrasenia");
+        res.render("recuperarContraseniaView");
     },
     RecuperarContrasena: (req, res) => {
         const { correo } = req.body;
@@ -62,7 +62,7 @@ const LoginController = {
         });
     },
     formCambiarContrasena: (req, res) => {
-        res.render("cambiarContrasena");
+        res.render("cambiarContrasenaView");
     },
     cambiarContrasena: (req, res) => {
         const { user, newPassword } = req.body;
@@ -80,7 +80,7 @@ const LoginController = {
         });
     },
     mostrarFormAddEmail: (req, res) => {
-        res.render("addEmail");
+        res.render("AgregarEmail");
     },
     AddEmail: (req, res) => {
         const { username, correo } = req.body;
