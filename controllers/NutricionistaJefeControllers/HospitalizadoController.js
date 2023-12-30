@@ -25,7 +25,7 @@ const HospitalizadoController = {
 
     const query = `
         SELECT CodigoCama,
-        CONCAT(RutHospitalizado, "-", DvHospitalizado) AS Rut,
+        TRIM(CONCAT(RutHospitalizado,'-',DvHospitalizado)) AS Rut,
         NombreHospitalizado,
         TIMESTAMPDIFF(YEAR, FechaNacimiento, CURDATE()) AS Edad,
         DATE_FORMAT(FechaIngreso, "%d-%m-%Y") AS FechaIngreso,
@@ -57,7 +57,6 @@ const HospitalizadoController = {
       ObservacionesNutricionista, //textbox
       FechaAlta, //date
       IndicacionesAlta, //textbox
-      ServicioAlta,
       CodigoCamaAlta,
       IdTipoServicio,
       IdTipoUnidad,
@@ -65,7 +64,7 @@ const HospitalizadoController = {
     } = req.body;
 
     // Realiza una consulta SQL para agregar un hospitalizado
-    const query = "INSERT INTO `Hospitalizado` (`CodigoCama`, `RutHospitalizado`, `DvHospitalizado`, `NombreHospitalizado`, `FechaNacimiento`, `FechaIngreso`, `ObservacionesNutricionista`, `FechaAlta`, `IndicacionesAlta`, `ServicioAlta`, `CodigoCamaAlta`, `IdTipoServicio`, `IdTipoUnidad`, `IdTipoVia`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+    const query = "INSERT INTO `Hospitalizado` (`CodigoCama`, `RutHospitalizado`, `DvHospitalizado`, `NombreHospitalizado`, `FechaNacimiento`, `FechaIngreso`, `ObservacionesNutricionista`, `FechaAlta`, `IndicacionesAlta`, `CodigoCamaAlta`, `IdTipoServicio`, `IdTipoUnidad`, `IdTipoVia`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 
     db.query(query, [
       CodigoCama, //int
@@ -77,7 +76,6 @@ const HospitalizadoController = {
       ObservacionesNutricionista, //textbox
       FechaAlta, //date
       IndicacionesAlta, //textbox
-      ServicioAlta,
       CodigoCamaAlta,
       IdTipoServicio,
       IdTipoUnidad,
@@ -90,21 +88,66 @@ const HospitalizadoController = {
       return res.redirect('/NutricionistaJefe/listar-hospitalizado');
     });
   },
-  actualizarHospitalizado: async (req, res) => {
-    const RutHospitalizado = req.params.rut;
-    // Realiza una consulta SQL para obtener los datos del hospitalizado a editar
-    const query = "SELECT * FROM Hospitalizado WHERE TRIM(CONCAT(`RutHospitalizado`,'-',`DvHospitalizado`)) = ?";
+  actualizarServicioHospitalizado: async (req, res) => {
+    const { servicio, RutHospitalizado } = req.body;
+    console.log(servicio)
+    const fechaSolicitud = new Date();
+    const dia = fechaSolicitud.getDate().toString().padStart(2, '0');
+    const mes = (fechaSolicitud.getMonth() + 1).toString().padStart(2, '0'); // Se suma 1 porque los meses van de 0 a 11
+    const anio = fechaSolicitud.getFullYear();
+    const fechaFormateada = `${anio}-${mes}-${dia}`;
 
-    db.query(query, [RutHospitalizado], (error, results, fields) => {
-      if (error) {
-        return res.status(500).json({ error: 'Error al obtener el hospitalizado' });
-      }
-      return res.status(200).json({ Bacan: 'hospitalizado actualizado' });
-      // Renderiza el formulario de edición con los datos del hospitalizado
-      //res.render('formularioEditarHospitalizado', { hospitalizado: results[0] }); // Asegúrate de crear la vista correspondiente
+    // Consulta para insertar un registro en AntecedentesHospitalizado
+    const insertLogQuery = "INSERT INTO AntecedentesHospitalizado (FechaLog, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia) SELECT ?, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia FROM Hospitalizado WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
+
+    db.query(insertLogQuery, [fechaFormateada, RutHospitalizado], (error, results, fields) => {
+        if (error) {
+            return res.status(500).json({ error: 'Error al insertar el log en AntecedentesHospitalizado' });
+        }
+
+        // Consulta para actualizar el servicio del hospitalizado
+        const updateHospitalizadoQuery = "UPDATE Hospitalizado SET IdTipoServicio = ? WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
+
+        db.query(updateHospitalizadoQuery, [servicio, RutHospitalizado], (error, results, fields) => {
+            if (error) {
+                return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
+            }
+
+            return res.redirect('/NutricionistaJefe');
+        });
     });
-  },
-  eliminarHospitalizado: async (req, res) => {
+},
+actualizarAltaHospitalizado: async (req, res) => {
+  const { RutHospitalizado, FechaAlta } = req.body;
+  console.log(FechaAlta)
+  const fechaSolicitud = new Date();
+  const dia = fechaSolicitud.getDate().toString().padStart(2, '0');
+  const mes = (fechaSolicitud.getMonth() + 1).toString().padStart(2, '0'); // Se suma 1 porque los meses van de 0 a 11
+  const anio = fechaSolicitud.getFullYear();
+  const fechaFormateada = `${anio}-${mes}-${dia}`;
+
+  // Consulta para insertar un registro en AntecedentesHospitalizado
+  const insertLogQuery = "INSERT INTO AntecedentesHospitalizado (FechaLog, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia) SELECT ?, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia FROM Hospitalizado WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
+
+  db.query(insertLogQuery, [fechaFormateada, RutHospitalizado], (error, results, fields) => {
+      if (error) {
+          return res.status(500).json({ error: 'Error al insertar el log en AntecedentesHospitalizado' });
+      }
+
+      // Consulta para actualizar el servicio del hospitalizado
+      const updateHospitalizadoQuery = "UPDATE Hospitalizado SET FechaAlta = ? WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
+
+      db.query(updateHospitalizadoQuery, [FechaAlta, RutHospitalizado], (error, results, fields) => {
+          if (error) {
+              return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
+          }
+
+          return res.redirect('/NutricionistaJefe');
+      });
+  });
+},
+
+  /* eliminarHospitalizado: async (req, res) => {
     // Obtén el ID del hospitalizado a eliminar
     const RutHospitalizado = req.params.rut;
 
@@ -118,7 +161,7 @@ const HospitalizadoController = {
       return res.status(200).json({ Bacan: 'hospitalizado Eliminado' });
       //return res.redirect('/NutricionistaJefe/listar-hospitalizado'); // Redirige a la lista de hospitalizados
     });
-  },
+  }, */
   mostrarGrafico: (req, res) => {
     res.render("dashboard");
   },
