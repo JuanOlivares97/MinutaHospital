@@ -20,4 +20,6 @@ Route.post('/editar-alta-hospitalizado', HospitalizadoController.actualizarAltaH
 
 //Route.post('/eliminar-hospitalizado/:rut', HospitalizadoController.eliminarHospitalizado);
 
+Route.get('/dashboard', HospitalizadoController.mostrarGrafico);
+
 module.exports = Route;
