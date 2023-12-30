@@ -15,8 +15,9 @@ Route.get('/listar-funcionario', FuncionarioController.listarFuncionarios);
 Route.post('/agregar-hospitalizado', HospitalizadoController.agregarHospitalizado);
 
 // Ruta para procesar el formulario de editar un hospitalizado
-Route.post('/editar-hospitalizado/:rut', HospitalizadoController.actualizarHospitalizado);
+Route.post('/editar-servicio-hospitalizado', HospitalizadoController.actualizarServicioHospitalizado);
+Route.post('/editar-alta-hospitalizado', HospitalizadoController.actualizarAltaHospitalizado);
 
-Route.post('/eliminar-hospitalizado/:rut', HospitalizadoController.eliminarHospitalizado);
+//Route.post('/eliminar-hospitalizado/:rut', HospitalizadoController.eliminarHospitalizado);
 
 module.exports = Route;
