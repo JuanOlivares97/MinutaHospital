@@ -13,11 +13,14 @@ body {
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 20px;
-    text-align: center;
+
 }
 
 h1 {
-    color: #ff0000;
+    color: black;
+}
+a{
+    text-decoration: none;
 }
 
 button {
@@ -48,13 +51,12 @@ input {
 }
 
 #button1{
-    background-color: #42f4b0;
-    color: #ffffff;
-    padding: 10px 20px;
-    text-decoration: none;
+    font-size: 16px;
+    background-color: #4CAF50; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
     border: none;
+    border-radius: 5px; /* Bordes redondeados */
     cursor: pointer;
-    justify-content: space-around;
 }
 
 #tiposRegimenList {

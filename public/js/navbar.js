@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function (event) {
-
   const showNavbar = (toggleId, navId, bodyId, headerId) => {
     const toggle = document.getElementById(toggleId),
       nav = document.getElementById(navId),
@@ -34,5 +33,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
   linkColor.forEach(l => l.addEventListener('click', colorLink))
 
-  // Your code to run since DOM is loaded and ready
+  // Cambia la imagen del logo cuando se carga la página y al cambiar el tamaño de la ventana
+  window.onload = function() {
+    cambiarImagen(); // Cambia la imagen cuando se carga la página
+    window.addEventListener('resize', cambiarImagen); // Cambia la imagen al cambiar el tamaño de la ventana
+  };
+
+  function cambiarImagen() {
+    var logo = document.getElementById('logo');
+    var screenWidth = window.innerWidth;
+
+    // Cambia la imagen del logo según el ancho de la pantalla
+    if (screenWidth <= 68) {
+      logo.src = '/resources/img/logogrande-hospital.png';
+    } else {
+      logo.src = '/resources/img/logopequeno-hospital.png';
+    }
+  }
 });

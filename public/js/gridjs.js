@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'pagination': {
                 'previous': '⬅️',
                 'next': '➡️',
-                'showing': '😃 Mostrando',
+                'showing': ' Mostrando',
                 'results': () => 'Pacientes'
             }
         },
