@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/resources/css/nutricionista.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+
+    <title>Hospital San Jose Melipilla</title>
+
+    <!--Scripts-->
+    <script defer src="/resources/js/FuncionarioApis.js"></script>
+    <script defer src="/resources/js/listarfuncionario.js"></script>
+    <script defer src="/resources/js/navbar.js"></script>
+</head>
+
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        <h3>SISTEMA DE CONTROL DE ALIMENTACIÓN</h3>
+        <div class="log-out"><a href="/logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
+            class="nav_name">
+            <%= NombreCompleto %>
+        </span></a></div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div class="nav_list">
+                <a href="/NutricionistaJefe/funcionarios" class="nav_link "> <i class='bx bx-grid-alt nav_icon'></i>
+                    <span class="nav_name">Mantenedor de Funcionario</span></a>
+                <a href="#" class="nav_link"><i class='bx bx-bookmark nav_icon'></i>
+                    <span class="nav_name">Venta Almuerzo</span> </a>
+                <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i>
+                    <span class="nav_name">CheckIn Almuerzo Funcionario</span></a>
+                <a href="/NutricionistaJefe" class="nav_link"> <i class='bx bx-user nav_icon'></i>
+                    <span class="nav_name">Alimentacion Hospitalizado</span> </a>
+                <a href="#" class="nav_link"> <i class='bx bx-search nav_icon'></i>
+                    <span class="nav_name">Buscador de pacientes</span></a>
+                <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
+                    <span class="nav_name">Reporteria</span></a>
+                <a href="#" class="nav_link"> <i class='bx bx-check-square nav_icon'></i>
+                    <span class="nav_name">Mantenedores</span> </a>
+                <a href="/NutricionistaJefe/dashboard" class="nav_link active"> <i
+                        class='bx bx-bar-chart-alt-2 nav_icon'></i>
+                    <span class="nav_name">Dashboard</span> </a>
+            </div>
+        </nav>
+    </div>
+    <!--Navbar end-->
+    <div class="titulo">Mantenedor de Funcionario</div>
+    <!--Container Main start-->
+    <div id="container">
+        <a id="agregar" href="#" data-toggle="modal" data-target="#modalFuncionario">Agregar Funcionario<img
+                src="/img/agregar.png" alt=""></a>
+        <!-- Modal agregar Funcionario. -->
+        <div class="modal fade" id="modalFuncionario" tabindex="-1" role="dialog"
+            aria-labelledby="modalFuncionarioLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalFuncionarioLabel">Agregar hospitalizado</h5>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí coloca tu formulario -->
+                        <form action="/NutricionistaJefe/agregar-funcionario" method="post">
+                            <label for="RutFuncionario">Rut Funcionario:</label>
+                            <div><input placeholder="11111111" type="number" id="RutFunconario" name="RutSinDv"
+                                    required><input placeholder="k" type="number" id="DvFuncionario"
+                                    name="dvFuncionario" required></div>
+
+                            <label for="NombreFuncionario">Nombre Completo Funcionario:</label>
+                            <input type="text" id="NombreFuncionario" name="NombreCompletoFuncionario" required>
+
+                            <label for="FechaInicio">Fecha contratación:</label>
+                            <input type="date" id="FechaInicio" name="FechaInicioContrato" required>
+
+                            <label for="FechaTermino">Termino Contrato:</label>
+                            <input type="date" id="FechaTermino" name="FechaTermino">
+
+                            <label for="CorreoElectronico">Correo Electronico:</label>
+                            <input type="email" id="CorreoElectronico" name="CorreoElectronico" required>
+
+                            <label for="TipoContrato">Tipo de Contrato:</label>
+                            <select id="TipoContrato" name="TipoContrato"></select>
+
+                            <label for="TipoFuncionario">Tipo Funcionario:</label>
+                            <select id="TipoFuncionario" name="TipoFuncionario"></select>
+
+                            <label for="IdTipoEstamento">Estamento:</label>
+                            <select id="TipoEstamento" name="TipoEstamento"></select>
+
+                            <label for="TipoServicio">Servicio:</label>
+                            <select id="TipoServicio" name="TipoServicio"></select>
+
+                            <label for="TipoUnidad">Unidad:</label>
+                            <select id="TipoUnidad" name="TipoUnidad"></select>
+
+                            <label for="TipoRegimen">Regimen:</label>
+                            <select id="TipoRegimen" name="TipoRegimen"></select>
+
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tabla GridJs -->
+        <div id="listarfuncionarios"></div>
+    </div>
+    <!--Container Main end-->
+
+</body>
+
+</html>
