@@ -5,7 +5,14 @@ const mailConfig = require('../database/emailConfig.js');
 
 const LoginController = {
     mostrarLogin: (req, res) => {
-        res.render("loginview", { titulo: "Login Hospital" });
+        if (req.session && req.session.user) {
+            // Accede a los datos almacenados en la sesión
+            const { IdTipoFuncionario } = req.session.user;
+            const redirectPath = getRedirectPath(IdTipoFuncionario);
+            res.redirect(redirectPath)
+        } else {
+            res.render("loginview", { titulo: "Login Hospital" })
+        }
     },
     ValidacionLogin: (req, res) => {
         const { username, password } = req.body;
@@ -16,11 +23,11 @@ const LoginController = {
                 if (err) throw err;
                 if (results.length === 1) {
                     const user = results[0];
-    
+
                     if (!user.correo || user.correo.trim() === "") {
-                        return res.redirect("/auth/formEmail");
+                        return res.redirect("/formEmail");
                     }
-    
+
                     const isMatch = user.contrasena === password;
                     if (isMatch) {
                         req.session.user = {
@@ -29,13 +36,13 @@ const LoginController = {
                             NombreCompleto: user.NombreFuncionario,
                             IdTipoFuncionario: user.IdTipoFuncionario
                         };
-    
-                        res.redirect('/auth/colacion');
+
+                        res.redirect('/colacion');
                     } else {
-                        res.render('errorView', {mensaje: "Credenciales Incorrectas" })
+                        res.render('errorView', { mensaje: "Credenciales Incorrectas" })
                     }
                 } else {
-                    res.render('errorView',{ mensaje: "Usuario no Encontrado" })
+                    res.render('errorView', { mensaje: "Usuario no Encontrado" })
                 }
             }
         );
@@ -47,7 +54,7 @@ const LoginController = {
         const { correo } = req.body;
         const user = getUserByEmail(correo, (err, user) => {
             if (err) {
-                return res.render('errorView',{ error: 'Error al buscar el usuario: '+ err.message });
+                return res.render('errorView', { error: 'Error al buscar el usuario: ' + err.message });
             }
 
             if (!user) {
@@ -69,7 +76,7 @@ const LoginController = {
 
         updateUserPasswordByEmail(user, newPassword, (err, success) => {
             if (err) {
-                return res.render('errorView',  { mensaje: err.message });
+                return res.render('errorView', { mensaje: err.message });
             }
 
             if (success) {
@@ -93,17 +100,45 @@ const LoginController = {
                     return res.render('errorView', { mensaje: "Error al actualizar el correo electrónico", error: err });
                 }
                 if (results.affectedRows > 0) {
-                    return res.redirect("/auth");
+                    return res.redirect("/");
                 } else {
                     const mensaje =
-                        "No se ha agregado el correo electrónico, contáctate con el servicio técnico.  "+ err;
+                        "No se ha agregado el correo electrónico, contáctate con el servicio técnico.  " + err;
                     return res.render('errorView', { mensaje: mensaje, error: error });
                 }
             }
         );
     },
+    logout: (req, res) => {
+        req.session.destroy(err => {
+            if (err) {
+                console.log(err);
+                res.send('Error al cerrar sesión');
+            } else {
+                res.redirect('/');
+            }
+        });
+    }
 };
 
+function getRedirectPath(idTipoFuncionario) {
+    switch (idTipoFuncionario) {
+        case 1:
+            return "/Nutricionista";
+        case 2:
+            return "/NutricionistaJefe";
+        case 3:
+            return "/Tecnico";
+        case 4:
+            return "/Clinico";
+        case 5:
+            return "/Recursos";
+        case 6:
+            return "/Recaudacion";
+        default:
+            return "/";
+    }
+}
 
 function getUserByEmail(correo, callback) {
     const query = "SELECT * FROM Funcionario WHERE correo = ? LIMIT 1";
@@ -128,7 +163,7 @@ function enviarCorreoRestablecimiento(email) {
         from: 'ProyectoHospital15@gmail.com',  // Reemplaza con tu dirección de correo electrónico
         to: email,
         subject: 'Restablecimiento de Contraseña',
-        text: `Favor ingresa al siguiente link: http://localhost:3000/auth/changepassword `
+        text: `Favor ingresa al siguiente link: http://localhost:3000/changepassword `
     };
 
     // Envía el correo electrónico

@@ -19,5 +19,6 @@ router.post('/addEmail',LoginController.AddEmail) // guardar email
 router.get('/colacion', ColacionController.mostrarFormColacion)
 router.post('/agregar-colacion', ColacionController.agregarColacion)
 
+router.get('/logout',LoginController.logout)
 
 module.exports = router;

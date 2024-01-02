@@ -3,9 +3,6 @@ const path = require('path');
 const nombreCarpeta = path.basename(__dirname);
 
 const apiController = {
-  mostrarMantenedores: (req, res) => {
-    res.render(`${nombreCarpeta}/mantenedores`)
-  },
   listarTipoVia: (req, res) => {
     const query = "SELECT * FROM `TipoVia`";
     db.query(query, function (error, TipoVia) {
@@ -91,21 +88,7 @@ const apiController = {
 
       res.status(200).json(TipoFuncionario);
     });
-  },
-  agregarTipoVia: (req, res) => {  },
-  agregarTipoContrato: (req, res) => { },
-  agregarTipoEstamento: (req, res) => { },
-  agregarTipoRegimen: (req, res) => { },
-  agregarTipoServicio: (req, res) => { },
-  agregarTipoUnidad: (req, res) => { },
-  agregarTipoFuncionario: (req, res) => { },
-  actualizarTipoVia: (req, res) => {  },
-  actualizarTipoContrato: (req, res) => { },
-  actualizarTipoEstamento: (req, res) => { },
-  actualizarTipoRegimen: (req, res) => { },
-  actualizarTipoServicio: (req, res) => { },
-  actualizarTipoUnidad: (req, res) => { },
-  actualizarTipoFuncionario: (req, res) => { },
+  }
 };
 
 module.exports = apiController;
