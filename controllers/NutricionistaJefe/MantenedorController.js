@@ -5,7 +5,18 @@ const nombreCarpeta = path.basename(__dirname);
 
 const mantenedorController = {
     mostrarVistaMantenedores: (req,res) =>{
-        res.render(`${nombreCarpeta}/mantenedorView`)
+        if (req.session && req.session.user) {
+            // Accede a los datos almacenados en la sesión
+            const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
+
+            res.render(`${nombreCarpeta}/mantenedorView`, {
+                username: username,
+                IdTipoFuncionario: IdTipoFuncionario,
+                NombreCompleto: NombreCompleto
+            });
+        } else {
+            res.redirect("/");
+        }
     },
     // Los listar estan en el archivo apiController, estos son utilizados por GridJs
     agregarTipoVia: (req, res) => {

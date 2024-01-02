@@ -23,7 +23,12 @@ Route.post('/editar-alta-hospitalizado', HospitalizadoController.actualizarAltaH
 //Route.post('/eliminar-hospitalizado/:rut', HospitalizadoController.eliminarHospitalizado);
 
 Route.get('/mantenedores', mantenedorController.mostrarVistaMantenedores)
+//Route.get('/editar-mantenedores', mantenedorController.mostrarVistaMantenedores)
+//Route.get('/eliminar-mantenedores', mantenedorController.mostrarVistaMantenedores)
+
 
 Route.get('/dashboard', dashboardController.mostrarDashboard);
+Route.get('/colacion-funcionarios', dashboardController.colacionFuncionarios)
+Route.get('/colacion-hospitalizados', dashboardController.colacionHospitalizados)
 
 module.exports = Route;

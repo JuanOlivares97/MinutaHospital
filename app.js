@@ -22,30 +22,20 @@ app.use(express.urlencoded({
 app.use(session({
   secret: 'secreto',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true
 }));
+
 app.use(express.static('public'))
 app.set("view engine", "ejs");
 
-app.get('/', (req, res) => {
-  res.redirect('/auth')
-});
-
-app.use('/auth', LoginRoutes);
+app.use('/', LoginRoutes);
 app.use('/NutricionistaJefe', NutricionistaJefeRoutes);
+//app.use('/Nutricionista', NutricionistaRoutes);
+//app.use('/Clinico', ClinicoRoutes);
+//app.use('/Recaudador', RecaudadorRoutes);
+//app.use('/Recursos', RecursosRoutes);
+//app.use('/Tecnico',TecnicoRoutes);
 app.use('/api', apiRoutes)
-
-app.get('/logout', (req, res) => {
-  // Destruye la sesión
-  req.session.destroy(err => {
-    if (err) {
-      console.log(err);
-      res.send('Error al cerrar sesión');
-    } else {
-      res.redirect('/auth');  // Redirige a la página de inicio de sesión
-    }
-  });
-});
 
 app.use("/resources", express.static("public"));
 app.use("/resources", express.static(__dirname + "/public"));

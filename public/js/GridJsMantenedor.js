@@ -24,7 +24,7 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
         fixedHeader: true,
         style: {
             table: {
-                "font-size": "15px",
+                "font-size": "10px",
             },
         },
         search: true,
