@@ -11,7 +11,6 @@ const ColacionController = {
         const anio = fechaSolicitud.getFullYear();
 
         const fechaFormateada = `${anio}-${mes}-${dia}`; // Obtener la fecha actual
-        // Supongo que "rut" y "fechaFormateada" deben obtenerse de alguna manera en tu código
 
         const checkQuery = "SELECT COUNT(*) AS count FROM Colacion WHERE RutSolicitante = ? AND FechaSolicitud = ?";
         db.query(checkQuery, [rut, fechaFormateada], (error, result) => {
@@ -19,9 +18,6 @@ const ColacionController = {
                 return res.render('errorView', { mensaje: 'Error en la consulta de validación.' });
             } else {
                 const count = result[0].count;
-                if(count > 0){
-                    return res.redirect(redirectPath);  
-                }
                 res.render('elegirColacionView', {
                     username: username,
                     RutaTipoFuncionario: redirectPath,
@@ -64,14 +60,54 @@ const ColacionController = {
                             return res.render('errorView', { mensaje: 'Error en la inserción de datos.' + error.message });
                         } else {
                             // Éxito en la inserción
-                            return res.redirect(redirectPath);  
+                            return res.redirect(redirectPath);
                         }
                     });
                 }
             }
         });
     },
-    confirmarColacion: (req, res) => { },
+    confirmarColacion: (req, res) => {
+        if (req.session && req.session.user) {
+            const { rut, IdTipoFuncionario } = req.session.user;
+            const redirectPath = getRedirectPath(IdTipoFuncionario);
+            const sql = "SELECT COUNT(*) AS count FROM Colacion WHERE RutSolicitante = ? AND FechaSolicitud = CURRENT_DATE AND Retirado = 1";
+
+            db.query(sql, [rut], (error, result) => {
+                if (error) {
+                    console.error(error);
+                    return res.render('errorView', { mensaje: "Error en la base de datos" });
+                }
+
+                const count = result[0].count;
+                if (count === 0) {
+                    return res.render('confirmarColacion');
+                }
+
+                return res.redirect(redirectPath);
+            });
+        } else {
+            res.redirect('/')
+        }
+    },
+    actualizarEstadoColacion: (req, res) => {
+        const { rutField } = req.body;
+        const { IdTipoFuncionario } = req.session.user;
+        const redirectPath = getRedirectPath(IdTipoFuncionario);
+
+        const query = "UPDATE `Colacion` SET `Retirado` = 1 WHERE `RutSolicitante` = ? AND FechaSolicitud = CURRENT_DATE";
+
+        db.query(query, [rutField], (error, result) => {
+            if (error) {
+                return res.render('errorView', { mensaje: "No se ha podido confirmar su colación estimado/a." });
+            } else if (result.affectedRows > 0) {
+
+                res.redirect(redirectPath);
+            } else {
+                return res.render('errorView', { mensaje: "No se ha podido confirmar su colación estimado/a." });
+            }
+        });
+    },
 };
 
 
