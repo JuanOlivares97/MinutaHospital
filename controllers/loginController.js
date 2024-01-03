@@ -36,7 +36,6 @@ const LoginController = {
                             NombreCompleto: user.NombreFuncionario,
                             IdTipoFuncionario: user.IdTipoFuncionario
                         };
-
                         res.redirect('/colacion');
                     } else {
                         res.render('errorView', { mensaje: "Credenciales Incorrectas" })
@@ -118,7 +117,8 @@ const LoginController = {
                 res.redirect('/');
             }
         });
-    }
+    },
+    
 };
 
 function getRedirectPath(idTipoFuncionario) {
