@@ -251,6 +251,12 @@ table {
     background: #F53131;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
   }
+  #RutFuncionario{
+    width: 80%;
+  }
+  #DvFuncionario{
+    width: 20%;
+  }
 }
 
 

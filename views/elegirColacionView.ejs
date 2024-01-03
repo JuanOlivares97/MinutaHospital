@@ -12,15 +12,19 @@
 
 <body>
     <% if (deshabilitado) { %>
-        <h1>Ya solicitaste una colacion maldito insecto</h1>
-        <a href="<%= RutaTipoFuncionario %>"><button id="button1">Ir</button></a>
-        <a href="/form-confirmar-colacion"><button id="button1">Confirmar colacion</button></a>
-    <% } else { %>
-        <form id="tipoRegimenForm" method="post" action="/auth/agregar-colacion">
-            <input type="hidden" name="regimen" id="regimenInput" value="">
-            <div id="tiposRegimenList"></div>
-        </form>
-    <% } %>
+        <div class="container">
+            <h1>Ya solicitaste una colacion maldito insecto</h1>
+            <a href="<%= RutaTipoFuncionario %>"><button id="button1">Ir</button></a>
+            <a href="/form-confirmar-colacion"><button id="button1">Confirmar colacion</button></a>
+        </div>
+        <% } else { %>
+            <div class="container2">
+                <form id="tipoRegimenForm" method="post" action="/auth/agregar-colacion">
+                    <input type="hidden" name="regimen" id="regimenInput" value="">
+                    <div id="tiposRegimenList"></div>
+                </form>
+            </div>
+            <% } %>
 </body>
 
 </html>

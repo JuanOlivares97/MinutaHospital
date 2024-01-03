@@ -3,66 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    #calculator {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
-
-    #rutField {
-      width: 200px;
-      height: 40px;
-      font-size: 1.2em;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .keypad {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 10px;
-    }
-
-    .key {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 60px;
-      height: 60px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1.2em;
-      cursor: pointer;
-    }
-
-    #deleteButton {
-      width: 60px;
-      height: 60px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1.2em;
-      cursor: pointer;
-    }
-  </style>
   <title>Teclado Numérico</title>
+  <link rel="stylesheet" href="/resources/css/confirmarColacion.css">
 </head>
 <body>
-
 <div id="calculator">
   <form id="rutForm" method="post" action="/checkin-colacion">
-    <input type="text" id="rutField" name="rutField" readonly oninput="validateRut()">
+    <input type="text" id="rutField" name="rutField" placeholder="11111111-1" readonly oninput="validateRut()">
   </form>
   
   <div class="keypad">
@@ -78,9 +25,9 @@
     <div class="key" onclick="appendValue('-')">-</div>
     <div class="key" onclick="appendValue('0')">0</div>
     <div class="key" onclick="appendValue('K')">K</div>
-    <div class="key" onclick="deleteLastCharacter()">DEL</div>
+    <div id="delete" class="key" onclick="deleteLastCharacter()">DEL</div>
     <div class="key" ></div>
-    <div class="key" onclick="submitForm()">OK</div>
+    <div id="ok" class="key" onclick="submitForm()">OK</div>
   </div>
 </div>
 

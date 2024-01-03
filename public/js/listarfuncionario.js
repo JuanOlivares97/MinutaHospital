@@ -6,12 +6,21 @@ const grid = new gridjs.Grid({
         "Fecha Contrato",
         "Fecha Termino",
         "Correo",
-        "Servicio",
-        "Unidad",
+        {
+            name: "Servicio",
+            width: "150px"
+        },
+        {name: "Unidad",
+    },
         "Regimen",
         "Contrato",
-        "Funcionario",
-        "Estamento",
+        {
+            name: "Funcionario",
+            width: "150px"
+        }, {
+            name: "Estamento",
+            width: "150px"
+        },
         {
             name: "Opciones",
             formatter: (cell, row) => gridjs.html(`
@@ -29,6 +38,7 @@ const grid = new gridjs.Grid({
     sort: true,
     fixedHeader: true,
     style: {
+
         table: {
             "font-size": "15px",
         },
@@ -36,12 +46,12 @@ const grid = new gridjs.Grid({
     search: true,
     language: {
         search: {
-            placeholder: "🔍 11111111-1",
+            placeholder: "11111111-1 🔍",
         },
         pagination: {
-            previous: "⬅️",
-            next: "➡️",
-            showing: "😃 Mostrando",
+            previous: "←",
+            next: "→",
+            showing: "Mostrando",
             results: () => "Pacientes",
         },
     },
