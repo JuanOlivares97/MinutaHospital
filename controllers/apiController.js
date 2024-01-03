@@ -1,4 +1,6 @@
 const db = require("../database/database.js");
+const path = require('path');
+const nombreCarpeta = path.basename(__dirname);
 
 const apiController = {
   listarTipoVia: (req, res) => {
@@ -74,6 +76,19 @@ const apiController = {
       res.status(200).json(TipoUnidad);
     });
   },
+  listarTipoFuncionario: (req, res) => {
+    const query = "SELECT IdTipoFuncionario, TipoPerfil FROM TipoFuncionario";
+    db.query(query, function (error, TipoFuncionario) {
+      if (error) {
+        console.error("Error en la consulta a la base de datos:", error);
+        return res
+          .status(500)
+          .json({ error: "Error en la consulta a la base de datos" });
+      }
+
+      res.status(200).json(TipoFuncionario);
+    });
+  }
 };
 
 module.exports = apiController;

@@ -1,20 +1,37 @@
+const { strictEqual } = require("assert");
 const db = require("../../database/database.js");
+const path = require('path');
+const nombreCarpeta = path.basename(__dirname);
+
 
 const HospitalizadoController = {
   mostrarPaginaHospitalizados: (req, res) => {
     if (req.session && req.session.user) {
       // Accede a los datos almacenados en la sesión
       const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
-
-      res.render("NutricionistaJefeViews/hospitalizadoview", {
-        username: username,
-        IdTipoFuncionario: IdTipoFuncionario,
-        NombreCompleto: NombreCompleto
+  
+      const sql = `
+        SELECT COUNT(*) AS Hospitalizados
+        FROM Hospitalizado
+        WHERE DATE(FechaIngreso) = CURDATE()
+      `;
+  
+      db.query(sql, (error, result) => {
+        if (error) {
+          res.status(500).json({ error: 'Error al cargar los hospitalizados' });
+        } else {
+          res.render(`${nombreCarpeta}/hospitalizadoview`, {
+            username: username,
+            IdTipoFuncionario: IdTipoFuncionario,
+            NombreCompleto: NombreCompleto,
+            conteoHospitalizado: result[0].Hospitalizados // Accede al resultado correctamente
+          });
+        }
       });
     } else {
       res.redirect("/");
     }
-  },
+  },  
   listarHospitalizados: (req, res) => {
     let tipoServicio = req.query.tipoServicio;
 
@@ -85,7 +102,7 @@ const HospitalizadoController = {
         return res.status(500).json({ error: error });
       }
 
-      return res.redirect('/NutricionistaJefe/listar-hospitalizado');
+      return res.redirect(`${nombreCarpeta}/listar-hospitalizado`);
     });
   },
   actualizarServicioHospitalizado: async (req, res) => {
@@ -113,7 +130,7 @@ const HospitalizadoController = {
                 return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
             }
 
-            return res.redirect('/NutricionistaJefe');
+            return res.redirect(`${nombreCarpeta}`);
         });
     });
 },
@@ -142,29 +159,10 @@ actualizarAltaHospitalizado: async (req, res) => {
               return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
           }
 
-          return res.redirect('/NutricionistaJefe');
+          return res.redirect(`${nombreCarpeta}`);
       });
   });
 },
-
-  /* eliminarHospitalizado: async (req, res) => {
-    // Obtén el ID del hospitalizado a eliminar
-    const RutHospitalizado = req.params.rut;
-
-    // Realiza una consulta SQL para eliminar el hospitalizado
-    const query = "DELETE FROM `Hospitalizado` WHERE TRIM(CONCAT(`RutHospitalizado`,'-',`DvHospitalizado`)) = ?";
-
-    db.query(query, [RutHospitalizado], (error, results, fields) => {
-      if (error) {
-        return res.status(500).json({ error: error });
-      }
-      return res.status(200).json({ Bacan: 'hospitalizado Eliminado' });
-      //return res.redirect('/NutricionistaJefe/listar-hospitalizado'); // Redirige a la lista de hospitalizados
-    });
-  }, */
-  mostrarGrafico: (req, res) => {
-    res.render("dashboard");
-  },
 };
 
 module.exports = HospitalizadoController;

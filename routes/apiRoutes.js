@@ -9,5 +9,6 @@ router.get('/listar-tipoestamento', apiController.listarTipoEstamento)
 router.get('/listar-tiporegimen', apiController.listarTipoRegimen)
 router.get('/listar-tiposervicio', apiController.listarTipoServicio)
 router.get('/listar-tipounidad', apiController.listarTipoUnidad)
+router.get('/listar-tipofuncionario', apiController.listarTipoFuncionario)
 
 module.exports = router;
