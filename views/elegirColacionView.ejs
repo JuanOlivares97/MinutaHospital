@@ -4,22 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Elegir Colación</title>
     <link rel="stylesheet" href="/resources/css/colacion.css">
     <script defer src="/resources/js/colacion.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="icon" type="image/x-icon" href="/resources/img/logopequeno-hospital.png">
 </head>
 
 <body>
     <% if (deshabilitado) { %>
         <div class="container">
-            <h1>Ya solicitaste una colacion maldito insecto</h1>
+            <h1>Ya solicitaste una colacion</h1>
             <a href="<%= RutaTipoFuncionario %>"><button id="button1">Ir</button></a>
             <a href="/form-confirmar-colacion"><button id="button1">Confirmar colacion</button></a>
         </div>
         <% } else { %>
             <div class="container2">
-                <form id="tipoRegimenForm" method="post" action="/auth/agregar-colacion">
+                <form id="tipoRegimenForm" method="post" action="/agregar-colacion">
+                    <h1 id="titulo">Elegir Una Colación</h1>
                     <input type="hidden" name="regimen" id="regimenInput" value="">
                     <div id="tiposRegimenList"></div>
                 </form>

@@ -63,6 +63,11 @@ input {
     cursor: pointer;
 }
 
+#titulo{
+   display: flex; 
+   justify-content: center;
+}
+
 #tiposRegimenList {
     margin-top: 10px;
     list-style: none;
