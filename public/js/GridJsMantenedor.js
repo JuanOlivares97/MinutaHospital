@@ -35,7 +35,7 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
             'pagination': {
                 'previous': '⬅️',
                 'next': '➡️',
-                'showing': '😃 Mostrando',
+                'showing': 'Mostrando',
                 'results': () => 'Pacientes'
             }
         },

@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function (event) {
-
   const showNavbar = (toggleId, navId, bodyId, headerId) => {
     const toggle = document.getElementById(toggleId),
       nav = document.getElementById(navId),
@@ -34,5 +33,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
   linkColor.forEach(l => l.addEventListener('click', colorLink))
 
-  // Your code to run since DOM is loaded and ready
+});
+
+document.getElementById('resoruces/img/logopequeno.png').addEventListener('click', function() {
+  changeImage('inactive');
+});
+
+document.getElementById('resoruces/img/logogrande.png').addEventListener('click', function() {
+  changeImage('active');
 });

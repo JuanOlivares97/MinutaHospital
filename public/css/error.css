@@ -6,7 +6,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+.container {
+  background-color: #fff;
+  padding: 20px;
 
+}
 .centered {
   height: 100vh;
   display: flex;
@@ -19,6 +23,17 @@ h1 {
   margin-bottom: 50px;
   font-family: 'Lato', sans-serif;
   font-size: 50px;
+}
+button{
+  background-color: #4285f4;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  justify-content: space-around;
+  margin-top: 10px;
+  height: 35px;
 }
 
 .message {
@@ -36,4 +51,7 @@ h1 {
 
 .hidden {
   color: #FFF;
+}
+#texto{
+  font-size: 22px;
 }

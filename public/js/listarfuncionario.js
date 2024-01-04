@@ -1,17 +1,20 @@
 const listaFuncionarios = document.getElementById("listarfuncionarios");
 const grid = new gridjs.Grid({
     columns: [
-        "Rut",
-        "Nombre",
-        "Fecha Contrato",
-        "Fecha Termino",
-        "Correo",
-        "Servicio",
-        "Unidad",
-        "Regimen",
-        "Contrato",
-        "Funcionario",
-        "Estamento",
+        {
+            name: "Rut",
+            width: "auto"
+        },
+        { name: "Nombre" },
+        { name: "Fecha Contrato" },
+        { name: "Fecha Termino" },
+        { name: "Correo" },
+        { name: "Servicio" },
+        { name: "Unidad" },
+        { name: "Regimen" },
+        { name: "Contrato" },
+        { name: "Funcionario" },
+        { name: "Estamento" },
         {
             name: "Opciones",
             formatter: (cell, row) => gridjs.html(`
@@ -32,16 +35,27 @@ const grid = new gridjs.Grid({
         table: {
             "font-size": "15px",
         },
+        th: {
+            'background-color': '#EEA561',
+            color: '#000',
+            'border-bottom': '3px solid #ccc',
+            'text-align': 'center',
+            'padding': 0
+          },
+          td: {
+            'text-align': 'center',
+            'padding': 0
+          }
     },
     search: true,
     language: {
         search: {
-            placeholder: "🔍 11111111-1",
+            placeholder: "11111111-1 🔍",
         },
         pagination: {
-            previous: "⬅️",
-            next: "➡️",
-            showing: "😃 Mostrando",
+            previous: "←",
+            next: "→",
+            showing: "Mostrando",
             results: () => "Pacientes",
         },
     },

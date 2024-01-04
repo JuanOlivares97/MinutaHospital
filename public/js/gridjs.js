@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
         fixedHeader: true,
         style: {
             table: {
-                "font-size": "15px",
+                "font-size": "15x",
+                "width":"80%",
             },
         },
         search: true,
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'pagination': {
                 'previous': '⬅️',
                 'next': '➡️',
-                'showing': '😃 Mostrando',
+                'showing': ' Mostrando',
                 'results': () => 'Pacientes'
             }
         },

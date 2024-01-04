@@ -1,9 +1,16 @@
-<link rel="stylesheet" href="/css/error.css">
+<head>
+  <link rel="stylesheet" href="/css/error.css">
+  <link rel="icon" type="image/x-icon" href="/resources/img/logopequeno-hospital.png">
+  <title>Error</title>
+</head>
 <section class="centered">
-    <h1>Server Error</h1>
-    <div class="container">
-      <span class="message" id="js-whoops"></span> <span class="message" id="js-appears"></span> <span class="message" id="js-error"></span> <span class="message" id="js-apology"></span>
-      <div><span class="" id=""> <%= mensaje %> </span></div>
-      <button><a href="/">VOLVER</a></button>
-    </div>
-  </section>
+  <h1>Server Error</h1>
+  <div class="container">
+    <span class="message" id="js-whoops"></span> <span class="message" id="js-appears"></span> <span class="message"
+      id="js-error"></span> <span class="message" id="js-apology"></span>
+    <div id="texto"><span class="" id="">
+        <%= mensaje %>
+      </span></div>
+    <a href="/"><button>VOLVER</button></a>
+  </div>
+</section>

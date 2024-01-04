@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/resources/img/logopequeno-hospital.png">
     <link rel="stylesheet" href="/resources/css/nutricionista.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
@@ -35,7 +36,7 @@
                     <span class="nav_name">Venta Almuerzo</span> </a>
                 <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i>
                     <span class="nav_name">CheckIn Almuerzo Funcionario</span></a>    
-                <a href="/NutricionistaJefe" class="nav_link"> <i class='bx bx-user nav_icon'></i>
+                <a href="/NutricionistaJefe" class="nav_link active"> <i class='bx bx-user nav_icon'></i>
                     <span class="nav_name">Alimentacion Hospitalizado</span> </a>
                 <a href="#" class="nav_link"> <i class='bx bx-search nav_icon'></i>
                     <span class="nav_name">Buscador de pacientes</span></a>
@@ -43,7 +44,7 @@
                     <span class="nav_name">Reporteria</span></a>
                 <a href="/NutricionistaJefe/mantenedores" class="nav_link"> <i class='bx bx-check-square nav_icon'></i>
                     <span class="nav_name">Mantenedores</span> </a>
-                <a href="/NutricionistaJefe/dashboard" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
+                <a href="/NutricionistaJefe/dashboard" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
                     <span class="nav_name">Dashboard</span> </a>
             </div>
         </nav>
@@ -74,11 +75,10 @@
                             <label for="CodigoCama">Código de Cama:</label>
                             <input type="number" id="CodigoCama" name="CodigoCama" required>
 
-                            <label for="RutHospitalizado">Rut Hospitalizado:</label>
-                            <input type="number" id="RutHospitalizado" name="RutHospitalizado" required>
-
-                            <label for="DvHospitalizado">Dv Hospitalizado:</label>
-                            <input type="number" id="DvHospitalizado" name="DvHospitalizado" required>
+                            <label for="RutFuncionario">Rut Funcionario:</label>
+                            <div><input placeholder="11111111" type="number" id="RutFuncionario" name="RutSinDv"
+                                    required><input placeholder="k" type="number" id="DvFuncionario"
+                                    name="dvFuncionario" required></div>
 
                             <label for="NombreHospitalizado">Nombre Hospitalizado:</label>
                             <input type="text" id="NombreHospitalizado" name="NombreHospitalizado" required>

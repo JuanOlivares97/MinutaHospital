@@ -80,6 +80,12 @@ a {
 }
 
 /*NAVBAR*/
+nav img {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
 .l-navbar {
   position: fixed;
   top: 0;
@@ -250,6 +256,12 @@ table {
     border-radius: 20px;
     background: #F53131;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
+  }
+  #RutFuncionario{
+    width: 80%;
+  }
+  #DvFuncionario{
+    width: 20%;
   }
 }
 
