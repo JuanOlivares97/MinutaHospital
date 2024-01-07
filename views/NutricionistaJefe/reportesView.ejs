@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reportes</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script
+      defer
+      src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.rawgit.com/eKoopmans/html2pdf/0.9.3/dist/html2pdf.bundle.js"></script>
+  </head>
+
+  <body>
+    <button onclick="descargarTabla()">Descargar Tabla</button>
+    <button onclick="descargarTablaPDF()">Descargar Tabla PDF</button>
+
+    <div id="tbl-reportes">
+      <table>
+        <tr>
+          <th>Establecimiento:</th>
+          <th>Año:</th>
+          <th>Mes:</th>
+        </tr>
+        <tr>
+          <th>Hosp San José (Melipilla)</th>
+          <th><%= info.anio %></th>
+          <th><%= info.mes %></th>
+        </tr>
+        <tr>
+          <th>Unidad</th>
+          <th># Raciones Funcionario</th>
+          <th># Raciones Hospitalizado</th>
+          <th># Raciones Lactante</th>
+        </tr>
+        <% detalles.forEach(detalle => { %>
+        <tr>
+          <td><%= detalle.DescTipoUnidad %></td>
+          <td><%= detalle.RacionesFuncionarios %></td>
+          <td><%= detalle.RacionesHospitalizados %></td>
+          <td><%= detalle.RacionesLactantes %></td>
+        </tr>
+        <% }); %>
+      </table>
+    </div>
+
+    <script>
+      function descargarTabla() {
+        $("#tbl-reportes table").table2excel({
+          exclude: ".noExl", // Clases CSS que quieres excluir de la exportación
+          name: "Tabla_Reportes",
+          filename: "reporte_<%= info.anio %>_<%= info.mes %>", // Nombre del archivo sin extensión
+        });
+      }
+      function descargarTablaPDF() {
+        const element = document.getElementById("tbl-reportes");
+
+        // Definir opciones para la descarga PDF
+        const options = {
+          margin: 10,
+          filename: "reporte_<%= info.anio %>_<%= info.mes %>.pdf", // Cambia 'nombre_personalizado' por el nombre que desees
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        };
+
+        // Llamar a la función html2pdf con las opciones
+        html2pdf(element, options);
+      }
+    </script>
+  </body>
+</html>
