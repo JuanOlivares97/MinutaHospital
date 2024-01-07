@@ -3,6 +3,7 @@ const HospitalizadoController = require("../controllers/NutricionistaJefe/Hospit
 const FuncionarioController = require("../controllers/NutricionistaJefe/FuncionarioController.js");
 const mantenedorController = require('../controllers/NutricionistaJefe/MantenedorController.js');
 const dashboardController = require('../controllers/NutricionistaJefe/DashboardController.js');
+const reportesController = require('../controllers/NutricionistaJefe/reportesController.js');
 const Route = express.Router();
 
 Route.get('/', HospitalizadoController.mostrarPaginaHospitalizados)
@@ -25,6 +26,9 @@ Route.post('/editar-alta-hospitalizado', HospitalizadoController.actualizarAltaH
 Route.get('/mantenedores', mantenedorController.mostrarVistaMantenedores)
 //Route.get('/editar-mantenedores', mantenedorController.mostrarVistaMantenedores)
 //Route.get('/eliminar-mantenedores', mantenedorController.mostrarVistaMantenedores)
+
+
+Route.get('/reportes',reportesController.mostrarViewReportes)
 
 
 Route.get('/dashboard', dashboardController.mostrarDashboard);
