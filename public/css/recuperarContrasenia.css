@@ -86,7 +86,7 @@ a {
 }
 
 #form {
-    width: 60%;
+    width: 55%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,7 +103,6 @@ a {
     background: var(--white-color);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
     width: 445px;
-    height: 605px;
 }
 
 #user,
@@ -157,14 +156,6 @@ label {
     background: #EA7B7B;
 }
 
-#recuperarpass {
-    color: var(--firt-border-color);
-    font-family: Lalezar;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
 
 .decoracion {
     color: var(--icons-color);

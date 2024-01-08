@@ -33,8 +33,8 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
                 'placeholder': '🔍 11111111-1'
             },
             'pagination': {
-                'previous': '⬅️',
-                'next': '➡️',
+                'previous': "←",
+                'next': "→",
                 'showing': 'Mostrando',
                 'results': () => 'Pacientes'
             }
