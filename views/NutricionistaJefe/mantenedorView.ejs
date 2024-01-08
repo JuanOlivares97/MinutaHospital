@@ -20,6 +20,28 @@
     <script defer src="/resources/js/GridJsMantenedor.js"></script>
 
     <script defer src="/resources/js/navbar.js"></script>
+
+    <style>
+        .content {
+            display: none;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .show {
+            display: block;
+        }
+        .gridjs-container{
+            width: auto !important;
+        }
+        .gridjs-wrapper{
+            width: auto;
+        }
+        .gridjs-table {
+            table-layout: auto !important;
+            width: auto !important;
+        }
+    </style>
 </head>
 
 <body id="body-pd">
@@ -52,40 +74,272 @@
     </div>
     <div class="titulo">Mantenedores</div>
     <div id="container">
-        <div>
+
+        <div class="navegacion">
+            <button onclick="toggleDiv('viaDiv')">Via</button>
+            <button onclick="toggleDiv('contratoDiv')">Contrato</button>
+            <button onclick="toggleDiv('estamentoDiv')">Estamento</button>
+            <button onclick="toggleDiv('regimenDiv')">Regimen</button>
+            <button onclick="toggleDiv('unidadDiv')">Unidad</button>
+            <button onclick="toggleDiv('servicioDiv')">Servicio</button>
+            <button onclick="toggleDiv('perfilDiv')">Perfil</button>
+        </div>
+
+        <div id="viaDiv" class="content">
             <h1>Via</h1>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modalVia">
+                Agregar un tipo de Via
+            </button>
             <div id="ListaVia"></div>
+
+            <div class="modal fade" id="modalVia" tabindex="-1" role="dialog" aria-labelledby="modalVialabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalVialabel">Agregar hospitalizado</h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Aquí coloca tu formulario -->
+                            <form action="/NutricionistaJefe/agregar-via" method="post">
+
+                                <input type="text" name="TipoVia" placeholder="Nombre del tipo via">
+
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div>
+        <div id="contratoDiv" class="content">
             <h1>Contrato</h1>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modalcontrato">
+                Agregar un tipo de Contrato
+            </button>
+
             <div id="ListaContrato"></div>
+
+            <div class="modal fade" id="modalcontrato" tabindex="-1" role="dialog" aria-labelledby="modalcontratolabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalcontratolabel">Agregar Contrato</h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Aquí coloca tu formulario -->
+                            <form action="/NutricionistaJefe/agregar-contrato" method="post">
+
+                                <input type="text" name="TipoContrato" placeholder="Nombre del tipo contrato">
+
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div>
+        <div id="estamentoDiv" class="content">
+            <h1>Tipo Estamento </h1>
+
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modalestamento">
+                Agregar un tipo de Estamento
+            </button>
+
             <div id="ListaEstamento"></div>
+
+            <div class="modal fade" id="modalestamento" tabindex="-1" role="dialog"
+                aria-labelledby="modalestamentolabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalestamentolabel">Agregar Estamento</h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Aquí coloca tu formulario -->
+                            <form action="/NutricionistaJefe/agregar-estamento" method="post">
+
+                                <input type="text" name="TipoContrato" placeholder="Nombre del tipo contrato">
+
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div>
+        <div id="regimenDiv" class="content">
             <h1>Regimen</h1>
+
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modalregimen">
+                Agregar un tipo de Regimen
+            </button>
+
             <div id="ListaRegimen"></div>
+
+            <div class="modal fade" id="modalregimen" tabindex="-1" role="dialog" aria-labelledby="modalregimenlabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalregimenlabel">Agregar Regimen</h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Aquí coloca tu formulario -->
+                            <form action="/NutricionistaJefe/agregar-regimen" method="post">
+
+                                <input type="text" name="DescTipoRegimen" placeholder="Nombre del tipo de Regimen">
+
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div>
+        <div id="unidadDiv" class="content">
             <h1>Servicio</h1>
+
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modalServicio">
+                Agregar un tipo de Servicio
+            </button>
+
             <div id="ListaServicio"></div>
+
+            <div class="modal fade" id="modalServicio" tabindex="-1" role="dialog" aria-labelledby="modalServiciolabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalServiciolabel">Agregar Servicio</h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Aquí coloca tu formulario -->
+                            <form action="/NutricionistaJefe/agregar-servicio" method="post">
+
+                                <input type="text" name="DescTipoServicio" placeholder="Nombre del tipo de servicio">
+
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div>
+        <div id="servicioDiv" class="content">
             <h1>Unidad</h1>
+
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modalUnidad">
+                Agregar un tipo de Unidad
+            </button>
+
             <div id="ListaUnidad"></div>
+
+            <div class="modal fade" id="modalUnidad" tabindex="-1" role="dialog" aria-labelledby="modalUnidadlabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalUnidadlabel">Agregar Servicio</h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Aquí coloca tu formulario -->
+                            <form action="/NutricionistaJefe/agregar-unidad" method="post">
+
+                                <input type="text" name="DescTipoUnidad" placeholder="Nombre del tipo de Unidad">
+
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div>
+        <div id="perfilDiv" class="content">
             <h1>Funcionario</h1>
+
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modalFuncionario">
+                Agregar un tipo de Funcionario
+            </button>
+
             <div id="ListaTipoFuncionarios"></div>
+
+            <div class="modal fade" id="modalFuncionario" tabindex="-1" role="dialog"
+                aria-labelledby="modalFuncionariolabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalFuncionariolabel">Agregar Funcionario</h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Aquí coloca tu formulario -->
+                            <form action="/NutricionistaJefe/agregar-funcionario" method="post">
+
+                                <input type="text" name="TipoContrato" placeholder="Nombre del tipo de Funcionario">
+
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
+    <script>
+        let currentDiv = null;
+
+        function toggleDiv(divId) {
+            const divToShow = document.getElementById(divId);
+
+            if (currentDiv !== null) {
+                currentDiv.classList.remove('show');
+            }
+
+            if (currentDiv !== divToShow) {
+                divToShow.classList.add('show');
+                currentDiv = divToShow;
+            } else {
+                currentDiv = null;
+            }
+        }
+
+    </script>
 </body>
 
 </html>

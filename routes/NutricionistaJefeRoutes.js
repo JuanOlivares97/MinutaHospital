@@ -24,8 +24,16 @@ Route.post('/editar-alta-hospitalizado', HospitalizadoController.actualizarAltaH
 //Route.post('/eliminar-hospitalizado/:rut', HospitalizadoController.eliminarHospitalizado);
 
 Route.get('/mantenedores', mantenedorController.mostrarVistaMantenedores)
+Route.post('/agregar-via',mantenedorController.agregarTipoVia)
+Route.post('/agregar-contrato',mantenedorController.agregarTipoContrato)
+Route.post('/agregar-estamento',mantenedorController.agregarTipoEstamento)
+Route.post('/agregar-funcionario',mantenedorController.agregarTipoFuncionario)
+Route.post('/agregar-regimen',mantenedorController.agregarTipoRegimen)
+Route.post('/agregar-servicio',mantenedorController.agregarTipoServicio)
+Route.post('/agregar-unidad',mantenedorController.agregarTipoUnidad)
+
 //Route.get('/editar-mantenedores', mantenedorController.mostrarVistaMantenedores)
-//Route.get('/eliminar-mantenedores', mantenedorController.mostrarVistaMantenedores)
+
 
 
 Route.get('/reportes',reportesController.mostrarViewReportes)

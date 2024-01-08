@@ -1,10 +1,10 @@
 const tipovia = document.getElementById('ListaVia');
 const tipocontrato = document.getElementById('ListaContrato');
 const tipoestamento = document.getElementById('ListaEstamento');
-const tiporegimen= document.getElementById('ListaRegimen');
+const tiporegimen = document.getElementById('ListaRegimen');
 const tiposervicio = document.getElementById('ListaServicio');
-const tipounidad= document.getElementById('ListaUnidad');
-const tipofuncionario= document.getElementById('ListaTipoFuncionarios');
+const tipounidad = document.getElementById('ListaUnidad');
+const tipofuncionario = document.getElementById('ListaTipoFuncionarios');
 
 function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
     const grid = new gridjs.Grid({
@@ -14,17 +14,14 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
             {
                 name: "Opciones",
                 formatter: (cell, row) => gridjs.html(`
-
-                <button><a class="editarServicio" id="agregar" href="#" data-toggle="modal" data-target="#modalEditarServicioHospitalizado" data-rut="${row.cells[1].data}">Editar</a></button>
-                <button><a class="editarAlta" id="agregar" href="#" data-toggle="modal" data-target="#modalEditarAltaHospitalizado" data-rut="${row.cells[1].data}">Eliminar</a></button>
+                <button class="btn btn-secondary btn-lg"  data-toggle="modal" data-target="#modalEditar" data-rut="${row.cells[1].data}">Editar</button>
                 `)
             }
         ],
         sort: true,
-        fixedHeader: true,
         style: {
             table: {
-                "font-size": "10px",
+                "font-size": "15px",
             },
         },
         search: true,
@@ -35,13 +32,14 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
             'pagination': {
                 'previous': "←",
                 'next': "→",
+                "to": "a",
+                "of": "de",
                 'showing': 'Mostrando',
-                'results': () => 'Pacientes'
+                'results': () => 'Resultados'
             }
         },
         pagination: {
-            limit: 10,
-            summary: true
+            limit: 10
         },
         server: {
             url: 'http://localhost:3000/api/listar-' + api,
@@ -60,13 +58,13 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-generarGrafico(tipovia, '#', "Tipo Via", "tipovia",'IdTipoVia','DescTipoVia')
-generarGrafico(tipocontrato, '#', "Contrato", "tipocontrato",'IdTipoContrato','TipoContrato' )
-generarGrafico(tipoestamento, '#', "Estamento", "tipoestamento",'IdTipoEstamento','DescTipoEstamento' )
-generarGrafico(tiporegimen, '#', "Regimen", "tiporegimen",'IdTipoRegimen','DescTipoRegimen' )
-generarGrafico(tiposervicio, '#', "Servicio", "tiposervicio",'IdTipoServicio','DescTipoServicio' )
-generarGrafico(tipounidad, '#', "Unidad", "tipounidad",'IdTipoUnidad','DescTipoUnidad' )
-generarGrafico(tipofuncionario, '#', "Tipo Funcionario", "tipofuncionario",'IdTipoFuncionario','TipoPerfil' )
+    generarGrafico(tipovia, '#', "Tipo Via", "tipovia", 'IdTipoVia', 'DescTipoVia')
+    generarGrafico(tipocontrato, '#', "Contrato", "tipocontrato", 'IdTipoContrato', 'TipoContrato')
+    generarGrafico(tipoestamento, '#', "Estamento", "tipoestamento", 'IdTipoEstamento', 'DescTipoEstamento')
+    generarGrafico(tiporegimen, '#', "Regimen", "tiporegimen", 'IdTipoRegimen', 'DescTipoRegimen')
+    generarGrafico(tiposervicio, '#', "Servicio", "tiposervicio", 'IdTipoServicio', 'DescTipoServicio')
+    generarGrafico(tipounidad, '#', "Unidad", "tipounidad", 'IdTipoUnidad', 'DescTipoUnidad')
+    generarGrafico(tipofuncionario, '#', "Tipo Funcionario", "tipofuncionario", 'IdTipoFuncionario', 'TipoPerfil')
 });
 
 
