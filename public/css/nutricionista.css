@@ -178,8 +178,10 @@ th {
 }
 
 #container {
-  margin-top: 150px;
+  margin-top: 120px;
   width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .titulo {
@@ -265,7 +267,23 @@ table {
   }
 }
 
-
+/*Vista Mantenedor*/
+.navegacion{
+  background-color: var(--body-font);
+  width: 100%;
+  height: var(--header-height);
+  align-items: center;
+}
+.navegacion button{
+  background-color: var(--body-font);
+  width: 150px;
+  font-size: 1.1rem;
+  margin: 0;
+  border: none;
+}
+.navegacion button:hover{
+  background-color: var(--first-color);
+}
 @media screen and (min-width: 768px) {
   body {
     margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -278,6 +296,10 @@ table {
   }
 
   .titulo {
+    height: calc(var(--header-height) + 1rem);
+    padding: 0 2rem 0 calc(var(--nav-width) + 2rem)
+  }
+  .navegacion {
     height: calc(var(--header-height) + 1rem);
     padding: 0 2rem 0 calc(var(--nav-width) + 2rem)
   }

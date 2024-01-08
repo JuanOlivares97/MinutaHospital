@@ -23,6 +23,7 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
             table: {
                 "font-size": "15px",
             },
+            
         },
         search: true,
         language: {
