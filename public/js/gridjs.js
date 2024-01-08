@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "font-size": "15x",
                 "width":"80%",
             },
+            
         },
         search: true,
         language: {
@@ -37,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 'placeholder': '🔍 11111111-1'
             },
             'pagination': {
-                'previous': '⬅️',
-                'next': '➡️',
+                'previous': "←",
+                'next': "→",
                 'showing': ' Mostrando',
                 'results': () => 'Pacientes'
             }

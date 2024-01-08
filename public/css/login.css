@@ -178,20 +178,21 @@ label {
         height: 600px;
     }
 
-    #svg-background2 {
-        display: none;
-    }
 }
 @media (max-width: 1360px) {
+    #inicio{
+        width: 65%;
+    }
+
     #formulario {
-        width: 380px;
-        height: 520PX;
+        width: 320px;
+        height: 450PX;
     }
 
     #form {
         padding-left: 100px;
         display: flex;
-        padding-right: 130px;
+        padding-right: 100px;
     }
 
     #user,
@@ -200,7 +201,7 @@ label {
     #button,
     .decoracion,
     #recuperarpass {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     #button {
@@ -209,7 +210,10 @@ label {
     }
 
     #img-background {
-        height: 450px;
+        height: 380px;
+    }
+    #svg-background2 {
+        height: 503px;
     }
 }
 

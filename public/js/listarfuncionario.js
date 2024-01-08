@@ -20,11 +20,11 @@ const grid = new gridjs.Grid({
             formatter: (cell, row) => gridjs.html(`
             <form action="" method="POST">
                     <input type="hidden" name="" value="${row.cells[1].data}" required> 
-                    <button style="width:100px; margin:5px;"> Editar </button>
+                    <button style="width:100px; margin:5px;"><i class='bx bx-edit'></i> Editar </button>
                 </form>
             <form action="" method="POST">
                     <input type="hidden" name="" value="${row.cells[1].data}" required> 
-                    <button style="width:100px; margin:5px;">Eliminar</button>
+                    <button style="width:100px; margin:5px;;"><i class='bx bx-trash'></i> Eliminar</button>
             </form>
                   `)
         }
@@ -44,7 +44,7 @@ const grid = new gridjs.Grid({
           },
           td: {
             'text-align': 'center',
-            'padding': 0
+            'padding': 0,
           }
     },
     search: true,
