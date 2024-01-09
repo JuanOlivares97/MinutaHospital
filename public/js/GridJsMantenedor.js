@@ -14,7 +14,7 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
             {
                 name: "Opciones",
                 formatter: (cell, row) => gridjs.html(`
-                <button class="btn btn-secondary btn-lg"  data-toggle="modal" data-target="#modalEditar" data-rut="${row.cells[1].data}">Editar</button>
+                <button class="btn btn-secondary btn-lg"  data-toggle="modal" data-target="#modalEditar" data-rut="${row.cells[1].data}"><i class='bx bx-edit'></i></button>
                 `)
             }
         ],
