@@ -28,9 +28,20 @@ document.addEventListener('DOMContentLoaded', function () {
         style: {
             table: {
                 "font-size": "15x",
-                "width":"80%",
+            }, 
+            th: {
+                'background-color': '#EEA561',
+                color: '#000',
+                'border-bottom': '3px solid #ccc',
+                'text-align': 'center',
+                'padding': '5px',
             },
-            
+            td: {
+                'text-align': 'center',
+                'align-items': 'center',
+                'padding': '3px',
+            }
+
         },
         search: true,
         language: {
