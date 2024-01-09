@@ -130,7 +130,7 @@ const HospitalizadoController = {
                 return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
             }
 
-            return res.redirect(`${nombreCarpeta}`);
+            return res.redirect(`/${nombreCarpeta}`);
         });
     });
 },
@@ -159,7 +159,7 @@ actualizarAltaHospitalizado: async (req, res) => {
               return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
           }
 
-          return res.redirect(`${nombreCarpeta}`);
+          return res.redirect(`/${nombreCarpeta}`);
       });
   });
 },

@@ -8,7 +8,7 @@ const FuncionariosController = {
     if (req.session && req.session.user) {
       // Accede a los datos almacenados en la sesión
       const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
-      res.render(`${nombreCarpeta}/funcionarioView`,{
+      res.render(`${nombreCarpeta}/funcionarioView`, {
         username: username,
         IdTipoFuncionario: IdTipoFuncionario,
         NombreCompleto: NombreCompleto,
@@ -16,7 +16,7 @@ const FuncionariosController = {
     } else {
       res.redirect("/");
     }
-    
+
   },
   listarFuncionarios: (req, res) => {
     const query = `
@@ -96,8 +96,12 @@ const FuncionariosController = {
       }
     );
   },
-  actualizarFuncionarios: (req, res) => { },
-  eliminarFuncionarios: async (req, res) => { },
+  actualizarFuncionarios: (req, res) => {
+
+  },
+  eliminarFuncionarios: async (req, res) => {
+
+  },
 };
 
 module.exports = FuncionariosController;
