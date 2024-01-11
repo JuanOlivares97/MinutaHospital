@@ -94,7 +94,7 @@ const FuncionariosController = {
         if (error) {
           return res.status(500).json({ error: error });
         }
-        return res.redirect(`/${nombreCarpeta}/funcionarios?mensaje=Operación realizada con éxito'`);
+        return res.redirect(`/${nombreCarpeta}/funcionarios?mensaje=Operación realizada con éxito`);
       }
     );
   },
@@ -114,7 +114,7 @@ const FuncionariosController = {
     const FechaTermino = req.body.FechaTermino || null;
 
     const query =
-    `UPDATE Funcionario SET 
+      `UPDATE Funcionario SET 
     NombreFuncionario = ?,
     FechaTerminoContrato = ?, 
     correo = ?,
@@ -146,31 +146,43 @@ const FuncionariosController = {
           return res.render('errorView', { mensaje: error });
         }
 
-        return res.redirect(`/${nombreCarpeta}/funcionarios?mensaje=Operación realizada con éxito'`);
+        return res.redirect(`/${nombreCarpeta}/funcionarios?mensaje=Operación realizada con éxito`);
       }
     );
   },
-  deshabilitarFuncionarios: async (req, res) => {
+  deshabilitarFuncionarios: (req, res) => {
+    const { Rut } = req.body;
 
+    const query = "UPDATE Funcionario SET Habilitado = 'N' WHERE TRIM(CONCAT(RutFuncionario, ' - ', DvFuncionario)) = ?";
+
+    db.query(query, [Rut], (error, results, fields) => {
+      if (error) {
+        console.log(req.body)
+        return res.render('errorView', { mensaje: error });
+      }
+
+      return res.redirect(`/${nombreCarpeta}/funcionarios?mensaje=Usuario Deshabilitado`);
+    }
+    )
   },
 };
 
 function getRedirectPath(idTipoFuncionario) {
   switch (idTipoFuncionario) {
-      case 1:
-          return "/Nutricionista";
-      case 2:
-          return "/NutricionistaJefe";
-      case 3:
-          return "/Tecnico";
-      case 4:
-          return "/Clinico";
-      case 5:
-          return "/Recursos";
-      case 6:
-          return "/Recaudacion";
-      default:
-          return "/";
+    case 1:
+      return "/Nutricionista";
+    case 2:
+      return "/NutricionistaJefe";
+    case 3:
+      return "/Tecnico";
+    case 4:
+      return "/Clinico";
+    case 5:
+      return "/Recursos";
+    case 6:
+      return "/Recaudacion";
+    default:
+      return "/";
   }
 }
 

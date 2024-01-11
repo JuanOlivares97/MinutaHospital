@@ -40,7 +40,7 @@ const mantenedorController = {
                     return res.render('errorView',{ mensaje: error });
                 }
 
-                return res.redirect(`/${nombreCarpeta}/mantenedores`);
+                return res.redirect(`/${nombreCarpeta}/mantenedores?mensaje=Registro Agregado`);
             });
         });
     },
@@ -53,7 +53,7 @@ const mantenedorController = {
                 return res.render('errorView',{ mensaje: error });
             }
 
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
+            return res.redirect(`${nombreCarpeta}/mantenedores?mensaje=Registro Agregado`);
         });
     },
     agregarTipoEstamento: (req, res) => {
@@ -65,7 +65,7 @@ const mantenedorController = {
                 return res.render('errorView',{ mensaje: error });
             }
 
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
+            return res.redirect(`${nombreCarpeta}/mantenedores?mensaje=Registro Agregado`);
         });
     },
     agregarTipoRegimen: (req, res) => {
@@ -94,7 +94,7 @@ const mantenedorController = {
                         return res.render('errorView',{ mensaje: error });
                     }
 
-                    return res.redirect(`${nombreCarpeta}/mantenedores`);
+                    return res.redirect(`${nombreCarpeta}/mantenedores?mensaje=Registro Agregado`);
                 }
             );
         });
@@ -118,7 +118,7 @@ const mantenedorController = {
                     return res.render('errorView',{ mensaje: error });
                 }
 
-                return res.redirect(`${nombreCarpeta}/mantenedores`);
+                return res.redirect(`${nombreCarpeta}/mantenedores?mensaje=Registro Agregado`);
             });
         });
     },
@@ -140,7 +140,7 @@ const mantenedorController = {
                     return res.render('errorView',{ mensaje: error });
                 }
 
-                return res.redirect(`${nombreCarpeta}/mantenedores`);
+                return res.redirect(`${nombreCarpeta}/mantenedores?mensaje=Registro Agregado`);
             });
         });
     },
@@ -153,7 +153,7 @@ const mantenedorController = {
                 return res.render('errorView',{ mensaje: error });
             }
 
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
+            return res.redirect(`${nombreCarpeta}/mantenedores?mensaje=Registro Agregado`);
         });
     },
     editarMantenedores: (req, res) => {
@@ -177,7 +177,7 @@ const mantenedorController = {
             // Verifica si se actualizó correctamente
             if (result.affectedRows === 1) {
                 // Puedes agregar un mensaje de éxito y redirigir
-                return res.redirect(`/${nombreCarpeta}/mantenedores`);
+                return res.redirect(`/${nombreCarpeta}/mantenedores?mensaje=Registro actualizado`);
             } else {
                 return res.render('errorView', { mensaje: 'Registro no encontrado.' });
             }

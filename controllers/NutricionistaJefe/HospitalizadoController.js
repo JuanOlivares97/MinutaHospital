@@ -15,10 +15,10 @@ const HospitalizadoController = {
         FROM Hospitalizado
         WHERE DATE(FechaIngreso) = CURDATE()
       `;
-  
+
       db.query(sql, (error, result) => {
         if (error) {
-          res.status(500).json({ error: 'Error al cargar los hospitalizados' });
+          res.render('errorView', { mensaje: 'Error al cargar los hospitalizados' });
         } else {
           res.render(`${nombreCarpeta}/hospitalizadoview`, {
             username: username,
@@ -31,7 +31,7 @@ const HospitalizadoController = {
     } else {
       res.redirect("/");
     }
-  },  
+  },
   listarHospitalizados: (req, res) => {
     let tipoServicio = req.query.tipoServicio;
 
@@ -57,7 +57,7 @@ const HospitalizadoController = {
 
     db.query(query, [tipoServicio], (error, hospitalizados) => {
       if (error) {
-        res.status(500).json({ error: 'Error al cargar los hospitalizados' });
+        res.render('errorView', { mensaje:'Error al cargar los hospitalizados' });
       } else {
         res.status(200).json(hospitalizados);
       }
@@ -102,7 +102,7 @@ const HospitalizadoController = {
         return res.status(500).json({ error: error });
       }
 
-      return res.redirect(`${nombreCarpeta}/listar-hospitalizado`);
+      return res.redirect(`${nombreCarpeta}/listar-hospitalizado?mensaje=Hospitalizado Agregado`);
     });
   },
   actualizarServicioHospitalizado: async (req, res) => {
@@ -118,69 +118,96 @@ const HospitalizadoController = {
     const insertLogQuery = "INSERT INTO AntecedentesHospitalizado (FechaLog, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia) SELECT ?, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia FROM Hospitalizado WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
 
     db.query(insertLogQuery, [fechaFormateada, RutHospitalizado], (error, results, fields) => {
+      if (error) {
+        return res.status(500).json({ error: 'Error al insertar el log en AntecedentesHospitalizado' });
+      }
+
+      // Consulta para actualizar el servicio del hospitalizado
+      const updateHospitalizadoQuery = "UPDATE Hospitalizado SET IdTipoServicio = ? WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
+
+      db.query(updateHospitalizadoQuery, [servicio, RutHospitalizado], (error, results, fields) => {
         if (error) {
-            return res.status(500).json({ error: 'Error al insertar el log en AntecedentesHospitalizado' });
+          return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
         }
 
-        // Consulta para actualizar el servicio del hospitalizado
-        const updateHospitalizadoQuery = "UPDATE Hospitalizado SET IdTipoServicio = ? WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
-
-        db.query(updateHospitalizadoQuery, [servicio, RutHospitalizado], (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
-            }
-
-            return res.redirect(`/${nombreCarpeta}`);
-        });
+        return res.redirect(`/${nombreCarpeta}?mensaje=Servicio de Hospitalizado Agregado`);
+      });
     });
-},
-actualizarAltaHospitalizado: async (req, res) => {
-  const { RutHospitalizado, FechaAlta } = req.body;
-  console.log(FechaAlta)
-  const fechaSolicitud = new Date();
-  const dia = fechaSolicitud.getDate().toString().padStart(2, '0');
-  const mes = (fechaSolicitud.getMonth() + 1).toString().padStart(2, '0'); // Se suma 1 porque los meses van de 0 a 11
-  const anio = fechaSolicitud.getFullYear();
-  const fechaFormateada = `${anio}-${mes}-${dia}`;
+  },
+  actualizarAltaHospitalizado: async (req, res) => {
+    const { RutHospitalizado, FechaAlta } = req.body;
+    console.log(FechaAlta)
+    const fechaSolicitud = new Date();
+    const dia = fechaSolicitud.getDate().toString().padStart(2, '0');
+    const mes = (fechaSolicitud.getMonth() + 1).toString().padStart(2, '0'); // Se suma 1 porque los meses van de 0 a 11
+    const anio = fechaSolicitud.getFullYear();
+    const fechaFormateada = `${anio}-${mes}-${dia}`;
 
-  // Consulta para insertar un registro en AntecedentesHospitalizado
-  const insertLogQuery = "INSERT INTO AntecedentesHospitalizado (FechaLog, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia) SELECT ?, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia FROM Hospitalizado WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
+    // Consulta para insertar un registro en AntecedentesHospitalizado
+    const insertLogQuery = "INSERT INTO AntecedentesHospitalizado (FechaLog, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia) SELECT ?, IdHospitalizado, CodigoCama, RutHospitalizado, DvHospitalizado, NombreHospitalizado, FechaNacimiento, FechaIngreso, ObservacionesNutricionista, FechaAlta, IndicacionesAlta, ServicioAlta, CodigoCamaAlta, IdTipoRegimen, Ayuno, IdTipoServicio, IdTipoUnidad, IdTipoVia FROM Hospitalizado WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
 
-  db.query(insertLogQuery, [fechaFormateada, RutHospitalizado], (error, results, fields) => {
+    db.query(insertLogQuery, [fechaFormateada, RutHospitalizado], (error, results, fields) => {
       if (error) {
-          return res.status(500).json({ error: 'Error al insertar el log en AntecedentesHospitalizado' });
+        return res.status(500).json({ error: 'Error al insertar el log en AntecedentesHospitalizado' });
       }
 
       // Consulta para actualizar el servicio del hospitalizado
       const updateHospitalizadoQuery = "UPDATE Hospitalizado SET FechaAlta = ? WHERE TRIM(CONCAT(RutHospitalizado, '-', DvHospitalizado)) = ?";
 
       db.query(updateHospitalizadoQuery, [FechaAlta, RutHospitalizado], (error, results, fields) => {
-          if (error) {
-              return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
-          }
+        if (error) {
+          return res.status(500).json({ error: 'Error al actualizar el servicio del hospitalizado' });
+        }
 
-          return res.redirect(`/${nombreCarpeta}`);
+        return res.redirect(`/${nombreCarpeta}?mensaje=Hospitalizado dado de Alta`);
       });
-  });
-},
+    });
+  },
+  listarhistorial: async (req, res) => {
+
+    let rut = req.query.rut;
+
+    const query = `
+    SELECT 	CodigoCama,
+    TRIM(CONCAT(RutHospitalizado,'-',DvHospitalizado)) AS Rut,
+    NombreHospitalizado,
+    DATE_FORMAT(FechaIngreso, "%d-%m-%Y") AS FechaIngreso,
+    ObservacionesNutricionista,
+    DATE_FORMAT(FechaAlta, "%d-%m-%Y") AS FechaAlta,
+    TR.DescTipoRegimen AS TipoRegimen,
+    TS.DescTipoServicio as TipoServicio
+    FROM AntecedentesHospitalizado H
+    INNER JOIN TipoRegimen TR ON (H.IdTipoRegimen = TR.IdTipoRegimen)
+    INNER JOIN TipoServicio TS ON (H.IdTipoServicio = TS.IdTipoServicio)
+    WHERE TRIM(CONCAT(RutHospitalizado,'-',DvHospitalizado)) = ?
+`;
+    db.query(query, [rut], (error, hospitalizados) => {
+      if (error) {
+        res.status(500).json({ error: 'Error al cargar los hospitalizados' });
+      } else {
+        res.status(200).json(hospitalizados);
+      }
+    });
+  }
+
 };
 
 function getRedirectPath(idTipoFuncionario) {
   switch (idTipoFuncionario) {
-      case 1:
-          return "/Nutricionista";
-      case 2:
-          return "/NutricionistaJefe";
-      case 3:
-          return "/Tecnico";
-      case 4:
-          return "/Clinico";
-      case 5:
-          return "/Recursos";
-      case 6:
-          return "/Recaudacion";
-      default:
-          return "/";
+    case 1:
+      return "/Nutricionista";
+    case 2:
+      return "/NutricionistaJefe";
+    case 3:
+      return "/Tecnico";
+    case 4:
+      return "/Clinico";
+    case 5:
+      return "/Recursos";
+    case 6:
+      return "/Recaudacion";
+    default:
+      return "/";
   }
 }
 
