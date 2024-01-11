@@ -20,6 +20,7 @@
     <title>Hospital San Jose Melipilla</title>
 
     <!--Scripts-->
+    <script defer src="/resources/js/alerta.js"></script>
     <script defer src="/resources/js/FuncionarioApis.js"></script>
     <script defer src="/resources/js/listarfuncionario.js"></script>
     <script defer src="/resources/js/navbar.js"></script>
@@ -37,16 +38,16 @@
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div class="nav_list">
-                <a href="/NutricionistaJefe/funcionarios" class="nav_link active"> <i
+                <a href="<%= TipoFuncionario %>/funcionarios" class="nav_link active"> <i
                         class='bx bx-grid-alt nav_icon'></i>
                     <span class="nav_name">Mantenedor de Funcionario</span></a>
-                <a href="/NutricionistaJefe" class="nav_link"> <i class='bx bx-user nav_icon'></i>
+                <a href="<%= TipoFuncionario %>" class="nav_link"> <i class='bx bx-user nav_icon'></i>
                     <span class="nav_name">Alimentacion Hospitalizado</span> </a>
-                <a href="/NutricionistaJefe/reportes" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
+                <a href="<%= TipoFuncionario %>/reportes" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
                     <span class="nav_name">Reporteria</span></a>
-                <a href="/NutricionistaJefe/mantenedores" class="nav_link"> <i class='bx bx-check-square nav_icon'></i>
+                <a href="<%= TipoFuncionario %>/mantenedores" class="nav_link"> <i class='bx bx-check-square nav_icon'></i>
                     <span class="nav_name">Mantenedores</span> </a>
-                <a href="/NutricionistaJefe/dashboard" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
+                <a href="<%= TipoFuncionario %>/dashboard" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
                     <span class="nav_name">Dashboard</span> </a>
             </div>
         </nav>
@@ -67,7 +68,7 @@
                     </div>
                     <div class="modal-body">
                         <!-- Aquí coloca tu formulario -->
-                        <form action="/NutricionistaJefe/agregar-funcionario" method="post">
+                        <form action="<%= TipoFuncionario %>/agregar-funcionario" method="post">
                             <label for="RutFuncionario">Rut Funcionario:</label>
                             <div><input placeholder="11111111" type="number" id="RutFuncionario" name="RutSinDv"
                                     required><input placeholder="k" type="number" id="DvFuncionario"
@@ -167,8 +168,11 @@
             </div>
         </div>
 
+
+        
         <script>
-            
+
+
             var modalId = document.getElementById('editarFuncionario');
 
             modalId.addEventListener('show.bs.modal', function (event) {
@@ -221,6 +225,7 @@
                     }
                 }
             });
+
         </script>
 
 

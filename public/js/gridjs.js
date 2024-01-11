@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 <button><a class="editarServicio" data-toggle="modal" data-target="#modalEditarServicioHospitalizado" data-rut="${row.cells[1].data}">Cambiar Servicio</a></button>
                 <button><a class="editarAlta" data-toggle="modal" data-target="#modalEditarAltaHospitalizado" data-rut="${row.cells[1].data}">Dar Alta</a></button>
-                <button><a class="verLogs" data-toggle="modal" data-target="#" data-rut="${row.cells[1].data}">Logs</a></button>`)
+                <button><a class="verLogs" data-toggle="modal" data-target="#miModal" data-rut="${row.cells[1].data}">Logs</a></button>`)
             },
             "Ayuno"
         ],
@@ -107,5 +107,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Recarga la tabla
         grid.forceRender();
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    $('#miModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var rut = button.data('rut'); // Extraer el valor de data-rut del botón
+
+        // Realizar la llamada a la API al abrir el modal
+        fetch(`http://localhost:3000/NutricionistaJefe/listar-antecedentes?rut=${rut}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Actualizar el contenido del modal con los datos obtenidos
+                var modal = $(this);
+                modal.find('#rutEnModal').text('Rut: ' + rut);
+
+                // Crear una tabla para mostrar los resultados
+                var tabla = '<table class="table"><thead><tr><th>Código Cama</th><th>Rut</th><th>Nombre Hospitalizado</th><th>Fecha Ingreso</th><th>Observaciones Nutricionista</th><th>Fecha Alta</th><th>Tipo Regimen</th><th>Tipo Servicio</th></tr></thead><tbody>';
+
+                // Agregar filas a la tabla con los resultados de la consulta
+                data.forEach(row => {
+                    tabla += `<tr><td>${row.CodigoCama}</td><td>${row.Rut}</td><td>${row.NombreHospitalizado}</td><td>${row.FechaIngreso}</td><td>${row.ObservacionesNutricionista}</td><td>${row.FechaAlta}</td><td>${row.TipoRegimen}</td><td>${row.TipoServicio}</td></tr>`;
+                });
+
+                tabla += '</tbody></table>';
+
+                // Agregar la tabla al contenido del modal
+                modal.find('#datosAntecedentes').html(tabla);
+            })
+            .catch(error => {
+                console.error('Error al obtener datos de la API:', error);
+            });
     });
 });

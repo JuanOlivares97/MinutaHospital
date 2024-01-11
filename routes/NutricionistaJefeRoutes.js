@@ -12,7 +12,7 @@ Route.get('/funcionarios', FuncionarioController.mostrarPaginaFuncionarios);
 // API Para listar Registros
 Route.get('/listar-hospitalizado', HospitalizadoController.listarHospitalizados);
 Route.get('/listar-funcionario', FuncionarioController.listarFuncionarios);
-
+Route.get('/listar-antecedentes', HospitalizadoController.listarhistorial)
 // Ruta para procesar el formulario de agregar un hospitalizado
 Route.post('/agregar-hospitalizado', HospitalizadoController.agregarHospitalizado);
 Route.post('/agregar-funcionario', FuncionarioController.agregarFuncionarios);
@@ -21,7 +21,7 @@ Route.post('/agregar-funcionario', FuncionarioController.agregarFuncionarios);
 Route.post('/editar-servicio-hospitalizado', HospitalizadoController.actualizarServicioHospitalizado);
 Route.post('/editar-alta-hospitalizado', HospitalizadoController.actualizarAltaHospitalizado);
 Route.post('/editar-funcionario', FuncionarioController.actualizarFuncionarios)
-
+Route.post('/deshabilitar-funcionario', FuncionarioController.deshabilitarFuncionarios)
 
 
 Route.get('/mantenedores', mantenedorController.mostrarVistaMantenedores)

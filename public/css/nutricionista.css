@@ -98,6 +98,11 @@ nav img {
   z-index: var(--z-fixed)
 }
 
+#miModal .modal-dialog {
+  max-width: 80%; /* Puedes ajustar el porcentaje según tus necesidades */
+  margin: 1.75rem auto; /* Ajusta el margen superior e inferior según sea necesario */
+}
+
 .nav {
   height: 100%;
   display: flex;

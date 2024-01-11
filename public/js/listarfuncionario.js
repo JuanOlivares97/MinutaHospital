@@ -28,10 +28,14 @@ const grid = new gridjs.Grid({
                     data-bs-toggle="modal"
                     data-bs-target="#editarFuncionario"
                     ><i class='bx bx-edit'></i></button>
-
-                    <button  style="width:50%; margin:5px;"
-                    data-Rut="${row.cells[0].data}"
-                    ><i class='bx bx-trash'></i></button>
+        
+                    <form action="/NutricionistaJefe/deshabilitar-funcionario" method="post">
+            <input type="hidden" name="Rut" value="${row.cells[0].data}">
+            <button style="width:50%; margin:5px;">
+                <i class='bx bx-trash'></i>
+            </button>
+        </form>
+        
                   `)
         }
     ],
@@ -47,12 +51,12 @@ const grid = new gridjs.Grid({
             'border-bottom': '3px solid #ccc',
             'text-align': 'center',
             'padding': '2px',
-          },
-          td: {
+        },
+        td: {
             'text-align': 'center',
             'align-items': 'center',
             'padding': 0,
-          }
+        }
     },
     search: true,
     language: {
@@ -93,3 +97,4 @@ const grid = new gridjs.Grid({
         },
     },
 }).render(listaFuncionarios);
+
