@@ -23,8 +23,9 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
                 data-tabla="${api}"
                 data-columna1="${columna1}"
                 data-columna2="${columna2}">
-                Editar
+                <i class='bx bx-edit'></i>
                 </button>
+
                 `)
             }
         ],

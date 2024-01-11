@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
         style: {
             table: {
                 "font-size": "15x",
-            }, 
+            },
             th: {
                 'background-color': '#EEA561',
                 color: '#000',
@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 'align-items': 'center',
                 'padding': '3px',
             }
-
         },
         search: true,
         language: {
