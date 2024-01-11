@@ -3,13 +3,13 @@ const db = require("../../database/database.js");
 const path = require('path');
 const nombreCarpeta = path.basename(__dirname);
 
-
 const HospitalizadoController = {
   mostrarPaginaHospitalizados: (req, res) => {
     if (req.session && req.session.user) {
       // Accede a los datos almacenados en la sesión
       const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
-  
+      const redirectPath = getRedirectPath(IdTipoFuncionario);
+
       const sql = `
         SELECT COUNT(*) AS Hospitalizados
         FROM Hospitalizado
@@ -22,7 +22,7 @@ const HospitalizadoController = {
         } else {
           res.render(`${nombreCarpeta}/hospitalizadoview`, {
             username: username,
-            IdTipoFuncionario: IdTipoFuncionario,
+            TipoFuncionario: redirectPath,
             NombreCompleto: NombreCompleto,
             conteoHospitalizado: result[0].Hospitalizados // Accede al resultado correctamente
           });
@@ -164,5 +164,24 @@ actualizarAltaHospitalizado: async (req, res) => {
   });
 },
 };
+
+function getRedirectPath(idTipoFuncionario) {
+  switch (idTipoFuncionario) {
+      case 1:
+          return "/Nutricionista";
+      case 2:
+          return "/NutricionistaJefe";
+      case 3:
+          return "/Tecnico";
+      case 4:
+          return "/Clinico";
+      case 5:
+          return "/Recursos";
+      case 6:
+          return "/Recaudacion";
+      default:
+          return "/";
+  }
+}
 
 module.exports = HospitalizadoController;

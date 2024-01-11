@@ -8,9 +8,11 @@ const mantenedorController = {
             // Accede a los datos almacenados en la sesión
             const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
 
+            const TipoFuncionario = getRedirectPath(IdTipoFuncionario)
+
             res.render(`${nombreCarpeta}/mantenedorView`, {
                 username: username,
-                IdTipoFuncionario: IdTipoFuncionario,
+                TipoFuncionario: TipoFuncionario,
                 NombreCompleto: NombreCompleto,
             });
         } else {
@@ -25,7 +27,7 @@ const mantenedorController = {
 
         db.query(getMaxIdQuery, (error, results, fields) => {
             if (error) {
-                return res.status(500).json({ error: error });
+                return res.render('errorView',{ mensaje: error });
             }
 
             // Obtener el nuevo idtiporegimen sumando 1 al máximo actual
@@ -35,7 +37,7 @@ const mantenedorController = {
 
             db.query(query, [newIdTipoVia, TipoVia], (error, results, fields) => {
                 if (error) {
-                    return res.status(500).json({ error: error });
+                    return res.render('errorView',{ mensaje: error });
                 }
 
                 return res.redirect(`/${nombreCarpeta}/mantenedores`);
@@ -48,7 +50,7 @@ const mantenedorController = {
 
         db.query(query, [TipoContrato], (error, results, fields) => {
             if (error) {
-                return res.status(500).json({ error: error });
+                return res.render('errorView',{ mensaje: error });
             }
 
             return res.redirect(`${nombreCarpeta}/mantenedores`);
@@ -60,7 +62,7 @@ const mantenedorController = {
 
         db.query(query, [DescTipoEstamento], (error, results, fields) => {
             if (error) {
-                return res.status(500).json({ error: error });
+                return res.render('errorView',{ mensaje: error });
             }
 
             return res.redirect(`${nombreCarpeta}/mantenedores`);
@@ -74,7 +76,7 @@ const mantenedorController = {
 
         db.query(getMaxIdQuery, (error, results, fields) => {
             if (error) {
-                return res.status(500).json({ error: error });
+                return res.render('errorView',{ mensaje: error });
             }
 
             // Obtener el nuevo idtiporegimen sumando 1 al máximo actual
@@ -89,7 +91,7 @@ const mantenedorController = {
                 [newIdTipoRegimen, DescTipoRegimen],
                 (error, results, fields) => {
                     if (error) {
-                        return res.status(500).json({ error: error });
+                        return res.render('errorView',{ mensaje: error });
                     }
 
                     return res.redirect(`${nombreCarpeta}/mantenedores`);
@@ -104,7 +106,7 @@ const mantenedorController = {
 
         db.query(getMaxIdQuery, (error, results, fields) => {
             if (error) {
-                return res.status(500).json({ error: error });
+                return res.render('errorView',{ mensaje: error });
             }
 
             const newIdTipoServicio = results[0].maxId + 1;
@@ -113,7 +115,7 @@ const mantenedorController = {
 
             db.query(query, [newIdTipoServicio, DescTipoServicio], (error, results, fields) => {
                 if (error) {
-                    return res.status(500).json({ error: error });
+                    return res.render('errorView',{ mensaje: error });
                 }
 
                 return res.redirect(`${nombreCarpeta}/mantenedores`);
@@ -127,7 +129,7 @@ const mantenedorController = {
 
         db.query(getMaxIdQuery, (error, results, fields) => {
             if (error) {
-                return res.status(500).json({ error: error });
+                return res.render('errorView',{ mensaje: error });
             }
 
             const newIdTipoUnidad = results[0].maxId + 1;
@@ -135,7 +137,7 @@ const mantenedorController = {
 
             db.query(query, [newIdTipoUnidad, DescTipoUnidad], (error, results, fields) => {
                 if (error) {
-                    return res.status(500).json({ error: error });
+                    return res.render('errorView',{ mensaje: error });
                 }
 
                 return res.redirect(`${nombreCarpeta}/mantenedores`);
@@ -148,96 +150,59 @@ const mantenedorController = {
 
         db.query(query, [TipoPerfil], (error, results, fields) => {
             if (error) {
-                return res.status(500).json({ error: error });
+                return res.render('errorView',{ mensaje: error });
             }
 
             return res.redirect(`${nombreCarpeta}/mantenedores`);
         });
     },
-    editarTipoVia: (req, res) => {
-        const { IdTipoVia, NuevoDescTipoVia } = req.body;
-        const query = "UPDATE `TipoVia` SET DescTipoVia = UPPER(?) WHERE IdTipoVia = ?";
-
-        db.query(query, [NuevoDescTipoVia, IdTipoVia], (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({ error: error });
+    editarMantenedores: (req, res) => {
+        const { tabla, columna, nuevoDato, nombreIdentificador, Identificador } = req.body;
+    
+        // Verifica que los valores necesarios estén presentes
+        if (!tabla || !columna || !nuevoDato || !nombreIdentificador || !Identificador) {
+            return res.render('errorView', { mensaje: 'Faltan parámetros obligatorios.' });
+        }
+    
+        // Evita la interpolación directa de los valores en la consulta SQL para prevenir SQL injection
+        const query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+        const values = [tabla, columna, nuevoDato, nombreIdentificador, Identificador];
+    
+        db.query(query, values, (err, result) => {
+            if (err) {
+                console.error("Error al ejecutar la consulta SQL:", err);
+                return res.render('errorView', { mensaje: 'Error interno del servidor.' });
             }
-
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
+    
+            // Verifica si se actualizó correctamente
+            if (result.affectedRows === 1) {
+                // Puedes agregar un mensaje de éxito y redirigir
+                return res.redirect(`/${nombreCarpeta}/mantenedores`);
+            } else {
+                return res.render('errorView', { mensaje: 'Registro no encontrado.' });
+            }
         });
     },
-    editarTipoContrato: (req, res) => {
-        const { IdTipoContrato, NuevoTipoContrato } = req.body;
-        const query = "UPDATE `TipoContrato` SET TipoContrato = ? WHERE IdTipoContrato = ?";
-
-        db.query(query, [NuevoTipoContrato, IdTipoContrato], (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({ error: error });
-            }
-
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
-        });
-    },
-    editarTipoEstamento: (req, res) => {
-        const { IdTipoEstamento, NuevoDescTipoEstamento } = req.body;
-        const query = "UPDATE `TipoEstamento` SET DescTipoEstamento = ? WHERE IdTipoEstamento = ?";
-
-        db.query(query, [NuevoDescTipoEstamento, IdTipoEstamento], (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({ error: error });
-            }
-
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
-        });
-    },
-    editarTipoRegimen: (req, res) => {
-        const { IdTipoRegimen, NuevoDescTipoRegimen } = req.body;
-        const query = "UPDATE `TipoRegimen` SET DescTipoRegimen = ? WHERE IdTipoRegimen = ?";
-
-        db.query(query, [NuevoDescTipoRegimen, IdTipoRegimen], (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({ error: error });
-            }
-
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
-        });
-    },
-    editarTipoServicio: (req, res) => {
-        const { IdTipoServicio, NuevoDescTipoServicio } = req.body;
-        const query = "UPDATE `TipoServicio` SET DescTipoServicio = ? WHERE IdTipoServicio = ?";
-
-        db.query(query, [NuevoDescTipoServicio, IdTipoServicio], (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({ error: error });
-            }
-
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
-        });
-    },
-    editarTipoUnidad: (req, res) => {
-        const { IdTipoUnidad, NuevoDescTipoUnidad } = req.body;
-        const query = "UPDATE `TipoUnidad` SET DescTipoUnidad = ? WHERE IdTipoUnidad = ?";
-
-        db.query(query, [NuevoDescTipoUnidad, IdTipoUnidad], (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({ error: error });
-            }
-
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
-        });
-    },
-    editarTipoFuncionario: (req, res) => {
-        const { IdTipoPerfil, NuevoTipoPerfil } = req.body;
-        const query = "UPDATE `TipoFuncionario` SET TipoPerfil = ? WHERE IdTipoPerfil = ?";
-
-        db.query(query, [NuevoTipoPerfil, IdTipoPerfil], (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({ error: error });
-            }
-
-            return res.redirect(`${nombreCarpeta}/mantenedores`);
-        });
-    },
+    
 };
+
+function getRedirectPath(idTipoFuncionario) {
+    switch (idTipoFuncionario) {
+        case 1:
+            return "/Nutricionista";
+        case 2:
+            return "/NutricionistaJefe";
+        case 3:
+            return "/Tecnico";
+        case 4:
+            return "/Clinico";
+        case 5:
+            return "/Recursos";
+        case 6:
+            return "/Recaudacion";
+        default:
+            return "/";
+    }
+}
 
 module.exports = mantenedorController;

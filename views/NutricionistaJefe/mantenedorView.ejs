@@ -59,16 +59,16 @@
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div class="nav_list">
-                <a href="/NutricionistaJefe/funcionarios" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i>
+                <a href="<%= TipoFuncionario %>/funcionarios" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i>
                     <span class="nav_name">Mantenedor de Funcionario</span></a>
-                <a href="/NutricionistaJefe" class="nav_link"> <i class='bx bx-user nav_icon'></i>
+                <a href="<%= TipoFuncionario %>" class="nav_link"> <i class='bx bx-user nav_icon'></i>
                     <span class="nav_name">Alimentacion Hospitalizado</span> </a>
-                <a href="/NutricionistaJefe/reportes" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
+                <a href="<%= TipoFuncionario %>/reportes" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
                     <span class="nav_name">Reporteria</span></a>
-                <a href="/NutricionistaJefe/mantenedores" class="nav_link active"> <i
+                <a href="<%= TipoFuncionario %>/mantenedores" class="nav_link active"> <i
                         class='bx bx-check-square nav_icon'></i>
                     <span class="nav_name">Mantenedores</span> </a>
-                <a href="/NutricionistaJefe/dashboard" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
+                <a href="<%= TipoFuncionario %>/dashboard" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
                     <span class="nav_name">Dashboard</span> </a>
             </div>
         </nav>
@@ -101,7 +101,7 @@
                         </div>
                         <div class="modal-body">
                             <!-- Aquí coloca tu formulario -->
-                            <form action="/NutricionistaJefe/agregar-via" method="post">
+                            <form action="<%= TipoFuncionario %>/agregar-via" method="post">
 
                                 <input type="text" name="TipoVia" placeholder="Nombre del tipo via">
 
@@ -134,7 +134,7 @@
                         </div>
                         <div class="modal-body">
                             <!-- Aquí coloca tu formulario -->
-                            <form action="/NutricionistaJefe/agregar-contrato" method="post">
+                            <form action="<%= TipoFuncionario %>/agregar-contrato" method="post">
 
                                 <input type="text" name="TipoContrato" placeholder="Nombre del tipo contrato">
 
@@ -168,7 +168,7 @@
                         </div>
                         <div class="modal-body">
                             <!-- Aquí coloca tu formulario -->
-                            <form action="/NutricionistaJefe/agregar-estamento" method="post">
+                            <form action="<%= TipoFuncionario %>/agregar-estamento" method="post">
 
                                 <input type="text" name="TipoContrato" placeholder="Nombre del tipo contrato">
 
@@ -202,7 +202,7 @@
                         </div>
                         <div class="modal-body">
                             <!-- Aquí coloca tu formulario -->
-                            <form action="/NutricionistaJefe/agregar-regimen" method="post">
+                            <form action="<%= TipoFuncionario %>/agregar-regimen" method="post">
 
                                 <input type="text" name="DescTipoRegimen" placeholder="Nombre del tipo de Regimen">
 
@@ -236,7 +236,7 @@
                         </div>
                         <div class="modal-body">
                             <!-- Aquí coloca tu formulario -->
-                            <form action="/NutricionistaJefe/agregar-servicio" method="post">
+                            <form action="<%= TipoFuncionario %>/agregar-servicio" method="post">
 
                                 <input type="text" name="DescTipoServicio" placeholder="Nombre del tipo de servicio">
 
@@ -270,7 +270,7 @@
                         </div>
                         <div class="modal-body">
                             <!-- Aquí coloca tu formulario -->
-                            <form action="/NutricionistaJefe/agregar-unidad" method="post">
+                            <form action="<%= TipoFuncionario %>/agregar-unidad" method="post">
 
                                 <input type="text" name="DescTipoUnidad" placeholder="Nombre del tipo de Unidad">
 
@@ -304,7 +304,7 @@
                         </div>
                         <div class="modal-body">
                             <!-- Aquí coloca tu formulario -->
-                            <form action="/NutricionistaJefe/agregar-funcionario" method="post">
+                            <form action="<%= TipoFuncionario %>/agregar-funcionario" method="post">
 
                                 <input type="text" name="TipoContrato" placeholder="Nombre del tipo de Funcionario">
 
@@ -319,9 +319,70 @@
             </div>
 
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modaleditarmantenedor" tabindex="-1" role="dialog"
+            aria-labelledby="EditarMantenedor" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="EditarMantenedor">Editar Mantenedor</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editarForm" action="<%= TipoFuncionario %>/editar-mantenedor" method="post">
+                            <input type="hidden" name="tabla">
+                            <input type="hidden" name="columna">
+                            <input type="hidden" name="Identificador">
+                            <input type="hidden" name="nombreIdentificador">
+                            <input type="text" name="nuevoDato" placeholder="Ingrese la nueva descripción">
+                            <button type="submit">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
     <script>
+
+        document.addEventListener("click", function (event) {
+            const editarmantenedor = "editarServicio";
+
+            // Verificar si el clic ocurrió en un elemento con la clase "editarServicio"
+            if (event.target.classList.contains(editarmantenedor)) {
+                // Verificar si el elemento tiene el atributo data-identificador antes de acceder a él
+                const identificador = event.target.getAttribute("data-identificador");
+                const tabla = event.target.getAttribute("data-tabla");
+                const columna1 = event.target.getAttribute("data-columna1");
+                const columna2 = event.target.getAttribute("data-columna2");
+                const valoractual = event.target.getAttribute("data-valoractual");
+                if (identificador && tabla && columna1 && columna2) {
+                    // Asignar los valores a los campos de entrada en el modal
+                    const modal = document.getElementById("modaleditarmantenedor");
+                    const inputTabla = modal.querySelector('input[name="tabla"]');
+                    const inputColumna = modal.querySelector('input[name="columna"]');
+                    const inputIdentificador = modal.querySelector('input[name="Identificador"]');
+                    const inputNombreIdentificador = modal.querySelector('input[name="nombreIdentificador"]');
+                    const inputValorActual = modal.querySelector('input[name="nuevoDato"]')
+                    // Asegúrate de que los elementos existan antes de asignarles valores
+                    if (inputTabla && inputColumna && inputIdentificador && inputNombreIdentificador) {
+                        inputTabla.value = tabla;
+                        inputColumna.value = columna2; // Puedes elegir columna1 o columna2 según tus necesidades
+                        inputIdentificador.value = identificador;
+                        inputNombreIdentificador.value = columna1;
+                        inputValorActual.value = valoractual; // Puedes elegir columna1 o columna2 según tus necesidades
+                    }
+
+                    // Mostrar el modal
+                    const bsModal = new bootstrap.Modal(modal);
+                    bsModal.show();
+                }
+            }
+        });
+
+
+
         let currentDiv = null;
 
         function toggleDiv(divId) {

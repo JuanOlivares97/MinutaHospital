@@ -14,7 +14,17 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
             {
                 name: "Opciones",
                 formatter: (cell, row) => gridjs.html(`
-                <button class="btn btn-secondary btn-lg"  data-toggle="modal" data-target="#modalEditar" data-rut="${row.cells[1].data}">Editar</button>
+                <button
+                class="btn btn-secondary btn-lg editarServicio"
+                data-bs-toggle="modal"
+                data-bs-target="#modaleditarmantenedor"
+                data-identificador="${row.cells[0].data}"
+                data-valoractual="${row.cells[1].data}"
+                data-tabla="${api}"
+                data-columna1="${columna1}"
+                data-columna2="${columna2}">
+                Editar
+                </button>
                 `)
             }
         ],
@@ -59,13 +69,13 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    generarGrafico(tipovia, '#', "Tipo Via", "tipovia", 'IdTipoVia', 'DescTipoVia')
-    generarGrafico(tipocontrato, '#', "Contrato", "tipocontrato", 'IdTipoContrato', 'TipoContrato')
-    generarGrafico(tipoestamento, '#', "Estamento", "tipoestamento", 'IdTipoEstamento', 'DescTipoEstamento')
-    generarGrafico(tiporegimen, '#', "Regimen", "tiporegimen", 'IdTipoRegimen', 'DescTipoRegimen')
-    generarGrafico(tiposervicio, '#', "Servicio", "tiposervicio", 'IdTipoServicio', 'DescTipoServicio')
-    generarGrafico(tipounidad, '#', "Unidad", "tipounidad", 'IdTipoUnidad', 'DescTipoUnidad')
-    generarGrafico(tipofuncionario, '#', "Tipo Funcionario", "tipofuncionario", 'IdTipoFuncionario', 'TipoPerfil')
+    generarGrafico(tipovia, '#', "Tipo Via", "TipoVia", 'IdTipoVia', 'DescTipoVia')
+    generarGrafico(tipocontrato, '#', "Contrato", "TipoContrato", 'IdTipoContrato', 'TipoContrato')
+    generarGrafico(tipoestamento, '#', "Estamento", "TipoEstamento", 'IdTipoEstamento', 'DescTipoEstamento')
+    generarGrafico(tiporegimen, '#', "Regimen", "TipoRegimen", 'IdTipoRegimen', 'DescTipoRegimen')
+    generarGrafico(tiposervicio, '#', "Servicio", "TipoServicio", 'IdTipoServicio', 'DescTipoServicio')
+    generarGrafico(tipounidad, '#', "Unidad", "TipoUnidad", 'IdTipoUnidad', 'DescTipoUnidad')
+    generarGrafico(tipofuncionario, '#', "Tipo Funcionario", "TipoFuncionario", 'IdTipoFuncionario', 'TipoPerfil')
 });
 
 
