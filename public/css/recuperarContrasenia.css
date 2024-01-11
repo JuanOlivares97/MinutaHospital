@@ -82,7 +82,7 @@ a {
 #img {
     width: 40%;
     height: 80%;
-    float: left;
+    float: right;
 }
 
 #form {
@@ -168,10 +168,10 @@ label {
 }
 
 /*REPONSIVO*/
-@media(max-width: 2500px) {
+@media(min-width: 2500px) {
     #formulario {
-        width: 600px;
-        height: 780PX;
+        width: 200px;
+        height: 600PX;
     }
 
     #form {
@@ -235,25 +235,17 @@ label {
         height: 580px;
     }
 
-    #svg-background2 {
-        height: 780px;
-    }
 }
-
-@media (max-width: 1196px) {
+@media (max-width: 1536px) {
     #formulario {
-        width: 350px;
-        height: 500PX;
+        width: 470px;
+        height: 550PX;
     }
 
     #form {
-        padding-left: 0px;
+        padding-left: 100px;
         display: flex;
-        padding-right: 150px;
-    }
-
-    #svg-background2 {
-        display: none;
+        padding-right: 0;
     }
 
     #user,
@@ -266,6 +258,80 @@ label {
     }
 
     #button {
+        width: 235px;
+        height: 50px;
+    }
+
+    #img-background {
+        height: 400px;
+    }
+
+}
+
+@media (max-width: 1360px) {
+    #inicio{
+        width: 65%;
+    }
+
+    #formulario {
+        width: 420px;
+        height: 550PX;
+    }
+
+    #form {
+        padding-left: 0;
+        display: flex;
+        padding-left: 100px;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion,
+    #recuperarpass {
+        font-size: 20px;
+    }
+
+    #button {
+        width: 235px;
+        height: 50px;
+    }
+
+    #img-background {
+        height: 380px;
+    }
+    #svg-background2 {
+        height: 503px;
+    }
+}
+
+@media (max-width: 1196px) {
+    #formulario {
+        width: 350px;
+        height: 450PX;
+    }
+
+    #form {
+        padding-right: 0px;
+        display: flex;
+        padding-left: 90px;
+    }
+
+    #svg-background2 {
+        height: 500px;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion,
+    #recuperarpass {
+        font-size: 22px;
+    }
+
+    #button, #buttonC {
         width: 200px;
         height: 47px;
     }
@@ -276,20 +342,15 @@ label {
     }
 }
 
-@media (max-width: 1049px) {
+@media (min-width: 1049px) {
     #formulario {
-        width: 350px;
-        height: 530PX;
+        width: 450px;
+        height: 480PX;
     }
 
     #form {
-        padding-left: 0px;
         display: flex;
         padding-right: 150px;
-    }
-
-    #svg-background2 {
-        display: none;
     }
 
     #user,
@@ -297,21 +358,20 @@ label {
     label,
     #button,
     .decoracion {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     #recuperarpass {
         font-size: 20px;
     }
 
-    #button {
-        width: 230px;
-        height: 47px;
+    #button, #buttonC{
+        width: 200px;
+        height: 45px;
     }
 
     #img-background {
-        z-index: -0.5;
-        height: 290px;
+        height: 380px;
         opacity: 0.95;
     }
 }
@@ -319,11 +379,11 @@ label {
 @media (max-width: 1109px) {
     #formulario {
         width: 300px;
-        height: 450PX;
+        height: 420PX;
     }
 
     #form {
-        padding-left: 400px;
+        padding-left: 100px;
         display: flex;
     }
 
