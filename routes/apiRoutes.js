@@ -3,12 +3,12 @@ const apiController = require("../controllers/apiController.js");
 
 const router = express.Router()
 
-router.get('/listar-tipovia', apiController.listarTipoVia)
-router.get('/listar-tipocontrato', apiController.listarTipoContrato)
-router.get('/listar-tipoestamento', apiController.listarTipoEstamento)
-router.get('/listar-tiporegimen', apiController.listarTipoRegimen)
-router.get('/listar-tiposervicio', apiController.listarTipoServicio)
-router.get('/listar-tipounidad', apiController.listarTipoUnidad)
-router.get('/listar-tipofuncionario', apiController.listarTipoFuncionario)
+router.get('/listar-TipoVia', apiController.listarTipoVia)
+router.get('/listar-TipoContrato', apiController.listarTipoContrato)
+router.get('/listar-TipoEstamento', apiController.listarTipoEstamento)
+router.get('/listar-TipoRegimen', apiController.listarTipoRegimen)
+router.get('/listar-TipoServicio', apiController.listarTipoServicio)
+router.get('/listar-TipoUnidad', apiController.listarTipoUnidad)
+router.get('/listar-TipoFuncionario', apiController.listarTipoFuncionario)
 
 module.exports = router;

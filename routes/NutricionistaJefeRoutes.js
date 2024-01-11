@@ -20,8 +20,9 @@ Route.post('/agregar-funcionario', FuncionarioController.agregarFuncionarios);
 // Ruta para procesar el formulario de editar un hospitalizado
 Route.post('/editar-servicio-hospitalizado', HospitalizadoController.actualizarServicioHospitalizado);
 Route.post('/editar-alta-hospitalizado', HospitalizadoController.actualizarAltaHospitalizado);
+Route.post('/editar-funcionario', FuncionarioController.actualizarFuncionarios)
 
-//Route.post('/eliminar-hospitalizado/:rut', HospitalizadoController.eliminarHospitalizado);
+
 
 Route.get('/mantenedores', mantenedorController.mostrarVistaMantenedores)
 Route.post('/agregar-via',mantenedorController.agregarTipoVia)
@@ -31,15 +32,14 @@ Route.post('/agregar-funcionario',mantenedorController.agregarTipoFuncionario)
 Route.post('/agregar-regimen',mantenedorController.agregarTipoRegimen)
 Route.post('/agregar-servicio',mantenedorController.agregarTipoServicio)
 Route.post('/agregar-unidad',mantenedorController.agregarTipoUnidad)
-
-//Route.get('/editar-mantenedores', mantenedorController.mostrarVistaMantenedores)
+Route.post('/editar-mantenedor', mantenedorController.editarMantenedores)
 
 
 
 Route.get('/reportes',reportesController.mostrarViewReportes)
 
 
-Route.get('/dashboard', dashboardController.mostrarDashboard);
+Route.get('/dashboard', dashboardController.mostrarDashboard); //Listo
 Route.get('/colacion-funcionarios', dashboardController.colacionFuncionarios)
 Route.get('/colacion-hospitalizados', dashboardController.colacionHospitalizados)
 

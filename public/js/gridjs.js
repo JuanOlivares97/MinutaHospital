@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 name: "Opciones",
                 formatter: (cell, row) => gridjs.html(`
 
-                <button><a class="editarServicio" id="agregar" href="#" data-toggle="modal" data-target="#modalEditarServicioHospitalizado" data-rut="${row.cells[1].data}">Cambiar Servicio</a></button>
-                <button><a class="editarAlta" id="agregar" href="#" data-toggle="modal" data-target="#modalEditarAltaHospitalizado" data-rut="${row.cells[1].data}">Dar Alta</a></button>
-                <button><a class="" id="agregar" href="#" data-toggle="modal" data-target="#" data-rut="${row.cells[1].data}">Logs</a></button>`)
+                <button><a class="editarServicio" data-toggle="modal" data-target="#modalEditarServicioHospitalizado" data-rut="${row.cells[1].data}">Cambiar Servicio</a></button>
+                <button><a class="editarAlta" data-toggle="modal" data-target="#modalEditarAltaHospitalizado" data-rut="${row.cells[1].data}">Dar Alta</a></button>
+                <button><a class="verLogs" data-toggle="modal" data-target="#" data-rut="${row.cells[1].data}">Logs</a></button>`)
             },
             "Ayuno"
         ],
