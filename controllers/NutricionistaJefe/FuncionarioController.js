@@ -8,20 +8,22 @@ const FuncionariosController = {
     if (req.session && req.session.user) {
       // Accede a los datos almacenados en la sesión
       const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
-      res.render(`${nombreCarpeta}/funcionarioView`,{
+      const redirectPath = getRedirectPath(IdTipoFuncionario);
+
+      res.render(`${nombreCarpeta}/funcionarioView`, {
         username: username,
-        IdTipoFuncionario: IdTipoFuncionario,
+        TipoFuncionario: redirectPath,
         NombreCompleto: NombreCompleto,
       });
     } else {
       res.redirect("/");
     }
-    
+
   },
   listarFuncionarios: (req, res) => {
     const query = `
         SELECT 
-            CONCAT(RutFuncionario, "-", DvFuncionario) as Rut,
+            TRIM(CONCAT(RutFuncionario, "-", DvFuncionario)) as Rut,
             (NombreFuncionario) , 
             DATE_FORMAT(FechaInicioContrato, "%d-%m-%Y") as FechaContrato,
             COALESCE(DATE_FORMAT(FechaTerminoContrato, "%d-%m-%Y"), 'INDEFINIDO') as FechaTermino,
@@ -92,12 +94,84 @@ const FuncionariosController = {
         if (error) {
           return res.status(500).json({ error: error });
         }
-        return res.redirect(`/${nombreCarpeta}/funcionarios`);
+        return res.redirect(`/${nombreCarpeta}/funcionarios?mensaje=Operación realizada con éxito'`);
       }
     );
   },
-  actualizarFuncionarios: (req, res) => { },
-  eliminarFuncionarios: async (req, res) => { },
+  actualizarFuncionarios: (req, res) => {
+    const {
+      Rut,
+      NombreCompletoFuncionario,
+      CorreoElectronico,
+      TipoContrato,
+      TipoFuncionario,
+      TipoEstamento,
+      TipoServicio,
+      TipoUnidad,
+      TipoRegimen,
+    } = req.body;
+
+    const FechaTermino = req.body.FechaTermino || null;
+
+    const query =
+    `UPDATE Funcionario SET 
+    NombreFuncionario = ?,
+    FechaTerminoContrato = ?, 
+    correo = ?,
+    IdTipoContrato = ?,
+    IdTipoFuncionario = ?, 
+    IdTipoEstamento = ?, 
+    IdTipoServicio = ?, 
+    IdTipoUnidad = ?,
+    IdTipoRegimen = ? 
+    WHERE TRIM(CONCAT(RutFuncionario, "-", DvFuncionario)) = ?`;
+
+    db.query(
+      query,
+      [
+        NombreCompletoFuncionario,
+        FechaTermino,
+        CorreoElectronico,
+        TipoContrato,
+        TipoFuncionario,
+        TipoEstamento,
+        TipoServicio,
+        TipoUnidad,
+        TipoRegimen,
+        Rut
+      ],
+      (error, results, fields) => {
+        if (error) {
+          console.log(req.body)
+          return res.render('errorView', { mensaje: error });
+        }
+
+        return res.redirect(`/${nombreCarpeta}/funcionarios?mensaje=Operación realizada con éxito'`);
+      }
+    );
+  },
+  deshabilitarFuncionarios: async (req, res) => {
+
+  },
 };
+
+function getRedirectPath(idTipoFuncionario) {
+  switch (idTipoFuncionario) {
+      case 1:
+          return "/Nutricionista";
+      case 2:
+          return "/NutricionistaJefe";
+      case 3:
+          return "/Tecnico";
+      case 4:
+          return "/Clinico";
+      case 5:
+          return "/Recursos";
+      case 6:
+          return "/Recaudacion";
+      default:
+          return "/";
+  }
+}
 
 module.exports = FuncionariosController;
