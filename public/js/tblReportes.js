@@ -20,10 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 'placeholder': '🔍 11111111-1'
             },
             'pagination': {
-                'previous': '⬅️',
-                'next': '➡️',
-                'showing': ' Mostrando',
-                'results': () => 'Pacientes'
+                'previous': '←',
+                'next': "→",
+                "to": "a",
+                "of": "de",
+                'showing': 'Mostrando',
+                'results': () => 'Resultados'
             }
         },
         pagination: {
