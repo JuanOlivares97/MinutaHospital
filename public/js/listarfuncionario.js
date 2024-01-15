@@ -5,11 +5,11 @@ const grid = new gridjs.Grid({
             name: "Rut",
             width: "auto"
         },
-        { name: "Nombre" },
+        { name: "Nombre"},
         { name: "Fecha Contrato" },
         { name: "Fecha Termino" },
-        { name: "Correo" },
-        { name: "Servicio" },
+        { name: "Correo", width: "155px"  },
+        { name: "Servicio", width: "155px" },
         { name: "Unidad" },
         { name: "Regimen" },
         { name: "Contrato" },
@@ -50,7 +50,7 @@ const grid = new gridjs.Grid({
             color: '#000',
             'border-bottom': '3px solid #ccc',
             'text-align': 'center',
-            'padding': '2px',
+            'padding': '0px',
         },
         td: {
             'text-align': 'center',
@@ -63,10 +63,12 @@ const grid = new gridjs.Grid({
         search: {
             placeholder: "11111111-1 🔍",
         },
-        pagination: {
-            previous: "←",
-            next: "→",
-            showing: "Mostrando",
+        'pagination': {
+            'previous': '←',
+            'next': "→",
+            "to": "a",
+            "of": "de",
+            'showing': 'Mostrando',
             results: () => "Pacientes",
         },
     },
