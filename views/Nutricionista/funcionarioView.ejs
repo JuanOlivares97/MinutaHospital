@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/resources/img/logopequeno-hospital.png">
+    <link rel="stylesheet" href="/resources/css/nutricionista.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+    <script defer src="/resources/js/alerta.js"></script>
+    <title>Hospital San Jose Melipilla</title>
+
+    <!--Scripts-->
+    <script defer src="/resources/js/alerta.js"></script>
+    <script defer src="/resources/js/FuncionarioApis.js"></script>
+    <script defer src="/resources/js/listarfuncionario.js"></script>
+    <script defer src="/resources/js/navbar.js"></script>
+</head>
+
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        <h3>SISTEMA DE CONTROL DE ALIMENTACIÓN</h3>
+        <div class="log-out"><a href="/logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
+                    class="nav_name">
+                    <%= NombreCompleto %>
+                </span></a></div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div class="nav_list">
+
+                <a href="<%= TipoFuncionario %>/funcionarios" class="nav_link active"> <i
+                        class='bx bx-grid-alt nav_icon'></i>
+                    <span class="nav_name">Mantenedor de Funcionario</span></a>
+                <a href="<%= TipoFuncionario %>" class="nav_link"> <i class='bx bx-user nav_icon'></i>
+                    <span class="nav_name">Alimentacion Hospitalizado</span> </a>
+                <a href="<%= TipoFuncionario %>/reportes" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
+                    <span class="nav_name">Reporteria</span></a>
+                <a href="<%= TipoFuncionario %>/mantenedores" class="nav_link"> <i class='bx bx-check-square nav_icon'></i>
+                    <span class="nav_name">Mantenedores</span> </a>
+                <a href="<%= TipoFuncionario %>/dashboard" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
+                    <span class="nav_name">Dashboard</span> </a>
+            </div>
+        </nav>
+    </div>
+    <!--Navbar end-->
+    <div class="titulo">Mantenedor de Funcionario</div>
+    <!--Container Main start-->
+    <div id="container">
+        <a id="agregar" href="#" data-toggle="modal" data-target="#modalFuncionario">Agregar Funcionario<img
+                src="/img/agregar.png" alt=""></a>
+        <!-- Modal agregar Funcionario. -->
+        <div class="modal fade" id="modalFuncionario" tabindex="-1" role="dialog"
+            aria-labelledby="modalFuncionarioLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalFuncionarioLabel">Agregar hospitalizado</h5>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí coloca tu formulario -->
+                        <form action="<%= TipoFuncionario %>/agregar-funcionario" method="post">
+                            <label for="RutFuncionario">Rut Funcionario:</label>
+                            <div><input placeholder="11111111" type="number" id="RutFuncionario" name="RutSinDv"
+                                    required><input placeholder="k" type="number" id="DvFuncionario"
+                                    name="dvFuncionario" required></div>
+
+                            <label for="NombreFuncionario">Nombre Completo Funcionario:</label>
+                            <input type="text" id="NombreFuncionario" name="NombreCompletoFuncionario" required>
+
+                            <label for="FechaInicio">Fecha contratación:</label>
+                            <input type="date" id="FechaInicio" name="FechaInicioContrato" required>
+
+                            <label for="FechaTermino">Termino Contrato:</label>
+                            <input type="date" id="FechaTermino" name="FechaTermino">
+
+                            <label for="CorreoElectronico">Correo Electronico:</label>
+                            <input type="email" id="CorreoElectronico" name="CorreoElectronico" required>
+
+                            <label for="TipoContrato">Tipo de Contrato:</label>
+                            <select id="TipoContrato" name="TipoContrato"></select>
+
+                            <label for="TipoFuncionario">Tipo Funcionario:</label>
+                            <select id="TipoFuncionario" name="TipoFuncionario"></select>
+
+                            <label for="IdTipoEstamento">Estamento:</label>
+                            <select id="TipoEstamento" name="TipoEstamento"></select>
+
+                            <label for="TipoServicio">Servicio:</label>
+                            <select id="TipoServicio" name="TipoServicio"></select>
+
+                            <label for="TipoUnidad">Unidad:</label>
+                            <select id="TipoUnidad" name="TipoUnidad"></select>
+
+                            <label for="TipoRegimen">Regimen:</label>
+                            <select id="TipoRegimen" name="TipoRegimen"></select>
+
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tabla GridJs -->
+        <div id="listarfuncionarios"></div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="editarFuncionario" tabindex="-1" role="dialog"
+            aria-labelledby="editarFuncionarioLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editarFuncionarioLabel">
+                            Editar Funcionario
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="<%= TipoFuncionario %>/editar-funcionario" method="post">
+                            <label for="TipoContrato">Nombre Funcionario:</label>
+                            <input type="text" name="NombreCompletoFuncionario">
+
+                            <label for="TipoContrato">Fecha De Termino:</label>
+                            <input type="date" name="FechaTermino">
+
+                            <label for="TipoContrato">Correo Electronico:</label>
+                            <input type="text" name="CorreoElectronico">
+
+                            <label for="TipoContrato">Tipo de Contrato:</label>
+                            <select id="TipoContrato1" name="TipoContrato"></select>
+
+                            <label for="TipoFuncionario">Tipo Funcionario:</label>
+                            <select id="TipoFuncionario1" name="TipoFuncionario"></select>
+
+                            <label for="IdTipoEstamento">Estamento:</label>
+                            <select id="TipoEstamento1" name="TipoEstamento"></select>
+
+                            <label for="TipoServicio">Servicio:</label>
+                            <select id="TipoServicio1" name="TipoServicio"></select>
+
+                            <label for="TipoUnidad">Unidad:</label>
+                            <select id="TipoUnidad1" name="TipoUnidad"></select>
+
+                            <label for="TipoRegimen">Regimen:</label>
+                            <select id="TipoRegimen1" name="TipoRegimen"></select>
+
+                            <input type="hidden" name="Rut">
+
+                            <button type="submit">Guardar</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+        <script>
+
+
+            var modalId = document.getElementById('editarFuncionario');
+
+            modalId.addEventListener('show.bs.modal', function (event) {
+                // Button that triggered the modal
+                let button = event.relatedTarget;
+                // Extract info from data-bs-* attributes
+                let recipient = button.getAttribute('data-bs-whatever');
+
+                // Use above variables to manipulate the DOM
+            });
+
+            document.addEventListener("click", function (event) {
+                const editarmantenedor = "editarFuncionacio";
+
+                // Verificar si el clic ocurrió en un elemento con la clase "editarFuncionacio"
+                if (event.target.classList.contains(editarmantenedor)) {
+                    // Verificar si el elemento tiene el atributo data-identificador antes de acceder a él
+                    const NombreCompletoFuncionario = event.target.getAttribute("data-NombreCompletoFuncionario");
+                    const FechaTermino = event.target.getAttribute("data-FechaTermino");
+
+                    // Dividir la fecha en día, mes y año
+                    const [dia, mes, anio] = FechaTermino.split("-");
+
+                    // Crear un objeto de fecha en formato "YYYY-MM-DD"
+                    const fechaFormateada = `${anio}-${mes}-${dia}`;
+
+                    // Obtener el elemento input
+                    const inputFechaTermino = document.getElementById("tuInputFechaTermino");
+                    const CorreoElectronico = event.target.getAttribute("data-CorreoElectronico");
+                    const Rut = event.target.getAttribute("data-Rut");
+
+                    if (NombreCompletoFuncionario && FechaTermino && CorreoElectronico && Rut) {
+                        // Asignar los valores a los campos de entrada en el modal
+                        const modal = document.getElementById("editarFuncionario");
+                        const inputNombre = modal.querySelector('input[name="NombreCompletoFuncionario"]');
+                        const inputFechaTermino = modal.querySelector('input[name="FechaTermino"]');
+                        const inputCorreo = modal.querySelector('input[name="CorreoElectronico"]');
+                        const inputRut = modal.querySelector('input[name="Rut"]');
+                        // Asegúrate de que los elementos existan antes de asignarles valores
+                        if (inputNombre && inputFechaTermino && inputCorreo && inputRut) {
+                            inputNombre.value = NombreCompletoFuncionario;
+                            inputFechaTermino.value = fechaFormateada; // Puedes elegir columna1 o columna2 según tus necesidades
+                            inputCorreo.value = CorreoElectronico;
+                            inputRut.value = Rut; // Puedes elegir columna1 o columna2 según tus necesidades
+                        }
+
+                        // Mostrar el modal
+                        const bsModal = new bootstrap.Modal(modal);
+                        bsModal.show();
+                    }
+                }
+            });
+
+        </script>
+
+
+
+
+    </div>
+    <!--Container Main end-->
+
+</body>
+
+</html>

@@ -13,6 +13,13 @@ app.use(cors(corsOptions));
 
 const LoginRoutes = require('./routes/LoginRoutes.js')
 const NutricionistaJefeRoutes = require("./routes/NutricionistaJefeRoutes.js")
+const NutricionistaRoutes = require("./routes/NutricionistaRoutes.js")
+const ClinicoRoutes = require("./routes/ClinicoRoutes.js")
+const RecaudadorRoutes = require("./routes/RecaudadorRoutes.js")
+const RecursosRoutes = require("./routes/RecursosRoutes.js")
+const TecnicoRoutes = require("./routes/TecnicoRoutes.js")
+const FuncionarioRoutes = require("./routes/FuncionarioRoutes.js")
+
 const apiRoutes = require('./routes/apiRoutes.js')
 
 app.use(express.urlencoded({
@@ -30,11 +37,12 @@ app.set("view engine", "ejs");
 
 app.use('/', LoginRoutes);
 app.use('/NutricionistaJefe', NutricionistaJefeRoutes);
-//app.use('/Nutricionista', NutricionistaRoutes);
-//app.use('/Clinico', ClinicoRoutes);
-//app.use('/Recaudador', RecaudadorRoutes);
-//app.use('/Recursos', RecursosRoutes);
-//app.use('/Tecnico',TecnicoRoutes);
+app.use('/Nutricionista', NutricionistaRoutes);
+app.use('/Clinico', ClinicoRoutes);
+app.use('/Recaudacion', RecaudadorRoutes);
+app.use('/Recursos', RecursosRoutes);
+app.use('/Tecnico',TecnicoRoutes);
+app.use('/Funcionario',FuncionarioRoutes)
 app.use('/api', apiRoutes)
 
 app.use("/resources", express.static("public"));
