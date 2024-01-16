@@ -10,13 +10,13 @@ const FuncionariosController = {
       const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
       const redirectPath = getRedirectPath(IdTipoFuncionario);
 
-      res.render(`${nombreCarpeta}/funcionarioView`, {
+      return res.render(`${nombreCarpeta}/funcionarioView`, {
         username: username,
         TipoFuncionario: redirectPath,
         NombreCompleto: NombreCompleto,
       });
     } else {
-      res.redirect("/");
+      return res.redirect("/");
     }
 
   },

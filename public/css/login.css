@@ -175,6 +175,9 @@ label {
     }
 
     #img-background {
+        height: 500px;
+    }
+    #svg-background2 {
         height: 600px;
     }
 
