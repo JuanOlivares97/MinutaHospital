@@ -20,6 +20,8 @@ Route.post('/agregar-funcionario', FuncionarioController.agregarFuncionarios);
 // Ruta para procesar el formulario de editar un hospitalizado
 Route.post('/editar-servicio-hospitalizado', HospitalizadoController.actualizarServicioHospitalizado);
 Route.post('/editar-alta-hospitalizado', HospitalizadoController.actualizarAltaHospitalizado);
+Route.post('/editar-ayuno', HospitalizadoController.actualizarAyuno)
+Route.post('/editar-observaciones', HospitalizadoController.actualizarObervaciones)
 Route.post('/editar-funcionario', FuncionarioController.actualizarFuncionarios)
 Route.post('/deshabilitar-funcionario', FuncionarioController.deshabilitarFuncionarios)
 
