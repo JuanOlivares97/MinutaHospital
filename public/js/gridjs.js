@@ -16,12 +16,15 @@ document.addEventListener('DOMContentLoaded', function () {
             {
                 name: "Opciones",
                 formatter: (cell, row) => gridjs.html(`
-
-                <button><a class="editarServicio" data-toggle="modal" data-target="#modalEditarServicioHospitalizado" data-rut="${row.cells[1].data}">Cambiar Servicio</a></button>
-                <button><a class="editarAlta" data-toggle="modal" data-target="#modalEditarAltaHospitalizado" data-rut="${row.cells[1].data}">Dar Alta</a></button>
-                <button><a class="verLogs" data-toggle="modal" data-target="#miModal" data-rut="${row.cells[1].data}">Logs</a></button>`)
+                <button class="editarServicio" data-toggle="modal" data-target="#modalEditarServicioHospitalizado" data-rut="${row.cells[1].data}"><i class='bx bx-shuffle'></i></button>
+                <button class="editarAlta" data-toggle="modal" data-target="#modalEditarAltaHospitalizado" data-rut="${row.cells[1].data}"><i class='bx bx-paste' ></i></button>
+                <button class="verLogs" data-toggle="modal" data-target="#miModal" data-rut="${row.cells[1].data}"><i class='bx bx-history' ></i></button>
+                <button class="EditarAyuno" data-rut="${row.cells[1].data}"><i class='bx bx-baguette'></i></button>
+                <button class="EditarObservaciones" data-toggle="modal" data-target="#modalEditarObsrvacionesHospitalizado" data-rut="${row.cells[1].data}"><i class='bx bx-message-square-dots'></i></button>`)
             },
-            "Ayuno"
+            "¿Ayuno?"
+
+
         ],
         sort: true,
         fixedHeader: true,
@@ -62,18 +65,28 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         server: {
             url: `http://localhost:3000/NutricionistaJefe/listar-hospitalizado?tipoServicio=0`,
-            then: (data) => data.map((hospitalizado) => [
-                hospitalizado.CodigoCama,
-                hospitalizado.Rut,
-                hospitalizado.NombreHospitalizado,
-                hospitalizado.Edad,
-                hospitalizado.FechaIngreso,
-                hospitalizado.ObservacionesNutricionista,
-                hospitalizado.FechaAlta,
-                hospitalizado.TipoRegimen,
-                null,
-                hospitalizado.Ayuno.data,
-            ]),
+            then: (data) => {
+                // Mapeo de los valores al array para Grid.js
+                return data.map((hospitalizado) => {
+                    // Lógica para determinar la imagen de Ayuno
+                    let ayunoValue = hospitalizado.Ayuno.data === 1
+                        ? "Debe Ayunar"
+                        : "No debe Ayunar";
+
+                    return [
+                        hospitalizado.CodigoCama,
+                        hospitalizado.Rut,
+                        hospitalizado.NombreHospitalizado,
+                        hospitalizado.Edad,
+                        hospitalizado.FechaIngreso,
+                        hospitalizado.ObservacionesNutricionista,
+                        hospitalizado.FechaAlta,
+                        hospitalizado.TipoRegimen,
+                        null, // Otros valores null que no están definidos en tu código original
+                        ayunoValue,
+                    ];
+                });
+            },
             handle: (res) => {
                 if (res.status === 404) return { data: [] };
                 if (res.ok) return res.json();
@@ -90,20 +103,29 @@ document.addEventListener('DOMContentLoaded', function () {
         grid.updateConfig({
             server: {
                 url: `http://localhost:3000/NutricionistaJefe/listar-hospitalizado?tipoServicio=${selectedValue}`,
-                then: (data) =>
-                    data.map((hospitalizado) => [
-                        hospitalizado.CodigoCama,
-                        hospitalizado.Rut,
-                        hospitalizado.NombreHospitalizado,
-                        hospitalizado.Edad,
-                        hospitalizado.FechaIngreso,
-                        hospitalizado.ObservacionesNutricionista,
-                        hospitalizado.FechaAlta,
-                        hospitalizado.TipoRegimen,
-                        null,
-                        hospitalizado.Ayuno.data,
-                    ])
+                then: (data) => {
+                    return data.map((hospitalizado) => {
+                        // Lógica para determinar la imagen de Ayuno
+                        let ayunoValue = hospitalizado.Ayuno.data === 1
+                            ? "Debe Ayunar"
+                            : "No debe Ayunar";
+
+                        return [
+                            hospitalizado.CodigoCama,
+                            hospitalizado.Rut,
+                            hospitalizado.NombreHospitalizado,
+                            hospitalizado.Edad,
+                            hospitalizado.FechaIngreso,
+                            hospitalizado.ObservacionesNutricionista,
+                            hospitalizado.FechaAlta,
+                            hospitalizado.TipoRegimen,
+                            null, // Otros valores null que no están definidos en tu código original
+                            ayunoValue,
+                        ];
+                    });
+                },
             },
+
         });
 
         // Recarga la tabla
@@ -130,11 +152,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 modal.find('#rutEnModal').text('Rut: ' + rut);
 
                 // Crear una tabla para mostrar los resultados
-                var tabla = '<table class="table"><thead><tr><th>Código Cama</th><th>Rut</th><th>Nombre Hospitalizado</th><th>Fecha Ingreso</th><th>Observaciones Nutricionista</th><th>Fecha Alta</th><th>Tipo Regimen</th><th>Tipo Servicio</th></tr></thead><tbody>';
+                var tabla = `<table class="table">
+                <thead><tr>
+                <th>Código Cama</th>
+                <th>Rut</th>
+                <th>Nombre Hospitalizado</th>
+                <th>Fecha Ingreso</th>
+                <th>Observaciones Nutricionista</th>
+                <th>Fecha Alta</th>
+                <th>Tipo Regimen</th>
+                <th>Tipo Servicio</th>
+                </tr>
+                </thead>
+                <tbody>`;
+
 
                 // Agregar filas a la tabla con los resultados de la consulta
                 data.forEach(row => {
-                    tabla += `<tr><td>${row.CodigoCama}</td><td>${row.Rut}</td><td>${row.NombreHospitalizado}</td><td>${row.FechaIngreso}</td><td>${row.ObservacionesNutricionista}</td><td>${row.FechaAlta}</td><td>${row.TipoRegimen}</td><td>${row.TipoServicio}</td></tr>`;
+                    tabla += `<tr>
+                    <td>${row.CodigoCama}</td>
+                    <td>${row.Rut}</td>
+                    <td>${row.NombreHospitalizado}</td>
+                    <td>${row.FechaIngreso}</td>
+                    <td>${row.ObservacionesNutricionista}</td>
+                    <td>${row.FechaAlta}</td>
+                    <td>${row.TipoRegimen}</td>
+                    <td>${row.TipoServicio}</td>
+                    </tr>`;
                 });
 
                 tabla += '</tbody></table>';
@@ -145,5 +189,39 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Error al obtener datos de la API:', error);
             });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("EditarAyuno")) {
+            const rutHospitalizado = event.target.getAttribute("data-rut");
+
+            // Realiza la llamada a la API mediante AJAX con fetch
+            fetch("http://localhost:3000/NutricionistaJefe/editar-ayuno", {
+                method: "POST", // Puedes cambiar a 'GET' si tu API acepta solicitudes GET
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    RutHospitalizado: rutHospitalizado,
+                }),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    // Maneja la respuesta de la API si es necesario
+                    console.log(data);
+                    // Puedes realizar alguna acción adicional aquí según la respuesta de la API
+                })
+                .catch((error) => {
+                    console.error("Error al llamar a la API:", error);
+                    // Maneja el error si es necesario
+                });
+        }
     });
 });
