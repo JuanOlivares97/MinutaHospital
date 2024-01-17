@@ -1,9 +1,9 @@
 const express = require('express');
-const HospitalizadoController = require("../controllers/Recaudacion/HospitalizadoController.js");
-const FuncionarioController = require("../controllers/Recaudacion/FuncionarioController.js");
-const mantenedorController = require('../controllers/Recaudacion/MantenedorController.js');
-const dashboardController = require('../controllers/Recaudacion/DashboardController.js');
-const reportesController = require('../controllers/Recaudacion/reportesController.js');
+const HospitalizadoController = require("../controllers/Recaudador/HospitalizadoController.js");
+const FuncionarioController = require("../controllers/Recaudador/FuncionarioController.js");
+const mantenedorController = require('../controllers/Recaudador/MantenedorController.js');
+const dashboardController = require('../controllers/Recaudador/DashboardController.js');
+const reportesController = require('../controllers/Recaudador/reportesController.js');
 const Route = express.Router();
 
 Route.get('/', HospitalizadoController.mostrarPaginaHospitalizados)
