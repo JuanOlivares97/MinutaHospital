@@ -148,16 +148,16 @@ label {
 }
 
 /*REPONSIVO*/
-@media (max-width: 1536px) {
+@media (max-width: 1536) {
     #formulario {
         width: 370px;
         height: 550PX;
     }
 
     #form {
-        padding-left: 100px;
+        padding-left: 200px;
         display: flex;
-        padding-right: 130px;
+        padding-right: 50px;
     }
 
     #user,
@@ -182,8 +182,41 @@ label {
     }
 
 }
+
+@media (max-width: 1440px) {
+    #formulario {
+        width: 370px;
+        height: 550PX;
+    }
+
+    #form {
+        padding-left: 200px;
+        display: flex;
+        padding-right: 50px;
+    }
+
+    #user,
+    #pass,
+    label,
+    #button,
+    .decoracion,
+    #recuperarpass {
+        font-size: 22px;
+    }
+
+    #button {
+        width: 235px;
+        height: 50px;
+    }
+
+    #img-background {
+        height: 600px;
+    }
+
+}
+
 @media (max-width: 1360px) {
-    #inicio{
+    #inicio {
         width: 65%;
     }
 
@@ -215,6 +248,7 @@ label {
     #img-background {
         height: 380px;
     }
+
     #svg-background2 {
         height: 503px;
     }
@@ -297,14 +331,17 @@ label {
     }
 }
 
-@media (max-width: 1109px) {
+@media (max-width: 800px) {
     #formulario {
         width: 300px;
         height: 450PX;
+        display: flex;
+        align-items: center;
     }
 
     #form {
-        padding-left: 400px;
+        align-items: center;
+        padding-left: 100px;
         display: flex;
     }
 
@@ -321,89 +358,58 @@ label {
         width: 235px;
         height: 50px;
     }
+
+    #img-background {
+        display: none;
+    }
+
+    #svg-background2 {
+        display: none;
+    }
 }
 
-@media (max-width: 996px) {
+@media (max-width: 400px) {
+    #inicio {
+        width: 80%;
+        height: 60%;
+        display: flex;
+        align-items: center;
+    }
+
     #formulario {
-        width: 400px;
-        height: 550PX;
+        width: 280px;
+        height: 380PX;
     }
 
     #form {
-        padding-left: 0px;
+        padding-left: 15px;
         display: flex;
         padding-right: 150px;
     }
 
-    #svg-background2 {
-        display: none;
-    }
-
     #user,
     #pass,
     label,
     #button,
     .decoracion {
-        font-size: 24px;
-    }
-
-    #recuperarpass {
         font-size: 20px;
     }
 
+    #recuperarpass {
+        font-size: 17px;
+    }
+
     #button {
-        width: 230px;
-        height: 47px;
+        width: 220px;
+        height: 40px;
     }
 
     #img-background {
         display: none;
-    }
-}
-
-@media (max-width: 375px) {
-    #formulario {
-        width: 275px;
-        height: 550PX;
-        box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.50);
-    }
-
-    #inicio {
-        background: none;
-        box-shadow: none;
-    }
-
-    #form {
-        padding-left: 0px;
-        display: flex;
     }
 
     #svg-background2 {
         display: none;
     }
 
-    #user,
-    #pass,
-    label,
-    #button,
-    .decoracion {
-        font-size: 16px;
-    }
-
-    #recuperarpass {
-        font-size: 13px;
-    }
-
-    #button {
-        width: 230px;
-        height: 47px;
-    }
-
-    #img-background {
-        display: none;
-    }
-
-    #svg-background {
-        display: none;
-    }
 }
