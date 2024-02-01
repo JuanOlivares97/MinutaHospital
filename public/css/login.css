@@ -148,10 +148,10 @@ label {
 }
 
 /*REPONSIVO*/
-@media (max-width: 1536) {
+@media (max-width: 1540) {
     #formulario {
-        width: 370px;
-        height: 550PX;
+        width: 320px;
+        height: 500PX;
     }
 
     #form {

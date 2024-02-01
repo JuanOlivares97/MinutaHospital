@@ -13,11 +13,7 @@
   --z-fixed: 100
 }
 
-*,
-::before,
-::after {
-  box-sizing: border-box
-}
+
 
 body {
   position: relative;
@@ -45,6 +41,10 @@ a {
   background-color: var(--first-color);
   z-index: var(--z-fixed);
   transition: .4s
+}
+
+.titulo-header {
+  font-size: 1.75rem;
 }
 
 .header_toggle {
@@ -76,7 +76,7 @@ a {
 
 .log-out>a {
   text-decoration: none;
-  font-size: 1rem;
+  font-size: var(--normal-font-size);
 }
 
 /*NAVBAR*/
@@ -100,8 +100,10 @@ nav img {
 }
 
 #miModal .modal-dialog {
-  max-width: 80%; /* Puedes ajustar el porcentaje según tus necesidades */
-  margin: 1.75rem auto; /* Ajusta el margen superior e inferior según sea necesario */
+  max-width: 80%;
+  /* Puedes ajustar el porcentaje según tus necesidades */
+  margin: 1.75rem auto;
+  /* Ajusta el margen superior e inferior según sea necesario */
 }
 
 .nav {
@@ -194,7 +196,7 @@ th {
 }
 
 .titulo {
-  margin-top: 65px;
+  margin-top: 55px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -211,7 +213,7 @@ th {
   /*letra*/
   color: var(--icons-color);
   font-family: Inter;
-  font-size: 30px;
+  font-size: 1.75rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -280,6 +282,13 @@ table {
 
 
 /*Vista Mantenedor*/
+#container_mantenedor {
+  margin-top: 110px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+}
 .navegacion {
   background-color: var(--body-font);
   width: 100%;
@@ -289,7 +298,7 @@ table {
   padding: 0 1rem;
   left: 0;
   margin: 0;
-
+}
   button {
     background-color: var(--body-font);
     width: 180px;
@@ -303,12 +312,11 @@ table {
   button:hover {
     background-color: var(--first-color);
   }
-}
 
 /*Vista Mantenedor*/
 
 
-
+/*Responsivo*/
 @media screen and (min-width: 768px) {
   body {
     margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -351,4 +359,78 @@ table {
   .body-pd {
     padding-left: calc(var(--nav-width) + 225px)
   }
+}
+
+@media (max-width: 800px) {
+
+  .titulo-header {
+    font-size: 1.40rem;
+  }
+
+  .titulo {
+    font-size: 1.50rem;
+    margin-top: 60px;
+  }
+
+  .log-out {
+    padding: 15px;
+    padding-top: 15px;
+  }
+
+  .nav_name {
+    display: none;
+    margin-top: 15px;
+  }
+
+  /*Mantenedor*/
+  #container_mantenedor{
+    margin-top: 120px;
+  }
+  .content{
+    padding-top: 120px;
+    padding-left: 0px;
+  }
+
+  .navegacion{
+    margin-top: 0;
+  }
+
+}
+
+@media (max-width: 400px) {
+
+  .titulo-header {
+    font-size: var(--normal-font-size);
+  }
+
+  .titulo {
+    font-size: 1.50rem;
+    margin-top: 40px;
+  }
+
+  .log-out {
+    padding: 15px;
+    padding-top: 15px;
+  }
+
+  .nav_name {
+    display: none;
+  }
+
+  /*Mantenedor*/
+  #container_mantenedor{
+    margin-top: 80px;
+  }
+  .content{
+    padding-top: 200px;
+    padding-left: 0px;
+  }
+  .content.show{
+    padding-left: 0;
+  }
+  .navegacion{
+    display: grid;
+    margin-top: 0;
+  }
+
 }
