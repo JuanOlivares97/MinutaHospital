@@ -14,6 +14,7 @@ body {
     border: 1px solid #ddd;
     padding: 20px;
 }
+
 .container2 {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -23,7 +24,8 @@ body {
 h1 {
     color: black;
 }
-a{
+
+a {
     text-decoration: none;
 }
 
@@ -54,18 +56,21 @@ input {
     justify-content: space-around;
 }
 
-#button1{
+#button1 {
     font-size: 16px;
-    background-color: #4CAF50; /* Color de fondo del botón */
-    color: white; /* Color del texto del botón */
+    background-color: #4CAF50;
+    /* Color de fondo del botón */
+    color: white;
+    /* Color del texto del botón */
     border: none;
-    border-radius: 5px; /* Bordes redondeados */
+    border-radius: 5px;
+    /* Bordes redondeados */
     cursor: pointer;
 }
 
-#titulo{
-   display: flex; 
-   justify-content: center;
+#titulo {
+    display: flex;
+    justify-content: center;
 }
 
 #tiposRegimenList {
@@ -75,3 +80,22 @@ input {
     grid-template-columns: repeat(2, 1fr);
 }
 
+@media (max-width: 400px) {
+    body{
+        height: 120vh;
+    }
+
+    #button1 {
+        font-size: 10px;
+    }
+
+    #tiposRegimenList {
+        margin-top: 3px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    button{
+        margin: 10px;
+        height: 35px;
+        width: 200px;
+    }
+}
