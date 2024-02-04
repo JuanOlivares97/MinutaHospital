@@ -289,6 +289,7 @@ table {
   justify-content: space-between;
   align-items: center;
 }
+
 .navegacion {
   background-color: var(--body-font);
   width: 100%;
@@ -299,19 +300,20 @@ table {
   left: 0;
   margin: 0;
 }
-  button {
-    background-color: var(--body-font);
-    width: 180px;
-    font-size: 1.1rem;
-    margin: 0;
-    border: none;
-    border-radius: 10px;
-    height: 35px;
-  }
 
-  button:hover {
-    background-color: var(--first-color);
-  }
+.navegacion button {
+  background-color: var(--body-font);
+  width: 180px;
+  font-size: 1.1rem;
+  margin: 0;
+  border: none;
+  border-radius: 10px;
+  height: 35px;
+}
+
+.navegacion button:hover {
+  background-color: var(--first-color);
+}
 
 /*Vista Mantenedor*/
 
@@ -367,37 +369,12 @@ table {
     font-size: 1.40rem;
   }
 
-  .titulo {
-    font-size: 1.50rem;
-    margin-top: 60px;
-  }
-
-  .log-out {
-    padding: 15px;
-    padding-top: 15px;
-  }
-
-  .nav_name {
+  .log-out span{
     display: none;
-    margin-top: 15px;
   }
-
-  /*Mantenedor*/
-  #container_mantenedor{
-    margin-top: 120px;
-  }
-  .content{
-    padding-top: 120px;
-    padding-left: 0px;
-  }
-
-  .navegacion{
-    margin-top: 0;
-  }
-
 }
 
-@media (max-width: 400px) {
+@media (max-width: 412px) {
 
   .titulo-header {
     font-size: var(--normal-font-size);
@@ -418,17 +395,20 @@ table {
   }
 
   /*Mantenedor*/
-  #container_mantenedor{
+  #container_mantenedor {
     margin-top: 80px;
   }
-  .content{
+
+  .content {
     padding-top: 200px;
     padding-left: 0px;
   }
-  .content.show{
+
+  .content.show {
     padding-left: 0;
   }
-  .navegacion{
+
+  .navegacion {
     display: grid;
     margin-top: 0;
   }
