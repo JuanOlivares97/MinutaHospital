@@ -1,632 +1,404 @@
 <!DOCTYPE html>
 <html lang="es-CL">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="/resources/img/logopequeno-hospital.png"
-    />
-    <title>Mantenedores</title>
-    <link rel="stylesheet" href="/resources/css/nutricionista.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css"
-      rel="stylesheet"
-    />
-    <script
-      defer
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    ></script>
-    <script
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    ></script>
-    <script
-      defer
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    ></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"
-    ></script>
-    <script defer src="/resources/js/GridJsMantenedor.js"></script>
-    <script defer src="/resources/js/alerta.js"></script>
-    <script defer src="/resources/js/navbar.js"></script>
 
-    <style>
-      .content {
-        display: none;
-        margin-top: 10px;
-        width: 100%;
-        padding-left: 100px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/resources/img/logopequeno-hospital.png" />
+  <title>Mantenedores</title>
+  <link rel="stylesheet" href="/resources/css/nutricionista.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+  <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+  <script defer src="/resources/js/GridJsMantenedor.js"></script>
+  <script defer src="/resources/js/alerta.js"></script>
+  <script defer src="/resources/js/navbar.js"></script>
 
-      .show {
-        display: block;
-      }
+  <style>
+    .content {
+      display: none;
+      margin-top: 10px;
+      width: 100%;
+      padding-left: 100px;
+    }
 
-      .gridjs-container {
-        width: auto !important;
-      }
+    .show {
+      display: block;
+    }
 
-      .gridjs-wrapper {
-        width: auto;
-      }
+    .gridjs-container {
+      width: auto !important;
+    }
 
-      .gridjs-table {
-        table-layout: auto !important;
-        width: auto !important;
-      }
-    </style>
-  </head>
+    .gridjs-wrapper {
+      width: auto;
+    }
 
-  <body id="body-pd">
-    <header class="header" id="header">
-      <div class="header_toggle">
-        <i class="bx bx-menu" id="header-toggle"></i>
-      </div>
-      <div class="titulo-header">SISTEMA DE CONTROL DE ALIMENTACIÓN</div>
-      <div class="log-out">
-        <a href="/logout" class="nav_link">
-          <i class="bx bx-log-out nav_icon"></i>
-          <span class="nav_name"> <%= NombreCompleto %> </span></a
-        >
-      </div>
-    </header>
-    <div class="l-navbar" id="nav-bar">
-      <nav class="nav">
-        <div class="nav_list">
-          <a href="<%= TipoFuncionario %>" class="nav_link">
-            <i class="bx bx-user nav_icon"></i>
-            <span class="nav_name">Alimentacion Hospitalizado</span>
-          </a>
-          <a href="<%= TipoFuncionario %>/funcionarios" class="nav_link">
-            <i class="bx bx-grid-alt nav_icon"></i>
-            <span class="nav_name">Mantenedor de Funcionario</span></a
-          >
-          <a href="<%= TipoFuncionario %>/reportes" class="nav_link">
-            <i class="bx bx-folder nav_icon"></i>
-            <span class="nav_name">Reporteria</span></a
-          >
-          <a href="<%= TipoFuncionario %>/mantenedores" class="nav_link active">
-            <i class="bx bx-check-square nav_icon"></i>
-            <span class="nav_name">Mantenedores</span>
-          </a>
-          <a href="<%= TipoFuncionario %>/dashboard" class="nav_link">
-            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-            <span class="nav_name">Dashboard</span>
-          </a>
-          <a href="<%= TipoFuncionario %>/venta" class="nav_link">
-            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-            <span class="nav_name">Venta</span>
-          </a>
-        </div>
-      </nav>
+    .gridjs-table {
+      table-layout: auto !important;
+      width: auto !important;
+    }
+  </style>
+</head>
+
+<body id="body-pd">
+  <%- include('../layouts/_layoutNutricionistaJefe') %>
+  <div class="titulo">Mantenedores</div>
+  <div id="container_mantenedor">
+    <div class="navegacion">
+      <button onclick="toggleDiv('viaDiv')">Via</button>
+      <button onclick="toggleDiv('contratoDiv')">Contrato</button>
+      <button onclick="toggleDiv('estamentoDiv')">Estamento</button>
+      <button onclick="toggleDiv('regimenDiv')">Regimen</button>
+      <button onclick="toggleDiv('unidadDiv')">Unidad</button>
+      <button onclick="toggleDiv('servicioDiv')">Servicio</button>
+      <button onclick="toggleDiv('perfilDiv')">Perfil</button>
     </div>
-    <div class="titulo">Mantenedores</div>
-    <div id="container_mantenedor">
-      <div class="navegacion">
-        <button onclick="toggleDiv('viaDiv')">Via</button>
-        <button onclick="toggleDiv('contratoDiv')">Contrato</button>
-        <button onclick="toggleDiv('estamentoDiv')">Estamento</button>
-        <button onclick="toggleDiv('regimenDiv')">Regimen</button>
-        <button onclick="toggleDiv('unidadDiv')">Unidad</button>
-        <button onclick="toggleDiv('servicioDiv')">Servicio</button>
-        <button onclick="toggleDiv('perfilDiv')">Perfil</button>
-      </div>
 
-      <div id="viaDiv" class="content">
-        <h1>Via</h1>
-        <button
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalVia"
-        >
-          Agregar un tipo de Via
-        </button>
-        <div id="ListaVia"></div>
+    <div id="viaDiv" class="content">
+      <h1>Via</h1>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalVia">
+        Agregar un tipo de Via
+      </button>
+      <div id="ListaVia"></div>
 
-        <div
-          class="modal fade"
-          id="modalVia"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="modalVialabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalVialabel">
-                  Agregar hospitalizado
-                </h5>
-              </div>
-              <div class="modal-body">
-                <!-- Aquí coloca tu formulario -->
-                <form action="<%= TipoFuncionario %>/agregar-via" method="post">
-                  <input
-                    type="text"
-                    name="TipoVia"
-                    placeholder="Nombre del tipo via"
-                  />
-
-                  <button type="submit">Enviar</button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="contratoDiv" class="content">
-        <h1>Contrato</h1>
-        <button
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalcontrato"
-        >
-          Agregar un tipo de Contrato
-        </button>
-
-        <div id="ListaContrato"></div>
-
-        <div
-          class="modal fade"
-          id="modalcontrato"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="modalcontratolabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalcontratolabel">
-                  Agregar Contrato
-                </h5>
-              </div>
-              <div class="modal-body">
-                <!-- Aquí coloca tu formulario -->
-                <form
-                  action="<%= TipoFuncionario %>/agregar-contrato"
-                  method="post"
-                >
-                  <input
-                    type="text"
-                    name="TipoContrato"
-                    placeholder="Nombre del tipo contrato"
-                  />
-
-                  <button type="submit">Enviar</button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="estamentoDiv" class="content">
-        <h1>Tipo Estamento</h1>
-
-        <button
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalestamento"
-        >
-          Agregar un tipo de Estamento
-        </button>
-
-        <div id="ListaEstamento"></div>
-
-        <div
-          class="modal fade"
-          id="modalestamento"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="modalestamentolabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalestamentolabel">
-                  Agregar Estamento
-                </h5>
-              </div>
-              <div class="modal-body">
-                <!-- Aquí coloca tu formulario -->
-                <form
-                  action="<%= TipoFuncionario %>/agregar-estamento"
-                  method="post"
-                >
-                  <input
-                    type="text"
-                    name="TipoContrato"
-                    placeholder="Nombre del tipo contrato"
-                  />
-
-                  <button type="submit">Enviar</button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="regimenDiv" class="content">
-        <h1>Regimen</h1>
-
-        <button
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalregimen"
-        >
-          Agregar un tipo de Regimen
-        </button>
-
-        <div id="ListaRegimen"></div>
-
-        <div
-          class="modal fade"
-          id="modalregimen"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="modalregimenlabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalregimenlabel">
-                  Agregar Regimen
-                </h5>
-              </div>
-              <div class="modal-body">
-                <!-- Aquí coloca tu formulario -->
-                <form
-                  action="<%= TipoFuncionario %>/agregar-regimen"
-                  method="post"
-                >
-                  <input
-                    type="text"
-                    name="DescTipoRegimen"
-                    placeholder="Nombre del tipo de Regimen"
-                  />
-
-                  <button type="submit">Enviar</button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="servicioDiv" class="content">
-        <h1>Servicio</h1>
-
-        <button
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalServicio"
-        >
-          Agregar un tipo de Servicio
-        </button>
-
-        <div id="ListaServicio"></div>
-
-        <div
-          class="modal fade"
-          id="modalServicio"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="modalServiciolabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalServiciolabel">
-                  Agregar Servicio
-                </h5>
-              </div>
-              <div class="modal-body">
-                <!-- Aquí coloca tu formulario -->
-                <form
-                  action="<%= TipoFuncionario %>/agregar-servicio"
-                  method="post"
-                >
-                  <input
-                    type="text"
-                    name="DescTipoServicio"
-                    placeholder="Nombre del tipo de servicio"
-                  />
-
-                  <button type="submit">Enviar</button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="unidadDiv" class="content">
-        <h1>Unidad</h1>
-
-        <button
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalUnidad"
-        >
-          Agregar un tipo de Unidad
-        </button>
-
-        <div id="ListaUnidad"></div>
-
-        <div
-          class="modal fade"
-          id="modalUnidad"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="modalUnidadlabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalUnidadlabel">
-                  Agregar Servicio
-                </h5>
-              </div>
-              <div class="modal-body">
-                <!-- Aquí coloca tu formulario -->
-                <form
-                  action="<%= TipoFuncionario %>/agregar-unidad"
-                  method="post"
-                >
-                  <input
-                    type="text"
-                    name="DescTipoUnidad"
-                    placeholder="Nombre del tipo de Unidad"
-                  />
-
-                  <button type="submit">Enviar</button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="perfilDiv" class="content">
-        <h1>Funcionario</h1>
-
-        <button
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#modalFuncionario"
-        >
-          Agregar un tipo de Funcionario
-        </button>
-
-        <div id="ListaTipoFuncionarios"></div>
-
-        <div
-          class="modal fade"
-          id="modalFuncionario"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="modalFuncionariolabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalFuncionariolabel">
-                  Agregar Funcionario
-                </h5>
-              </div>
-              <div class="modal-body">
-                <!-- Aquí coloca tu formulario -->
-                <form
-                  action="<%= TipoFuncionario %>/agregar-funcionario"
-                  method="post"
-                >
-                  <input
-                    type="text"
-                    name="TipoContrato"
-                    placeholder="Nombre del tipo de Funcionario"
-                  />
-
-                  <button type="submit">Enviar</button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modal -->
-      <div
-        class="modal fade"
-        id="modaleditarmantenedor"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="EditarMantenedor"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="modalVia" tabindex="-1" role="dialog" aria-labelledby="modalVialabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="EditarMantenedor">
-                Editar Mantenedor
+              <h5 class="modal-title" id="modalVialabel">
+                Agregar hospitalizado
               </h5>
             </div>
             <div class="modal-body">
-              <form
-                id="editarForm"
-                action="<%= TipoFuncionario %>/editar-mantenedor"
-                method="post"
-              >
-                <input type="hidden" name="tabla" />
-                <input type="hidden" name="columna" />
-                <input type="hidden" name="Identificador" />
-                <input type="hidden" name="nombreIdentificador" />
-                <input
-                  type="text"
-                  name="nuevoDato"
-                  placeholder="Ingrese la nueva descripción"
-                />
-                <button type="submit">Guardar</button>
+              <!-- Aquí coloca tu formulario -->
+              <form action="<%= TipoFuncionario %>/agregar-via" method="post">
+                <input type="text" name="TipoVia" placeholder="Nombre del tipo via" />
+
+                <button type="submit">Enviar</button>
               </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <script>
-      document.addEventListener("click", function (event) {
-        const editarmantenedor = "editarServicio";
+    <div id="contratoDiv" class="content">
+      <h1>Contrato</h1>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalcontrato">
+        Agregar un tipo de Contrato
+      </button>
 
-        // Verificar si el clic ocurrió en un elemento con la clase "editarServicio"
-        if (event.target.classList.contains(editarmantenedor)) {
-          // Verificar si el elemento tiene el atributo data-identificador antes de acceder a él
-          const identificador = event.target.getAttribute("data-identificador");
-          const tabla = event.target.getAttribute("data-tabla");
-          const columna1 = event.target.getAttribute("data-columna1");
-          const columna2 = event.target.getAttribute("data-columna2");
-          const valoractual = event.target.getAttribute("data-valoractual");
-          if (identificador && tabla && columna1 && columna2) {
-            // Asignar los valores a los campos de entrada en el modal
-            const modal = document.getElementById("modaleditarmantenedor");
-            const inputTabla = modal.querySelector('input[name="tabla"]');
-            const inputColumna = modal.querySelector('input[name="columna"]');
-            const inputIdentificador = modal.querySelector(
-              'input[name="Identificador"]'
-            );
-            const inputNombreIdentificador = modal.querySelector(
-              'input[name="nombreIdentificador"]'
-            );
-            const inputValorActual = modal.querySelector(
-              'input[name="nuevoDato"]'
-            );
-            // Asegúrate de que los elementos existan antes de asignarles valores
-            if (
-              inputTabla &&
-              inputColumna &&
-              inputIdentificador &&
-              inputNombreIdentificador
-            ) {
-              inputTabla.value = tabla;
-              inputColumna.value = columna2; // Puedes elegir columna1 o columna2 según tus necesidades
-              inputIdentificador.value = identificador;
-              inputNombreIdentificador.value = columna1;
-              inputValorActual.value = valoractual; // Puedes elegir columna1 o columna2 según tus necesidades
-            }
+      <div id="ListaContrato"></div>
 
-            // Mostrar el modal
-            const bsModal = new bootstrap.Modal(modal);
-            bsModal.show();
+      <div class="modal fade" id="modalcontrato" tabindex="-1" role="dialog" aria-labelledby="modalcontratolabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalcontratolabel">
+                Agregar Contrato
+              </h5>
+            </div>
+            <div class="modal-body">
+              <!-- Aquí coloca tu formulario -->
+              <form action="<%= TipoFuncionario %>/agregar-contrato" method="post">
+                <input type="text" name="TipoContrato" placeholder="Nombre del tipo contrato" />
+
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="estamentoDiv" class="content">
+      <h1>Tipo Estamento</h1>
+
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalestamento">
+        Agregar un tipo de Estamento
+      </button>
+
+      <div id="ListaEstamento"></div>
+
+      <div class="modal fade" id="modalestamento" tabindex="-1" role="dialog" aria-labelledby="modalestamentolabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalestamentolabel">
+                Agregar Estamento
+              </h5>
+            </div>
+            <div class="modal-body">
+              <!-- Aquí coloca tu formulario -->
+              <form action="<%= TipoFuncionario %>/agregar-estamento" method="post">
+                <input type="text" name="TipoContrato" placeholder="Nombre del tipo contrato" />
+
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="regimenDiv" class="content">
+      <h1>Regimen</h1>
+
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalregimen">
+        Agregar un tipo de Regimen
+      </button>
+
+      <div id="ListaRegimen"></div>
+
+      <div class="modal fade" id="modalregimen" tabindex="-1" role="dialog" aria-labelledby="modalregimenlabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalregimenlabel">
+                Agregar Regimen
+              </h5>
+            </div>
+            <div class="modal-body">
+              <!-- Aquí coloca tu formulario -->
+              <form action="<%= TipoFuncionario %>/agregar-regimen" method="post">
+                <input type="text" name="DescTipoRegimen" placeholder="Nombre del tipo de Regimen" />
+
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="servicioDiv" class="content">
+      <h1>Servicio</h1>
+
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalServicio">
+        Agregar un tipo de Servicio
+      </button>
+
+      <div id="ListaServicio"></div>
+
+      <div class="modal fade" id="modalServicio" tabindex="-1" role="dialog" aria-labelledby="modalServiciolabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalServiciolabel">
+                Agregar Servicio
+              </h5>
+            </div>
+            <div class="modal-body">
+              <!-- Aquí coloca tu formulario -->
+              <form action="<%= TipoFuncionario %>/agregar-servicio" method="post">
+                <input type="text" name="DescTipoServicio" placeholder="Nombre del tipo de servicio" />
+
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="unidadDiv" class="content">
+      <h1>Unidad</h1>
+
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalUnidad">
+        Agregar un tipo de Unidad
+      </button>
+
+      <div id="ListaUnidad"></div>
+
+      <div class="modal fade" id="modalUnidad" tabindex="-1" role="dialog" aria-labelledby="modalUnidadlabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalUnidadlabel">
+                Agregar Servicio
+              </h5>
+            </div>
+            <div class="modal-body">
+              <!-- Aquí coloca tu formulario -->
+              <form action="<%= TipoFuncionario %>/agregar-unidad" method="post">
+                <input type="text" name="DescTipoUnidad" placeholder="Nombre del tipo de Unidad" />
+
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="perfilDiv" class="content">
+      <h1>Funcionario</h1>
+
+      <button class="btn btn-primary" data-toggle="modal" data-target="#modalFuncionario">
+        Agregar un tipo de Funcionario
+      </button>
+
+      <div id="ListaTipoFuncionarios"></div>
+
+      <div class="modal fade" id="modalFuncionario" tabindex="-1" role="dialog" aria-labelledby="modalFuncionariolabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalFuncionariolabel">
+                Agregar Funcionario
+              </h5>
+            </div>
+            <div class="modal-body">
+              <!-- Aquí coloca tu formulario -->
+              <form action="<%= TipoFuncionario %>/agregar-funcionario" method="post">
+                <input type="text" name="TipoContrato" placeholder="Nombre del tipo de Funcionario" />
+
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modaleditarmantenedor" tabindex="-1" role="dialog" aria-labelledby="EditarMantenedor"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="EditarMantenedor">
+              Editar Mantenedor
+            </h5>
+          </div>
+          <div class="modal-body">
+            <form id="editarForm" action="<%= TipoFuncionario %>/editar-mantenedor" method="post">
+              <input type="hidden" name="tabla" />
+              <input type="hidden" name="columna" />
+              <input type="hidden" name="Identificador" />
+              <input type="hidden" name="nombreIdentificador" />
+              <input type="text" name="nuevoDato" placeholder="Ingrese la nueva descripción" />
+              <button type="submit">Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("click", function (event) {
+      const editarmantenedor = "editarServicio";
+
+      // Verificar si el clic ocurrió en un elemento con la clase "editarServicio"
+      if (event.target.classList.contains(editarmantenedor)) {
+        // Verificar si el elemento tiene el atributo data-identificador antes de acceder a él
+        const identificador = event.target.getAttribute("data-identificador");
+        const tabla = event.target.getAttribute("data-tabla");
+        const columna1 = event.target.getAttribute("data-columna1");
+        const columna2 = event.target.getAttribute("data-columna2");
+        const valoractual = event.target.getAttribute("data-valoractual");
+        if (identificador && tabla && columna1 && columna2) {
+          // Asignar los valores a los campos de entrada en el modal
+          const modal = document.getElementById("modaleditarmantenedor");
+          const inputTabla = modal.querySelector('input[name="tabla"]');
+          const inputColumna = modal.querySelector('input[name="columna"]');
+          const inputIdentificador = modal.querySelector(
+            'input[name="Identificador"]'
+          );
+          const inputNombreIdentificador = modal.querySelector(
+            'input[name="nombreIdentificador"]'
+          );
+          const inputValorActual = modal.querySelector(
+            'input[name="nuevoDato"]'
+          );
+          // Asegúrate de que los elementos existan antes de asignarles valores
+          if (
+            inputTabla &&
+            inputColumna &&
+            inputIdentificador &&
+            inputNombreIdentificador
+          ) {
+            inputTabla.value = tabla;
+            inputColumna.value = columna2; // Puedes elegir columna1 o columna2 según tus necesidades
+            inputIdentificador.value = identificador;
+            inputNombreIdentificador.value = columna1;
+            inputValorActual.value = valoractual; // Puedes elegir columna1 o columna2 según tus necesidades
           }
-        }
-      });
 
-      let currentDiv = null;
-
-      function toggleDiv(divId) {
-        const divToShow = document.getElementById(divId);
-
-        if (currentDiv !== null) {
-          currentDiv.classList.remove("show");
-        }
-
-        if (currentDiv !== divToShow) {
-          divToShow.classList.add("show");
-          currentDiv = divToShow;
-        } else {
-          currentDiv = null;
+          // Mostrar el modal
+          const bsModal = new bootstrap.Modal(modal);
+          bsModal.show();
         }
       }
-    </script>
-  </body>
+    });
+
+    let currentDiv = null;
+
+    function toggleDiv(divId) {
+      const divToShow = document.getElementById(divId);
+
+      if (currentDiv !== null) {
+        currentDiv.classList.remove("show");
+      }
+
+      if (currentDiv !== divToShow) {
+        divToShow.classList.add("show");
+        currentDiv = divToShow;
+      } else {
+        currentDiv = null;
+      }
+    }
+  </script>
+</body>
+
 </html>

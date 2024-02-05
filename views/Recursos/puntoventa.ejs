@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/resources/img/logopequeno-hospital.png" />
+  <link rel="stylesheet" href="/resources/css/nutricionista.css" />
+  <link rel="stylesheet" href="/resources/css/puntoventa.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+  <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+
+  <title>Hospital San Jose Melipilla</title>
+
+  <!--Scripts-->
+  <script defer src="/resources/js/alerta.js"></script>
+  <script defer src="/resources/js/navbar.js"></script>
+</head>
+
+<body id="body-pd">
+  <%- include('../layouts/_layoutRecaudador') %>
+    <button style="margin-top: 50px;" type="button" class="btn btn-primary" onclick="abrirModalVentas()">
+      Ver Ventas
+    </button>
+    <div class="container">
+      <div class="product-list"></div>
+      <div class="cart-info">
+        <h2>Carrito de Compras</h2>
+        <div class="client">
+          <label for="Rut">Rut Funcionario</label>
+          <input id="rutInput" name="Rut" type="text" placeholder="11111111-1">
+        </div>
+        <div class="cart">
+          <!-- Aquí se mostrarán los productos del carrito -->
+        </div>
+
+        <div class="summary">
+          <h4>Total</h4><strong id="totalAmount">$0</strong>
+          <button onclick="generarBoletaPDF()">Comprar</button>
+        </div>
+      </div>
+
+      <div class="modal fade" id="ventasModal" tabindex="-1" aria-labelledby="ventasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ventasModalLabel">Lista de Ventas</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="fechaInicio">Fecha de Inicio:</label>
+                <input type="date" class="form-control" id="fechaInicio">
+              </div>
+              <div class="form-group">
+                <label for="fechaFin">Fecha de Fin:</label>
+                <input type="date" class="form-control" id="fechaFin">
+              </div>
+              <button class="btn btn-primary" onclick="filtrarVentas()">Filtrar</button>
+
+              <div class="ventas-table"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const carrito = [];
+
+        document.addEventListener('DOMContentLoaded', function () {
+          // Obtener la fecha actual en formato 'YYYY-MM-DD'
+          const fechaActual = new Date().toISOString().split('T')[0];
+
+          // Establecer la fecha actual en ambos inputs
+          document.getElementById('fechaInicio').value = fechaActual;
+          document.getElementById('fechaFin').value = fechaActual;
+        });
+
+        function actualizarCarrito() {
+          const carritoElement = document.querySelector('.cart');
+          const totalAmountElement = document.getElementById('totalAmount');
+          carritoElement.innerHTML = '';
+
+          let total = 0;
+
+          carrito.forEach(producto => {
+            const productoElement = document.createElement('div');
+            productoElement.classList.add('product-cart');
+            productoElement.innerHTML = `
+      <img class="cart-img" src="${producto.imagen}" alt="${producto.nombre}">
+      <span>${producto.nombre} - $${producto.precio}</span>
+      <button onclick="eliminarDelCarrito(${producto.id})">Eliminar</button>
+    `;
+            carritoElement.appendChild(productoElement);
+
+            total += producto.precio;
+          });
+
+          // Actualizar el elemento HTML del total
+          totalAmountElement.textContent = `$${total.toFixed(0)}`;
+        }
+
+        function agregarAlCarrito(id, nombre, precio, imagen) {
+          const producto = {
+            id: id,
+            nombre: nombre,
+            precio: precio,
+            imagen: imagen
+          };
+
+          carrito.push(producto);
+          actualizarCarrito();
+        }
+
+        function eliminarDelCarrito(id) {
+          // Encontrar la primera ocurrencia del producto con el id proporcionado y eliminarlo
+          const index = carrito.findIndex(producto => producto.id === id);
+
+          if (index !== -1) {
+            carrito.splice(index, 1);
+          }
+
+          // Actualizar la interfaz después de eliminar el producto
+          actualizarCarrito();
+        }
+
+        function generarBoletaPDF() {
+          const rutInput = document.getElementById('rutInput');
+          const rut = rutInput.value.trim();
+
+          // Verificar si el campo rut está vacío
+          if (!rut) {
+            Swal.fire('Error', 'Por favor, ingresa un RUT válido.', 'error');
+            return;
+          }
+
+          // Verificar si no hay productos en el carrito
+          if (carrito.length === 0) {
+            Swal.fire('Error', 'No hay productos en el carrito.', 'error');
+            return;
+          }
+
+          // Simular la compra
+          const compra = {
+            clienteId: rut,
+            productos: carrito,
+            total: carrito.reduce((acc, producto) => acc + producto.precio, 0)
+          };
+
+          // Llamar a la función para agregar la venta a la API
+          agregarVentaAPI(rut, compra.productos, compra.total);
+          // Definir la estructura del documento PDF
+          const docDefinition = {
+            content: [
+              { text: '----- Boleta de Compra -----', fontSize: 16 },
+              { text: `Cliente: ${rut}`, fontSize: 12 },
+              { text: 'Productos:', fontSize: 12 },
+              ...carrito.map(producto => ({ text: `${producto.nombre} - $${producto.precio}`, fontSize: 10 })),
+              { text: `Total: $${compra.total.toFixed(0)}`, fontSize: 12 },
+            ]
+          };
+
+          // Crear el PDF y abrirlo en una nueva ventana
+          pdfMake.createPdf(docDefinition).open();
+
+          // Limpiar el carrito después de la compra
+          carrito.length = 0;
+          actualizarCarrito();
+
+          // Puedes realizar más acciones aquí, como enviar la información al servidor para procesar la compra
+        }
+
+        async function agregarVentaAPI(rut, productos, total) {
+          const url = 'http://localhost:3000/Recaudacion/agregar-venta';
+          const ventaData = {
+            Rut: rut,
+            Productos: productos,  // No es necesario convertir a JSON antes de enviar
+            Total: total
+          };
+
+          fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ventaData)
+          })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(data => {
+              console.log('Venta agregada exitosamente:', data);
+              // Puedes realizar más acciones aquí si es necesario
+            })
+            .catch(error => {
+              console.error('Error al agregar la venta:', error);
+              // Puedes manejar el error aquí
+            });
+        }
+
+        async function cargarProductosDesdeJSON() {
+          try {
+            const respuesta = await fetch('/resources/Productos.json'); // Reemplaza con la ruta correcta
+            const productos = await respuesta.json();
+
+            const productContainer = document.querySelector('.product-list');
+
+            productos.forEach(producto => {
+              const productElement = document.createElement('div');
+              productElement.classList.add('product');
+              productElement.innerHTML = `
+        <h3 class="product-tittle">${producto.nombre}</h3>
+        <img class="product-img" src="${producto.imagen}" alt="">
+        <strong>Plato Principal</strong>
+        <span>Postre</span>
+        <span>Bebestible</span>
+      `;
+              productElement.onclick = function () {
+                agregarAlCarrito(producto.id, producto.nombre, producto.precio, producto.imagen);
+              };
+
+              productContainer.appendChild(productElement);
+            });
+          } catch (error) {
+            console.error('Error al cargar productos desde JSON:', error);
+          }
+        }
+
+        // Llamar a la función para cargar productos cuando la página se carga
+        document.addEventListener('DOMContentLoaded', cargarProductosDesdeJSON);
+
+        var ventasTable;
+
+        function abrirModalVentas() {
+          $('#ventasModal').modal('show');
+          cargarVentas();
+        }
+
+        function cargarVentas() {
+          const fechaInicio = document.getElementById('fechaInicio').value;
+          const fechaFin = document.getElementById('fechaFin').value;
+
+          // Limpiar el contenido del contenedor antes de configurar la tabla
+          const ventasTableContainer = document.querySelector('.ventas-table');
+          ventasTableContainer.innerHTML = '';
+
+          // Realizar una solicitud a la API para obtener las ventas en el rango de fechas
+          listarVentasAPI(fechaInicio, fechaFin)
+            .then(ventas => {
+              // Configurar la tabla con los datos de ventas
+              ventasTable = new gridjs.Grid({
+                columns: ['Fecha Venta', 'Rut Cliente', 'Nombre Producto', 'Total'],
+                data: ventas.ventas.map(venta => [
+                  venta.Fecha_Venta,
+                  venta.Rut,
+                  venta.nombre_producto,
+                  `$${venta.Total.toFixed(0)}`
+                ]),
+                language: {
+                  'search': {
+                    'placeholder': '🔍 11111111-1'
+                  },
+                  'pagination': {
+                    'previous': '←',
+                    'next': "→",
+                    "to": "a",
+                    "of": "de",
+                    'showing': 'Mostrando',
+                    'results': () => 'Resultados'
+                  }
+                },
+                pagination: true,
+                search: true,
+                sort: true,
+              }).render(document.querySelector('.ventas-table'));
+            })
+            .catch(error => {
+              console.error('Error al cargar ventas desde la API:', error);
+            });
+        }
+
+        function filtrarVentas() {
+          cargarVentas();
+        }
+
+        async function listarVentasAPI(fechaInicio, fechaFin) {
+          const url = `http://localhost:3000/Recaudacion/listar-ventas?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`;
+          const response = await fetch(url);
+          const data = await response.json();
+          return data;
+        }
+      </script>
+    </div>
+</body>
+
+</html>

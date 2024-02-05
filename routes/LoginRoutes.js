@@ -21,8 +21,6 @@ router.post('/agregar-colacion', ColacionController.agregarColacion)
 router.get('/form-confirmar-colacion', ColacionController.confirmarColacion)
 router.post('/checkin-colacion', ColacionController.actualizarEstadoColacion)
 
-router.get('/venta', ColacionController.ventaColacion)
-
 router.get('/logout',LoginController.logout)
 
 module.exports = router;

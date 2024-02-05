@@ -21,47 +21,7 @@ DOCTYPE html>
 </head>
 
 <body id="body-pd">
-    <header class="header" id="header">
-        <div class="header_toggle">
-            <i class="bx bx-menu" id="header-toggle"></i>
-        </div>
-        <div class="titulo-header">SISTEMA DE CONTROL DE ALIMENTACIÓN</div>
-        <div class="log-out">
-            <a href="/logout" class="nav_link">
-                <i class="bx bx-log-out nav_icon"></i>
-                <span class="nav_name">
-                    <%= NombreCompleto %>
-                </span></a>
-        </div>
-    </header>
-    <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div class="nav_list">
-                <a href="<%= TipoFuncionario %>" class="nav_link active">
-                    <i class="bx bx-user nav_icon"></i>
-                    <span class="nav_name">Alimentacion Hospitalizado</span>
-                </a>
-                <a href="<%= TipoFuncionario %>/funcionarios" class="nav_link">
-                    <i class="bx bx-grid-alt nav_icon"></i>
-                    <span class="nav_name">Mantenedor de Funcionario</span></a>
-                <a href="<%= TipoFuncionario %>/reportes" class="nav_link">
-                    <i class="bx bx-folder nav_icon"></i>
-                    <span class="nav_name">Reporteria</span></a>
-                <a href="<%= TipoFuncionario %>/mantenedores" class="nav_link">
-                    <i class="bx bx-check-square nav_icon"></i>
-                    <span class="nav_name">Mantenedores</span>
-                </a>
-                <a href="<%= TipoFuncionario %>/dashboard" class="nav_link">
-                    <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-                    <span class="nav_name">Dashboard</span>
-                </a>
-                <a href="<%= TipoFuncionario %>/venta" class="nav_link">
-                    <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-                    <span class="nav_name">Venta</span>
-                  </a>
-            </div>
-        </nav>
-    </div>
+    <%- include('../layouts/_layoutNutricionistaJefe') %>
     <!--Navbar end-->
     <div class="titulo">Alimentación Hospitalizados</div>
     <!--Container Main start-->
@@ -74,7 +34,8 @@ DOCTYPE html>
         </form>
         <!--TABLA GRID JS-->
         <div id="listaHospitalizados"></div>
-        <h1>Hospitalizados Ingresados Hoy: <%= conteoHospitalizado %></h1>
+        <h1>Hospitalizados Ingresados Hoy: <%= conteoHospitalizado %>
+        </h1>
 
         <!-- Modal Agregar -->
         <div class="modal fade" id="modalHospitalizado" tabindex="-1" role="dialog"
@@ -114,7 +75,7 @@ DOCTYPE html>
 
                             <label for="IdTipoServicio">ID Tipo de Servicio:</label>
                             <select id="tipoServicioS" name="IdTipoServicio">
-                                <option value="" disabled selected >
+                                <option value="" disabled selected>
                                     Selecciona un tipo de servicio
                                 </option>
                             </select>
@@ -128,14 +89,14 @@ DOCTYPE html>
 
                             <label for="IdTipoVia">ID Tipo de Vía:</label>
                             <select id="tipovia" name="IdTipoVia">
-                                <option value="" disabled selected >
+                                <option value="" disabled selected>
                                     Selecciona un tipo de Via
                                 </option>
                             </select>
 
                             <label for="IdTipoRegimen">ID Tipo de Regimen:</label>
                             <select id="tiporegimen" name="IdTipoRegimen">
-                                <option value="" disabled selected >
+                                <option value="" disabled selected>
                                     Selecciona un tipo de Regimen
                                 </option>
                             </select>
