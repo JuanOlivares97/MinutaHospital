@@ -268,3 +268,35 @@ th {
     padding-left: calc(var(--nav-width) + 225px)
   }
 }
+@media (max-width: 800px) {
+
+  .titulo-header {
+    font-size: 1.40rem;
+  }
+
+  .log-out span{
+    display: none;
+  }
+}
+
+@media (max-width: 412px) {
+
+  .titulo-header {
+    font-size: var(--normal-font-size);
+  }
+
+  .titulo {
+    font-size: 1.50rem;
+    margin-top: 40px;
+  }
+
+  .log-out {
+    padding: 15px;
+    padding-top: 15px;
+  }
+
+  .nav_name {
+    display: none;
+  }
+
+}

@@ -48,31 +48,7 @@
 </head>
 
 <body id="body-pd">
-    <header class="header" id="header">
-        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <div class="titulo-header">SISTEMA DE CONTROL DE ALIMENTACIÓN</div>
-        <div class="log-out"><a href="/logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
-                    class="nav_name">
-                    <%= NombreCompleto %>
-                </span></a></div>
-    </header>
-    <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div class="nav_list">
-                
-                <a href="<%= TipoFuncionario %>" class="nav_link"> <i class='bx bx-user nav_icon'></i>
-                    <span class="nav_name">Alimentacion Hospitalizado</span> </a>
-                <a href="<%= TipoFuncionario %>/funcionarios" class="nav_link active"> <i
-                        class='bx bx-grid-alt nav_icon'></i>
-                    <span class="nav_name">Mantenedor de Funcionario</span></a>
-                <a href="<%= TipoFuncionario %>/reportes" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
-                    <span class="nav_name">Reporteria</span></a>
-                <a href="<%= TipoFuncionario %>/dashboard" class="nav_link"> <i
-                        class='bx bx-bar-chart-alt-2 nav_icon'></i>
-                    <span class="nav_name">Dashboard</span> </a>
-            </div>
-        </nav>
-    </div>
+    <%- include('../layouts/_layoutNutricionista') %>
     <!--Navbar end-->
     <div class="titulo">Mantenedor de Funcionario</div>
     <!--Container Main start-->

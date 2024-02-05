@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "nombre": "Minuta 1",
+        "precio": 4990,
+        "imagen": "https://www.lafallera.es/wp-content/uploads/2023/11/comidas-sin-grasa-1080x675.jpeg"
+    },
+    {
+        "id": 2,
+        "nombre": "Minuta 2",
+        "precio": 4990,
+        "imagen": "https://www.lafallera.es/wp-content/uploads/2023/11/comidas-sin-grasa-1080x675.jpeg"
+    },
+    {
+        "id": 3,
+        "nombre": "Minuta 3",
+        "precio": 4990,
+        "imagen": "https://www.lafallera.es/wp-content/uploads/2023/11/comidas-sin-grasa-1080x675.jpeg"
+    }
+]

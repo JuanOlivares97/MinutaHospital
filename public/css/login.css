@@ -368,7 +368,7 @@ label {
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 412px) {
     #inicio {
         width: 80%;
         height: 60%;
