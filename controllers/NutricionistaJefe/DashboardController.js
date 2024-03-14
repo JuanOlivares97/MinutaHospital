@@ -8,7 +8,7 @@ const dashboardController = {
             // Accede a los datos almacenados en la sesión
             const { username, IdTipoFuncionario, NombreCompleto } = req.session.user;
             const redirectPath = getRedirectPath(IdTipoFuncionario);
-            res.render(`${nombreCarpeta}/dashboard`, {
+            res.render(`${nombreCarpeta}/Dashboard`, {
                 username: username,
                 TipoFuncionario: redirectPath,
                 NombreCompleto: NombreCompleto
