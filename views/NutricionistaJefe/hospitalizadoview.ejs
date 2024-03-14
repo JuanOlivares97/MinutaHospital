@@ -199,7 +199,7 @@ DOCTYPE html>
                 </div>
             </div>
         </div>
-
+        <!--MODAL OBSERVACIONES HOSPITALIZADO-->
         <div class="modal" id="modalEditarObsrvacionesHospitalizado" tabindex="-1" role="dialog"
             aria-labelledby="modalHospitalizadoLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -214,6 +214,32 @@ DOCTYPE html>
                         <form action="<%= TipoFuncionario %>/editar-observaciones" method="post">
                             <input type="hidden" name="RutHospitalizado" id="inputObservaciones" value="">
                             <textarea name="Observaciones" id="Observaciones" cols="50" rows="20"></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--MODAL AYUNO HOSPITALIZADO-->
+        <div class="modal" id="modalEditarAyunoHospitalizado" tabindex="-1" role="dialog"
+            aria-labelledby="modalHospitalizadoLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalHospitalizadoLabel">
+                            ASIGNAR AYUNO
+                        </h5>
+                    </div>
+                    <div class="modal-body" style="display: flex;justify-content: center;">
+                        <!-- Aquí coloca tu formulario -->
+                        <form action="" method="post">
+                            <input type="hidden" name="RutHospitalizado" id="inputRutAyuno" value="">
+                            <input type="date" name="FechaAyuno" id="EditarAyuno">
                             <button type="submit">Enviar</button>
                         </form>
                     </div>
@@ -273,6 +299,20 @@ DOCTYPE html>
                     const inputObservaciones = document.getElementById("inputObservaciones");
                     if (inputObservaciones) {
                         inputObservaciones.value = rut2;
+                    }
+                }
+            }
+        
+            const editarAyunoHospitalizado = "EditarAyuno"
+
+            if(event.target.classList.contains(editarAyunoHospitalizado)){
+                // Verificar si el elemento tiene el atributo data-rut antes de acceder a él
+                const rut3 = event.target.getAttribute("data-rut");
+                if (rut3) {
+                    // Asignar el valor a un campo de entrada con el id "cambiarServicioInput"
+                    const inputRutAyuno = document.getElementById("inputRutAyuno");
+                    if (inputRutAyuno) {
+                        inputRutAyuno.value = rut3;
                     }
                 }
             }

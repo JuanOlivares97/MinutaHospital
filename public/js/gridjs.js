@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <button class="editarServicio" data-toggle="modal" data-target="#modalEditarServicioHospitalizado" data-rut="${row.cells[1].data}"><i class='bx bx-shuffle'></i></button>
                 <button class="editarAlta" data-toggle="modal" data-target="#modalEditarAltaHospitalizado" data-rut="${row.cells[1].data}"><i class='bx bx-paste' ></i></button>
                 <button class="verLogs" data-toggle="modal" data-target="#miModal" data-rut="${row.cells[1].data}"><i class='bx bx-history' ></i></button>
-                <button class="EditarAyuno" data-rut="${row.cells[1].data}"><i class='bx bx-baguette'></i></button>
+                <button class="EditarAyuno" data-toggle="modal" data-target="#modalEditarAyunoHospitalizado" data-rut="${row.cells[1].data}"><i class='bx bx-baguette'></i></button>
                 <button class="EditarObservaciones" data-toggle="modal" data-target="#modalEditarObsrvacionesHospitalizado" data-rut="${row.cells[1].data}"><i class='bx bx-message-square-dots'></i></button>`)
             },
             "¿Ayuno?"
