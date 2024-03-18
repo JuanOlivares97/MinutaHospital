@@ -69,7 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Mapeo de los valores al array para Grid.js
                 return data.map((hospitalizado) => {
                     // Lógica para determinar la imagen de Ayuno
-                    let ayunoValue = hospitalizado.Ayuno.data === 1
+                    const fechaSolicitud = new Date();
+                    let ayunoValue = new Date(hospitalizado.FechaFinAyuno) > fechaSolicitud
                         ? "Debe Ayunar"
                         : "No debe Ayunar";
 
@@ -106,10 +107,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 then: (data) => {
                     return data.map((hospitalizado) => {
                         // Lógica para determinar la imagen de Ayuno
-                        let ayunoValue = hospitalizado.Ayuno.data === 1
+                        const fechaSolicitud = new Date();
+                        let ayunoValue = new Date(hospitalizado.FechaFinAyuno) > fechaSolicitud
                             ? "Debe Ayunar"
                             : "No debe Ayunar";
-
                         return [
                             hospitalizado.CodigoCama,
                             hospitalizado.Rut,
