@@ -41,6 +41,7 @@ app.set('views', ['views',
                   'views/Recaudacion',
                   'views/Recursos',
                   'views/Tecnico']);
+                  
 app.use(express.json());
 
 app.use('/', LoginRoutes);
