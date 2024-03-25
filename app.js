@@ -26,11 +26,15 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-app.use(session({
+const sessionConfig = {
   secret: 'secreto',
   resave: false,
-  saveUninitialized: true
-}));
+  saveUninitialized: true,
+  store: new session.MemoryStore(), // Reemplaza esto con un almacenamiento adecuado para producción
+};
+
+app.use(session(sessionConfig));
+
 
 app.use(express.static('public'))
 app.set("view engine", "ejs");
