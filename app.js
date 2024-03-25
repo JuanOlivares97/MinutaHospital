@@ -34,6 +34,13 @@ app.use(session({
 
 app.use(express.static('public'))
 app.set("view engine", "ejs");
+app.set('views', ['views',
+                 'views/Clinico',
+                  'views/Nutricionista',
+                  'views/NutricionistaJefe',
+                  'views/Recaudacion',
+                  'views/Recursos',
+                  'views/Tecnico']);
 app.use(express.json());
 
 app.use('/', LoginRoutes);
