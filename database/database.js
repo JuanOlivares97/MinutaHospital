@@ -1,3 +1,5 @@
+require('dotenv').config(); // Esto cargará el archivo .env automáticamente
+
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({

@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
             summary: true
         },
         server: {
-            url: `http://localhost:3000/NutricionistaJefe/listar-hospitalizado?tipoServicio=0`,
+            url: `/NutricionistaJefe/listar-hospitalizado?tipoServicio=0`,
             then: (data) => {
                 // Mapeo de los valores al array para Grid.js
                 return data.map((hospitalizado) => {

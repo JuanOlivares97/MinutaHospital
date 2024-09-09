@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tipoRegimenForm = document.getElementById("tipoRegimenForm");
 
     // URL de la API
-    const apiUrl = "http://localhost:3000/api/listar-tiporegimen";
+    const apiUrl = "/api/listar-tiporegimen";
 
     // Hacer la solicitud a la API
     fetch(apiUrl)

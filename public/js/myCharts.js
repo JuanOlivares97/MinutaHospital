@@ -48,6 +48,6 @@ function createChart(apiEndpoint, htmlElementId, labels, values, chartType) {
 
 // Ejemplo de uso
 document.addEventListener('DOMContentLoaded', function () {
-  createChart('http://localhost:3000/NutricionistaJefe/colacion-funcionarios', 'myChart1', 'DescTipoRegimen', 'cantidad', 'pie');
-  createChart('http://localhost:3000/NutricionistaJefe/colacion-hospitalizados', 'myChart2', 'DescTipoRegimen', 'cantidad', 'pie');
+  createChart('/NutricionistaJefe/colacion-funcionarios', 'myChart1', 'DescTipoRegimen', 'cantidad', 'pie');
+  createChart('/NutricionistaJefe/colacion-hospitalizados', 'myChart2', 'DescTipoRegimen', 'cantidad', 'pie');
 });

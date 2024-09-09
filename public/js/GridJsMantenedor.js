@@ -54,7 +54,7 @@ function generarGrafico(objecto, titulo1, titulo2, api, columna1, columna2) {
             limit: 10
         },
         server: {
-            url: 'http://localhost:3000/api/listar-' + api,
+            url: '/api/listar-' + api,
             then: (data) => data.map((Tipo) => [
                 Tipo[columna1], // Corregir aquí
                 Tipo[columna2]  // Corregir aquí

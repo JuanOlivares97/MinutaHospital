@@ -163,7 +163,7 @@ function enviarCorreoRestablecimiento(email) {
         from: 'ProyectoHospital15@gmail.com',  // Reemplaza con tu dirección de correo electrónico
         to: email,
         subject: 'Restablecimiento de Contraseña',
-        text: `Favor ingresa al siguiente link: http://localhost:3000/changepassword `
+        text: `Favor ingresa al siguiente link: /changepassword `
     };
 
     // Envía el correo electrónico

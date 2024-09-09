@@ -77,7 +77,7 @@ const grid = new gridjs.Grid({
         summary: true,
     },
     server: {
-        url: `http://localhost:3000/NutricionistaJefe/listar-funcionario`,
+        url: `/NutricionistaJefe/listar-funcionario`,
         then: (data) =>
             data.map((funcionario) => [
                 funcionario.Rut,

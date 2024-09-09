@@ -5,7 +5,7 @@ var tipoUnidad = document.getElementById('tipoUnidad');
 var tipoVia = document.getElementById('tipovia');
 var tiporegimen = document.getElementById('tiporegimen');
 
-fetch('http://localhost:3000/api/listar-tiposervicio')
+fetch('/api/listar-tiposervicio')
     .then(response => response.json())
     .then(data => {
         // Iterar sobre los datos de la API y agregar opciones al select
@@ -18,7 +18,7 @@ fetch('http://localhost:3000/api/listar-tiposervicio')
     })
     .catch(error => console.error('Error al obtener datos de la API:', error));
 
-fetch('http://localhost:3000/api/listar-tiposervicio')
+fetch('/api/listar-tiposervicio')
     .then(response => response.json())
     .then(data => {
         // Iterar sobre los datos de la API y agregar opciones al select
@@ -31,7 +31,7 @@ fetch('http://localhost:3000/api/listar-tiposervicio')
     })
     .catch(error => console.error('Error al obtener datos de la API:', error));
 
-fetch('http://localhost:3000/api/listar-tiposervicio')
+fetch('/api/listar-tiposervicio')
     .then(response => response.json())
     .then(data => {
         // Iterar sobre los datos de la API y agregar opciones al select
@@ -45,7 +45,7 @@ fetch('http://localhost:3000/api/listar-tiposervicio')
     .catch(error => console.error('Error al obtener datos de la API:', error));
 
 
-    fetch('http://localhost:3000/api/listar-tipounidad')
+    fetch('/api/listar-tipounidad')
     .then(response => response.json())
     .then(data => {
         // Iterar sobre los datos de la API y agregar opciones al select
@@ -58,7 +58,7 @@ fetch('http://localhost:3000/api/listar-tiposervicio')
     })
     .catch(error => console.error('Error al obtener datos de la API:', error));
 
-    fetch('http://localhost:3000/api/listar-tipovia')
+    fetch('/api/listar-tipovia')
     .then(response => response.json())
     .then(data => {
         // Iterar sobre los datos de la API y agregar opciones al select
@@ -72,7 +72,7 @@ fetch('http://localhost:3000/api/listar-tiposervicio')
     .catch(error => console.error('Error al obtener datos de la API:', error));
 
 
-    fetch('http://localhost:3000/api/listar-tiporegimen')
+    fetch('/api/listar-tiporegimen')
     .then(response => response.json())
     .then(data => {
         // Iterar sobre los datos de la API y agregar opciones al select

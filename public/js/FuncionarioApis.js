@@ -16,7 +16,7 @@ var tiporegimen1 = document.getElementById('TipoRegimen1');
 
 
 function ConsumirApi(TipoApi, IdKey, DescripcionKey, selectElement) {
-    fetch('http://localhost:3000/api/listar-' + TipoApi)
+    fetch('/api/listar-' + TipoApi)
         .then(response => response.json())
         .then(data => {
             // Clear existing options
